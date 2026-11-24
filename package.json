@@ -11,10 +11,14 @@
     "typecheck": "tsc -p .",
     "fixtures": "tsx scripts/make-fixtures.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"scripts/**/*.ts\" \"web/*.{js,css,html}\"",
-    "update": "tsx src/crawl/crawl.ts --refresh=master,lists,all,abilities,regulation && tsx src/db/build-cli.ts"
+    "update": "tsx src/crawl/crawl.ts --refresh=master,lists,all,abilities,regulation && tsx src/db/build-cli.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node --enable-source-maps dist/server/index.js",
+    "job:update": "tsx src/jobs/update.ts"
   },
   "type": "module",
   "dependencies": {
+    "@google-cloud/storage": "^9.0.0",
     "@hono/node-server": "^2.1.11",
     "@modelcontextprotocol/sdk": "^1.32.2",
     "better-sqlite3": "^13.2.0",

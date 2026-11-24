@@ -76,7 +76,7 @@ export function renderReport(r: BuildReport): string {
   return lines.join("\n") + "\n";
 }
 
-if (process.argv[1]?.endsWith("build-cli.ts")) {
+if (process.argv[1]?.endsWith("build-cli.ts") || process.argv[1]?.endsWith("build-cli.js")) {
   const dbArg = process.argv.find((a) => a.startsWith("--db="))?.split("=")[1];
   const dbPath = dbArg ?? DEFAULT_DB_PATH;
   const t0 = Date.now();

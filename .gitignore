@@ -1,4 +1,6 @@
 node_modules/
+dist/
 data/raw/
 data/*.sqlite*
 data/crawl.log
+data/latest*.json

@@ -1,0 +1,7 @@
+# Files uploaded by "gcloud run deploy --source ." / "gcloud builds submit"
+.git
+.gitignore
+node_modules/
+dist/
+data/
+test/

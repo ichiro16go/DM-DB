@@ -6,8 +6,9 @@
 - **データ源**: [公式カード検索](https://dm.takaratomy.co.jp/card/)（全収録・全商品）と[殿堂レギュレーション](https://dm.takaratomy.co.jp/rule/regulation/)
 - **DB**: SQLite（1ファイル、`data/dm.sqlite`）
 - **検索**: Scryfall風のクエリ言語（AND / OR / NOT / 括弧 / 数値比較 / 正規表現）
-- **UI**: ローカルWeb UI（検索・カード詳細・絵柄違い一覧・デッキ検証・データ品質）
-- **AI**: MCPサーバ（`search_cards` / `get_card` / `validate_deck` / `list_keywords`）
+- **UI**: Web UI（検索・カード詳細・絵柄違い一覧・デッキ検証・データ品質）
+- **AI**: MCPサーバ（`search_cards` / `get_card` / `validate_deck` / `list_keywords`）。ローカル（stdio）とHTTP（`/mcp`）の両方
+- **運用**: Cloud Run（UI＋API＋MCPを1コンテナで）＋ 週1回の自動更新ジョブ → [docs/deploy-gcp.md](docs/deploy-gcp.md)
 
 > 個人利用を前提にしています。カードのテキスト・画像の権利はタカラトミー等にあります。DBやカード画像は再配布しないでください（UIの画像は公式サイトの画像URLを直接表示しています）。
 
@@ -27,10 +28,27 @@ npm test            # 単体 + フィクスチャ結合 + 本番DBの完全性�
 npm run update
 ```
 
+### サーバーに置く（GCP）
+
+```bash
+PROJECT_ID=<プロジェクトID> ./scripts/gcp/setup.sh
+```
+
+このコマンド1つで、次をまとめて構築します。
+
+- Cloud Run サービス（UI＋API＋MCP。Basic認証とトークン認証付き）
+- 週1回の自動更新ジョブ（差分クロール → DB構築 → 品質チェック → 公開）
+- Cloud Storage（公開中のDB、クロールのキャッシュ、過去の版）
+
+構成・認証・運用・費用は [docs/deploy-gcp.md](docs/deploy-gcp.md) を参照してください。
+
 ### AI（MCP）から使う
 
 ```bash
+# ローカル（stdio）
 claude mcp add dm-cards -- npx tsx /absolute/path/to/dm-card-db/src/mcp/server.ts
+# デプロイ済みサーバー（HTTP）
+claude mcp add --transport http dm-cards https://<サービスURL>/mcp --header "Authorization: Bearer <DM_API_TOKEN>"
 ```
 
 | ツール | 内容 |
@@ -134,6 +152,7 @@ sets（商品）  keywords / keyword_families（系統）  tags  illustrators  q
 | `test/search.test.ts` | 実カード18枚から**DBを丸ごと構築**し、各フィールドの検索結果を厳密に照合 |
 | `test/api-deck.test.ts` | HTTP API とデッキ検証（40枚、4枚制限、超次元/GRのゾーン、フォーマット） |
 | `test/mcp.test.ts` | MCPサーバ（インメモリ接続でツールを実行） |
+| `test/server.test.ts` | 設定の検証（Cloud Runで認証なしなら起動拒否）、Basic/Bearer/パス形式のトークン認証、MCP over HTTP、DBの無停止差し替え、更新ジョブの品質チェック |
 | `test/full-db.test.ts` | **本番DBの完全性**：公式一覧の全収録がDBにあるか、全商品に収録があるか、殿堂が全件対応づいたか、構造の不変条件、有名カードの抜き取り確認、キーワード抽出の公式との一致率、検索速度 |
 
 `npm run build:db` を実行すると `data/build-report.md` が出力されます。中身は次の2つです。
@@ -146,14 +165,17 @@ UIの「データ品質」タブからも確認でき、抽出漏れのカード
 ## ディレクトリ
 
 ```
-scripts/      フィクスチャ再取得、キーワード抽出の差分調査（keyword-misses.ts）
+scripts/      フィクスチャ再取得、キーワード抽出の差分調査（keyword-misses.ts）、GCPセットアップ（gcp/setup.sh）
+docs/         デプロイ手順（deploy-gcp.md）
 src/crawl/    公式サイトのクローラ（再開可能、並列数と間隔を制御）
 src/parse/    HTMLパーサ、キーワード抽出、効果タグ、殿堂ページ
 src/db/       スキーマとDB構築（raw → SQLite）
 src/search/   クエリパーサ → SQLコンパイラ → 検索エンジン
 src/deck/     デッキ検証
-src/server/   HTTP API + 静的UI
-src/mcp/      MCPサーバ
+src/server/   HTTP API + 静的UI + MCP(HTTP)、認証、DBの無停止差し替え
+src/mcp/      MCPのツール定義（tools.ts）と stdio 版の入口（server.ts）
+src/jobs/     定期更新ジョブ（クロール → 構築 → 品質チェック → 公開）
+src/storage/  Cloud Storage / ローカルフォルダの共通インターフェース
 web/          フロントエンド（ビルド不要）
 test/         テストと実カードのフィクスチャ
 ```

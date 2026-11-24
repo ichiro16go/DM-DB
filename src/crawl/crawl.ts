@@ -16,13 +16,21 @@ import { BASE, fetchText, HttpError, pool } from "../lib/http.js";
 import { rawExists, readRawJson, writeRaw, writeRawJson, listRaw } from "../lib/raw.js";
 import { parseListPage, parseMaster, type MasterData } from "../parse/master.js";
 
-const args = process.argv.slice(2);
-const refreshArg = args.find((a) => a === "--refresh" || a.startsWith("--refresh="));
-const refreshSteps = refreshArg?.includes("=") ? new Set(refreshArg.split("=")[1]!.split(",")) : null;
+export interface CrawlOptions {
+  /** Steps to run (master always runs; it is cached unless refreshed). Default: all. */
+  steps?: string[];
+  /** true = ignore every cached file; a list = ignore cached files of those steps only. */
+  refresh?: boolean | string[];
+  concurrency?: number;
+}
+
+// Options of the current run (module-level so the step functions stay small).
+let refreshAll = false;
+let refreshSteps = new Set<string>();
+let concurrency = 4;
 /** Whether cached raw files of `step` should be ignored. */
-const refreshes = (step: string) => !!refreshArg && (refreshSteps === null || refreshSteps.has(step));
-const concurrency = Number(args.find((a) => a.startsWith("--concurrency="))?.split("=")[1] ?? 4);
-const steps = args.filter((a) => !a.startsWith("--"));
+const refreshes = (step: string) => refreshAll || refreshSteps.has(step);
+let failures = 0;
 
 const log = (...m: unknown[]) => console.log(new Date().toISOString().slice(11, 19), ...m);
 const progress = (label: string) => (done: number, total: number) => {
@@ -166,10 +174,16 @@ function report(step: string, failed: { item: unknown; error: unknown }[]) {
   if (!failed.length) return;
   log(`${step}: ${failed.length} FAILED (re-run to retry)`);
   for (const f of failed.slice(0, 10)) log("  ", JSON.stringify(f.item), String(f.error));
-  process.exitCode = 1;
+  failures += failed.length;
 }
 
-async function main() {
+/** Run the crawler. Returns the number of items that failed (they are retried on the next run). */
+export async function runCrawl(opts: CrawlOptions = {}): Promise<{ failed: number }> {
+  const steps = opts.steps ?? [];
+  refreshAll = opts.refresh === true;
+  refreshSteps = new Set(Array.isArray(opts.refresh) ? opts.refresh : []);
+  concurrency = opts.concurrency ?? 4;
+  failures = 0;
   const want = (s: string) => steps.length === 0 || steps.includes(s) || steps.includes("everything");
   const master = await stepMaster();
   if (want("regulation")) await stepRegulation();
@@ -177,13 +191,24 @@ async function main() {
   if (want("all")) await stepAll();
   if (want("details")) await stepDetails();
   if (want("abilities")) await stepAbilities(master);
-  log("done");
+  log(failures ? `done with ${failures} failures` : "done");
+  return { failed: failures };
 }
 
-// Allow importing helpers (tests) without running the crawler.
+// CLI. Importing this module (tests, the update job) does not start a crawl.
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split("/").pop()!)) {
-  main().catch((e) => {
-    console.error(e);
-    process.exit(1);
-  });
+  const args = process.argv.slice(2);
+  const refreshArg = args.find((a) => a === "--refresh" || a.startsWith("--refresh="));
+  runCrawl({
+    steps: args.filter((a) => !a.startsWith("--")),
+    refresh: refreshArg ? (refreshArg.includes("=") ? refreshArg.split("=")[1]!.split(",") : true) : false,
+    concurrency: Number(args.find((a) => a.startsWith("--concurrency="))?.split("=")[1] ?? 4),
+  })
+    .then((r) => {
+      if (r.failed) process.exitCode = 1;
+    })
+    .catch((e) => {
+      console.error(e);
+      process.exit(1);
+    });
 }
