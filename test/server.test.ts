@@ -46,6 +46,7 @@ describe("auth", () => {
   const get = (path: string, headers: Record<string, string> = {}) => app().request(path, { headers });
 
   it("health check is open, everything else needs credentials", async () => {
+    expect((await get("/health")).status).toBe(200);
     expect((await get("/healthz")).status).toBe(200);
     const r = await get("/api/meta");
     expect(r.status).toBe(401);
@@ -95,7 +96,7 @@ describe("DbHolder + object store", () => {
     await holder.init();
     const v1 = holder.version;
     const app = createApp(holder);
-    const count = async () => ((await (await app.request("/healthz")).json()) as { cards: number }).cards;
+    const count = async () => ((await (await app.request("/health")).json()) as { cards: number }).cards;
     expect(await count()).toBe(18);
 
     // Unchanged store → no reload.

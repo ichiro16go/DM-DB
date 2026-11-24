@@ -34,9 +34,15 @@ export function safeEqual(a: string, b: string): boolean {
   return timingSafeEqual(sha(a), sha(b));
 }
 
+/**
+ * Unauthenticated health check. On Cloud Run use /health: the Google front end reserves paths
+ * ending in "z" (e.g. /healthz) and answers them itself with a 404 before they reach the app.
+ */
+const HEALTH_PATHS = new Set(["/health", "/healthz"]);
+
 function authMiddleware(auth: AuthConfig) {
   return async (c: Context, next: Next) => {
-    if (auth.public || c.req.path === "/healthz") return next();
+    if (auth.public || HEALTH_PATHS.has(c.req.path)) return next();
     const header = c.req.header("authorization") ?? "";
     if (auth.token && header.startsWith("Bearer ") && safeEqual(header.slice(7).trim(), auth.token)) return next();
     if (auth.token && c.req.path.startsWith("/mcp/")) {
@@ -79,10 +85,11 @@ export function createApp(source: DbSource, opts: AppOptions = {}): Hono {
     await next();
   });
 
-  app.get("/healthz", (c) => {
+  const health = (c: Context) => {
     const db = dbOf();
     return c.json({ ok: true, dbVersion: holder?.version ?? "local", cards: db.prepare("SELECT COUNT(*) FROM cards").pluck().get() });
-  });
+  };
+  for (const p of HEALTH_PATHS) app.get(p, health);
 
   app.get("/api/search", (c) => {
     const q = c.req.query("q") ?? "";

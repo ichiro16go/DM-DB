@@ -7,7 +7,7 @@
 ブラウザ ───→ │  /           Web UI（Basic 認証）                        │
 スクリプト ─→ │  /api/*      検索 API（Basic 認証 or Bearer トークン）   │──→ /tmp/dm-data/dm.<version>.sqlite
 Claude ─────→ │  /mcp        MCP（Bearer トークン）                       │      ↑ 起動時と10分ごとに確認し、
-             │  /healthz    死活監視（認証なし）                         │      │ 新しい版があれば無停止で差し替え
+             │  /health     死活監視（認証なし）                         │      │ 新しい版があれば無停止で差し替え
              └──────────────────────────────────────────────────────────┘      │
                                                                              │
 Cloud Scheduler（毎週月曜 4:17）→ Cloud Run ジョブ dm-card-db-update             │
@@ -117,6 +117,7 @@ gcloud run jobs execute dm-card-db-update --region asia-northeast1
 ## 補足
 
 - **メモリ**：Cloud Runの `/tmp` はメモリ上にあります。サービスはDB（56MB）を、差し替え中は2つ分持つので1GiBにしています。ジョブはクロールキャッシュを展開するので2GiBにしています。
+- **死活監視のパス**：`/health` を使います。Cloud Run は末尾が `z` のパス（`/healthz` など）を予約していて、アプリに届く前に Google のフロントエンドが 404 を返すためです。
 - **Cloud Build の権限**：新しいプロジェクトでは、ビルドに使われる既定のサービスアカウントに Artifact Registry への書き込み権限がないことがあります。`gcloud builds submit` が権限エラーで止まったら、次を付与してください。
   - 付与先：`<プロジェクト番号>-compute@developer.gserviceaccount.com`
   - ロール：`roles/artifactregistry.writer` と `roles/logging.logWriter`
