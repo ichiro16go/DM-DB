@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DM Card DB</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">DM Card DB <span id="db-stats" class="muted"></span></div>
+      <nav class="tabs">
+        <button data-tab="search" class="active">検索</button>
+        <button data-tab="deck">デッキ検証</button>
+        <button data-tab="quality">データ品質</button>
+        <button data-tab="help">クエリ構文</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ================= SEARCH ================= -->
+      <section id="tab-search" class="tab active">
+        <form id="query-form" class="querybar" autocomplete="off">
+          <input id="q" name="q" type="search" placeholder="例: kw:ブロッカー (c:光 or c:水) cost<=3 pow>=2000" spellcheck="false" />
+          <select id="unique" title="表示単位">
+            <option value="cards">カード単位</option>
+            <option value="prints">絵柄（収録）単位</option>
+          </select>
+          <select id="order" title="並び順">
+            <option value="release">新しい順</option>
+            <option value="first">初登場順</option>
+            <option value="cost">コスト順</option>
+            <option value="power">パワー順</option>
+            <option value="name">名前順</option>
+            <option value="printings">再録数順</option>
+          </select>
+          <select id="dir" title="昇順/降順">
+            <option value="">標準</option>
+            <option value="asc">昇順</option>
+            <option value="desc">降順</option>
+          </select>
+          <button type="submit" class="primary">検索</button>
+        </form>
+        <div id="query-error" class="error hidden"></div>
+
+        <div class="layout">
+          <aside id="filters" class="filters">
+            <div class="filters-head">
+              <strong>条件</strong>
+              <button type="button" id="reset" class="link">クリア</button>
+            </div>
+
+            <label class="f">カード名<input id="f-name" type="text" placeholder="部分一致（かな/カナ/・無視）" /></label>
+            <label class="f">テキスト<input id="f-text" type="text" placeholder="能力テキストの部分一致" /></label>
+
+            <fieldset class="f">
+              <legend>文明</legend>
+              <div class="civs" id="f-civs">
+                <label class="civ civ-light"><input type="checkbox" value="光" />光</label>
+                <label class="civ civ-water"><input type="checkbox" value="水" />水</label>
+                <label class="civ civ-dark"><input type="checkbox" value="闇" />闇</label>
+                <label class="civ civ-fire"><input type="checkbox" value="火" />火</label>
+                <label class="civ civ-nature"><input type="checkbox" value="自然" />自然</label>
+                <label class="civ civ-zero"><input type="checkbox" value="無色" />無色</label>
+              </div>
+              <select id="f-civ-mode">
+                <option value=":">選んだ文明をすべて含む</option>
+                <option value="any">選んだ文明のどれかを含む</option>
+                <option value="=">ちょうどその文明</option>
+                <option value="<=">その文明だけで組める（無色も）</option>
+              </select>
+              <select id="f-civ-count">
+                <option value="">単色/多色 指定なし</option>
+                <option value="単色">単色のみ</option>
+                <option value="多色">多色のみ</option>
+              </select>
+            </fieldset>
+
+            <div class="f range">
+              <span>コスト</span>
+              <input id="f-cost-min" type="number" min="0" placeholder="min" />〜<input id="f-cost-max" type="number" min="0" placeholder="max" />
+            </div>
+            <div class="f range">
+              <span>パワー</span>
+              <input id="f-pow-min" type="number" min="0" step="500" placeholder="min" />〜<input
+                id="f-pow-max"
+                type="number"
+                min="0"
+                step="500"
+                placeholder="max"
+              />
+            </div>
+
+            <label class="f"
+              >カードの種類
+              <select id="f-type">
+                <option value="">指定なし</option>
+              </select>
+            </label>
+            <label class="f">種族<input id="f-race" type="text" list="dl-races" placeholder="部分一致（例: ドラゴン）" /></label>
+
+            <fieldset class="f">
+              <legend>キーワード能力</legend>
+              <div class="chip-input">
+                <input id="f-kw-input" type="text" list="dl-keywords" placeholder="例: ジャストダイバー / パワーアタッカー>=2000" />
+                <button type="button" id="f-kw-add">追加</button>
+              </div>
+              <div id="f-kw-chips" class="chips"></div>
+              <div class="row">
+                <label><input type="radio" name="f-kw-mode" value="and" checked /> すべて (AND)</label>
+                <label><input type="radio" name="f-kw-mode" value="or" /> どれか (OR)</label>
+              </div>
+              <label class="small"><input type="checkbox" id="f-kw-always" /> 条件付きで得るものを除外</label>
+            </fieldset>
+
+            <fieldset class="f">
+              <legend>効果タグ <span class="muted small">(テキストからの推定)</span></legend>
+              <div id="f-tags" class="tag-grid"></div>
+              <div class="row">
+                <label><input type="radio" name="f-tag-mode" value="and" checked /> AND</label>
+                <label><input type="radio" name="f-tag-mode" value="or" /> OR</label>
+              </div>
+            </fieldset>
+
+            <label class="f"
+              >収録弾
+              <input id="f-set" type="text" list="dl-sets" placeholder="例: DM26-RP1 / dm26*" />
+            </label>
+            <label class="f small" style="margin-top: -6px"><input type="checkbox" id="f-set-first" /> その弾が初登場のカードだけ（再録を除く）</label>
+            <label class="f">イラストレーター<input id="f-illust" type="text" list="dl-illust" placeholder="部分一致" /></label>
+            <label class="f"
+              >レアリティ<select id="f-rarity">
+                <option value="">指定なし</option>
+              </select></label
+            >
+
+            <label class="f"
+              >フォーマット
+              <select id="f-format">
+                <option value="">指定なし</option>
+                <option value="original">オリジナルで使用可</option>
+                <option value="advance">アドバンスで使用可</option>
+              </select>
+            </label>
+            <label class="f"
+              >殿堂
+              <select id="f-reg">
+                <option value="">指定なし</option>
+                <option value="none">無制限</option>
+                <option value="restricted">殿堂入り</option>
+                <option value="premium">プレミアム殿堂</option>
+              </select>
+            </label>
+            <label class="f"
+              >その他
+              <select id="f-is">
+                <option value="">指定なし</option>
+                <option value="twinpact">ツインパクト</option>
+                <option value="psychic">超次元のカード</option>
+                <option value="gr">GRクリーチャー</option>
+                <option value="evolution">進化</option>
+                <option value="vanilla">バニラ（能力なし）</option>
+                <option value="reprint">再録あり</option>
+              </select>
+            </label>
+            <p class="muted small">条件を変えると上の検索欄にクエリが生成されます。クエリを直接書き換えてもOK。</p>
+          </aside>
+
+          <div class="results-wrap">
+            <div class="results-head">
+              <span id="result-count"></span>
+              <span class="view-toggle">
+                <button type="button" data-view="grid" class="active">画像</button>
+                <button type="button" data-view="list">テキスト</button>
+              </span>
+            </div>
+            <div id="results" class="grid"></div>
+            <div id="pager" class="pager"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= DECK ================= -->
+      <section id="tab-deck" class="tab">
+        <div class="deck-layout">
+          <div>
+            <p class="muted">1行に「枚数 カード名」。<code>超次元</code> / <code>GR</code> の行以降はそのゾーンとして扱います。</p>
+            <textarea
+              id="deck-text"
+              rows="22"
+              spellcheck="false"
+              placeholder="4 ボルメテウス・ホワイト・ドラゴン / ボルメテウス・レジェンド・フレア&#10;4 ...&#10;&#10;超次元&#10;1 ..."
+            ></textarea>
+            <div class="row">
+              <select id="deck-format">
+                <option value="original">オリジナル</option>
+                <option value="advance">アドバンス</option>
+              </select>
+              <button id="deck-validate" class="primary">検証</button>
+            </div>
+          </div>
+          <div id="deck-result"></div>
+        </div>
+      </section>
+
+      <!-- ================= QUALITY ================= -->
+      <section id="tab-quality" class="tab">
+        <div id="quality"></div>
+      </section>
+
+      <!-- ================= HELP ================= -->
+      <section id="tab-help" class="tab">
+        <div id="help"></div>
+      </section>
+    </main>
+
+    <dialog id="card-dialog">
+      <form method="dialog" class="dialog-close"><button aria-label="閉じる">×</button></form>
+      <div id="card-detail"></div>
+    </dialog>
+
+    <datalist id="dl-keywords"></datalist>
+    <datalist id="dl-races"></datalist>
+    <datalist id="dl-sets"></datalist>
+    <datalist id="dl-illust"></datalist>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

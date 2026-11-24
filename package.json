@@ -1,0 +1,35 @@
+{
+  "name": "dm-card-db",
+  "version": "0.1.0",
+  "description": "Duel Masters card database: crawler, SQLite DB, search engine, web UI and MCP server",
+  "scripts": {
+    "test": "vitest run",
+    "crawl": "tsx src/crawl/crawl.ts",
+    "build:db": "tsx src/db/build-cli.ts",
+    "serve": "tsx src/server/index.ts",
+    "mcp": "tsx src/mcp/server.ts",
+    "typecheck": "tsc -p .",
+    "fixtures": "tsx scripts/make-fixtures.ts",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"scripts/**/*.ts\" \"web/*.{js,css,html}\"",
+    "update": "tsx src/crawl/crawl.ts --refresh=master,lists,all,abilities,regulation && tsx src/db/build-cli.ts"
+  },
+  "type": "module",
+  "dependencies": {
+    "@hono/node-server": "^2.1.11",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "better-sqlite3": "^13.2.0",
+    "cheerio": "^1.2.0",
+    "hono": "^4.13.21",
+    "undici": "^8.13.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^26.6.6",
+    "prettier": "^3.10.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.1"
+  },
+  "private": true
+}
