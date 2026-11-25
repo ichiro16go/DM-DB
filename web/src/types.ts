@@ -1,7 +1,7 @@
 // Shapes of the server's JSON responses (kept in sync with src/server, src/decks, src/meta).
 
-export type Format = "original" | "advance";
-export type Zone = "main" | "hyperspatial" | "gr";
+import type { Format, Zone } from "../../src/deck/rules";
+export type { Format, Zone };
 export type DeckKind = "meta" | "user";
 export type DeckStatus = "complete" | "partial" | "unreadable";
 
@@ -34,7 +34,8 @@ export interface CardItem {
   id: number;
   name: string;
   layout: string;
-  zone: Zone;
+  zone: Exclude<Zone, "special">;
+  startsInBattleZone: boolean;
   civs: string[];
   races: string[];
   minCost: number | null;
@@ -152,6 +153,7 @@ export interface ResolvedDeckCard extends DeckCard {
   civs: string[];
   type: string | null;
   image: string | null;
+  homeZone: Zone | null;
 }
 
 export interface DeckProblem {
@@ -162,12 +164,12 @@ export interface DeckProblem {
 
 export interface DeckAnalysis {
   cards: ResolvedDeckCard[];
-  counts: { main: number; hyperspatial: number; gr: number; unknown: number };
+  counts: Record<Zone, number> & { unknown: number };
   problems: string[];
   report: {
     valid: boolean;
     format: Format;
-    counts: { main: number; hyperspatial: number; gr: number };
+    counts: Record<Zone, number>;
     problems: DeckProblem[];
     civs: Record<string, number>;
     costCurve: Record<string, number>;

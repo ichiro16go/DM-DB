@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { api } from "../api";
 import { useCardMeta } from "../lib/cardMeta";
-import { thumb } from "../lib/deck";
+import { thumb, ZONE_LONG_LABEL } from "../lib/deck";
 import type { CardDetail, CardItem, PrintingBrief, Zone } from "../types";
 
 export function CivBar({ civs }: { civs: string[] }) {
@@ -49,8 +49,6 @@ function PrintingMeta({ p }: { p: PrintingBrief }) {
     </>
   );
 }
-
-const ZONE_NAME: Record<Zone, string> = { main: "メインデッキ", hyperspatial: "超次元ゾーン", gr: "超GRゾーン" };
 
 /**
  * Card detail dialog. `onQuery` turns keyword/tag pills into searches; `onAdd` (deck builder)
@@ -115,7 +113,7 @@ export function CardModal({
                 <RegBadge regulation={card.regulation} />
                 {legal(card.legalOriginal && !premium, "オリジナル")}
                 {legal(card.legalAdvance && !premium, "アドバンス")}
-                <span className="badge">{ZONE_NAME[card.zone]}</span>
+                <span className="badge">{ZONE_LONG_LABEL[card.startsInBattleZone ? "special" : card.zone]}</span>
                 {card.deckLimit === null && <span className="badge">枚数制限なし</span>}
               </div>
               {card.faces.map((f, i) => (

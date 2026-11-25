@@ -38,17 +38,19 @@ async function main() {
   // React UI (web/dist, built by `npm run build:web`): static files, then index.html for client-side routes.
   const webDir = join(ROOT, "web", "dist");
   const webRoot = relative(process.cwd(), webDir) || ".";
-  const indexHtml = existsSync(join(webDir, "index.html")) ? readFileSync(join(webDir, "index.html"), "utf8") : null;
-  if (!indexHtml) log("web/dist/index.html not found: run `npm run build:web` to serve the UI");
+  // Read per request (tiny file): a rebuilt UI (new asset hashes) is served without a restart.
+  const indexHtml = () => (existsSync(join(webDir, "index.html")) ? readFileSync(join(webDir, "index.html"), "utf8") : null);
+  if (!indexHtml()) log("web/dist/index.html not found: run `npm run build:web` to serve the UI");
   app.use("/assets/*", async (c, next) => {
     await next();
     if (c.res.ok) c.header("cache-control", "public, max-age=31536000, immutable");
   });
   app.use("/*", serveStatic({ root: webRoot }));
   app.get("*", (c) => {
-    if (!indexHtml || /^\/(api|mcp)(\/|$)/.test(c.req.path) || /\.[a-z0-9]+$/i.test(c.req.path)) return c.notFound();
+    const html = indexHtml();
+    if (!html || /^\/(api|mcp)(\/|$)/.test(c.req.path) || /\.[a-z0-9]+$/i.test(c.req.path)) return c.notFound();
     c.header("cache-control", "no-cache");
-    return c.html(indexHtml);
+    return c.html(html);
   });
 
   const mode = config.auth.public ? "PUBLIC (no auth)" : [config.auth.basic && "basic", config.auth.token && "token"].filter(Boolean).join("+");

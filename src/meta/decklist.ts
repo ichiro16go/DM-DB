@@ -20,7 +20,8 @@ import { validateDeck, type DeckReport, type Format } from "../deck/validate.js"
  *   1 …
  *   ? 2                            cards that could not be read (partial lists)
  */
-export type Zone = "main" | "hyperspatial" | "gr";
+export type { Zone } from "../deck/rules.js";
+import type { Zone } from "../deck/rules.js";
 
 export interface DecklistLine {
   zone: Zone;
@@ -51,6 +52,7 @@ export function parseDecklistFile(file: string, text: string): DecklistFile {
     if (/^(メイン|main)$/i.test(line)) zone = "main";
     else if (/^(超次元|hyperspatial)$/i.test(line)) zone = "hyperspatial";
     else if (/^(超?GR|gr)$/i.test(line)) zone = "gr";
+    else if (/^(特殊枠?|special)$/i.test(line)) zone = "special";
     else if (/^\?\s*\d+$/.test(line))
       lines.push({ zone, name: "?", count: Number(line.slice(1)) }); // "? 3" = 3 unreadable cards
     else {
@@ -70,10 +72,10 @@ export function formatDecklistFile(meta: Record<string, string | number | null |
     .filter(([, v]) => v !== null && v !== undefined && v !== "")
     .map(([k, v]) => `# ${k}: ${v}`);
   const body: string[] = [];
-  for (const zone of ["main", "hyperspatial", "gr"] as Zone[]) {
+  for (const zone of ["main", "hyperspatial", "gr", "special"] as Zone[]) {
     const ls = lines.filter((l) => l.zone === zone);
     if (!ls.length) continue;
-    if (zone !== "main") body.push(zone === "hyperspatial" ? "超次元" : "GR");
+    if (zone !== "main") body.push(zone === "hyperspatial" ? "超次元" : zone === "gr" ? "GR" : "特殊枠");
     for (const l of ls) body.push(`${l.count} ${l.name}`);
   }
   return [...head, ...body].join("\n") + "\n";
@@ -213,7 +215,7 @@ export function checkDecklist(db: Database, resolver: CardResolver, file: Deckli
   if (file.status !== "unreadable") {
     const format: Format = file.meta.format === "advance" ? "advance" : "original";
     const byZone = (z: Zone) => cards.filter((c) => c.zone === z && c.cardId).map((c) => ({ name: c.name!, count: c.count }));
-    report = validateDeck(db, { format, main: byZone("main"), hyperspatial: byZone("hyperspatial"), gr: byZone("gr") });
+    report = validateDeck(db, { format, main: byZone("main"), hyperspatial: byZone("hyperspatial"), gr: byZone("gr"), special: byZone("special") });
     const mainTotal = cards.filter((c) => c.zone === "main").reduce((s, c) => s + c.count, 0);
     if (file.status === "complete") {
       if (unknown) problems.push(`status: complete なのに不明カードが ${unknown} 枚あります`);

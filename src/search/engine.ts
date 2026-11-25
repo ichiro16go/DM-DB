@@ -52,6 +52,8 @@ export interface CardSummary {
   name: string;
   layout: string;
   zone: string;
+  /** 禁断・零無 …: placed in the battle zone at game start (deck builder puts it in 特殊枠). */
+  startsInBattleZone: boolean;
   civs: string[];
   races: string[];
   minCost: number | null;
@@ -239,6 +241,7 @@ export class SearchEngine {
         name: c.name,
         layout: c.layout,
         zone: c.zone,
+        startsInBattleZone: !!c.starts_in_battle_zone,
         civs: JSON.parse(c.civs),
         races: JSON.parse(c.races),
         minCost: c.min_cost,

@@ -61,7 +61,7 @@ export function DeckSearchPanel({
         onChange={(e) => setQ(e.target.value)}
         placeholder="カード名 / クエリ（例: kw:S・トリガー c:光 cost<=3）"
         spellCheck={false}
-        autoFocus
+        autoFocus={typeof window !== "undefined" && window.innerWidth > 900}
       />
       <label className="small">
         <input type="checkbox" checked={all} onChange={(e) => setAll(e.target.checked)} /> フォーマット外のカードも表示
@@ -85,7 +85,7 @@ export function DeckSearchPanel({
                 </div>
               </div>
               {n > 0 && <span className="in-deck">{n}</span>}
-              <button type="button" className="add" title="1枚追加" onClick={() => onAdd(c.zone, c.name)}>
+              <button type="button" className="add" title="1枚追加" onClick={() => onAdd(c.startsInBattleZone ? "special" : c.zone, c.name)}>
                 ＋
               </button>
             </div>

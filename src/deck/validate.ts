@@ -1,14 +1,16 @@
 import type { Database } from "better-sqlite3";
 import { looseKey, nfkc } from "../lib/normalize.js";
+import { FORMAT_ZONES, ZONES, type Format, type Zone } from "./rules.js";
 
 /**
  * Deck legality check for オリジナル / アドバンス.
  *
- * オリジナル: main deck 40, no 超次元/超GR, no cards that start the game in the battle zone.
- * アドバンス: main deck 40, 超次元 ≤ 8 (psychic / dragheart / デュエルメイト), 超GR 0 or exactly 12 (≤ 2 per name).
+ * Zone sizes and per-zone copy limits come from ./rules.ts:
+ * オリジナル: main deck 40, no 超次元/超GR/特殊枠, no cards that start the game in the battle zone.
+ * アドバンス: main deck 40, 超次元 ≤ 8, 超GR 0 or exactly 12 (≤ 2 per name), 特殊枠 (禁断・零無 …).
  * Both: same-name ≤ 4 (unless the card says 何枚でも), 殿堂 ≤ 1, プレミアム殿堂 0, プレミアム殿堂コンビ not together.
  */
-export type Format = "original" | "advance";
+export type { Format, Zone } from "./rules.js";
 
 export interface DeckEntry {
   name: string;
@@ -20,6 +22,7 @@ export interface DeckInput {
   main: DeckEntry[];
   hyperspatial?: DeckEntry[];
   gr?: DeckEntry[];
+  special?: DeckEntry[];
 }
 
 export interface DeckProblem {
@@ -31,7 +34,7 @@ export interface DeckProblem {
 export interface DeckReport {
   valid: boolean;
   format: Format;
-  counts: { main: number; hyperspatial: number; gr: number };
+  counts: Record<Zone, number>;
   problems: DeckProblem[];
   resolved: { zone: string; input: string; name: string | null }[];
   civs: Record<string, number>;
@@ -48,6 +51,9 @@ interface CardRow {
   civs: string;
   min_cost: number | null;
 }
+
+/** Zone names as used in messages. */
+const ZONE_NAME: Record<Zone, string> = { main: "メインデッキ", hyperspatial: "超次元ゾーン", gr: "超GRゾーン", special: "特殊枠" };
 
 export function validateDeck(db: Database, deck: DeckInput): DeckReport {
   const problems: DeckProblem[] = [];
@@ -78,26 +84,31 @@ export function validateDeck(db: Database, deck: DeckInput): DeckReport {
     return row ?? null;
   };
 
-  const zones = {
-    main: deck.main.map((e) => ({ e, row: lookup("main", e) })),
-    hyperspatial: (deck.hyperspatial ?? []).map((e) => ({ e, row: lookup("hyperspatial", e) })),
-    gr: (deck.gr ?? []).map((e) => ({ e, row: lookup("gr", e) })),
-  };
+  const zones = Object.fromEntries(ZONES.map((z) => [z, (deck[z] ?? []).map((e) => ({ e, row: lookup(z, e) }))])) as Record<
+    Zone,
+    { e: DeckEntry; row: CardRow | null }[]
+  >;
   const sum = (xs: { e: DeckEntry }[]) => xs.reduce((s, x) => s + x.e.count, 0);
-  const counts = { main: sum(zones.main), hyperspatial: sum(zones.hyperspatial), gr: sum(zones.gr) };
+  const counts = Object.fromEntries(ZONES.map((z) => [z, sum(zones[z])])) as Record<Zone, number>;
+  const rules = FORMAT_ZONES[deck.format];
+  const fmtName = deck.format === "original" ? "オリジナル" : "アドバンス";
 
   // Zone sizes
-  if (counts.main !== 40) problems.push({ severity: "error", message: `メインデッキは40枚ちょうどです（現在 ${counts.main} 枚）` });
-  if (deck.format === "original") {
-    if (counts.hyperspatial > 0) problems.push({ severity: "error", message: "オリジナルでは超次元ゾーンを使用できません" });
-    if (counts.gr > 0) problems.push({ severity: "error", message: "オリジナルでは超GRゾーンを使用できません" });
-  } else {
-    if (counts.hyperspatial > 8) problems.push({ severity: "error", message: `超次元ゾーンは8枚までです（現在 ${counts.hyperspatial} 枚）` });
-    if (counts.gr !== 0 && counts.gr !== 12) problems.push({ severity: "error", message: `超GRゾーンは0枚か12枚ちょうどです（現在 ${counts.gr} 枚）` });
+  for (const z of ZONES) {
+    const rule = rules[z];
+    const n = counts[z];
+    if (!rule) {
+      if (n > 0) problems.push({ severity: "error", message: `${fmtName}では${ZONE_NAME[z]}を使用できません` });
+      continue;
+    }
+    if (rule.exact !== null && n !== rule.exact) problems.push({ severity: "error", message: `${ZONE_NAME[z]}は${rule.exact}枚ちょうどです（現在 ${n} 枚）` });
+    else if (rule.allowed && !rule.allowed.includes(n))
+      problems.push({ severity: "error", message: `${ZONE_NAME[z]}は${rule.allowed.join("枚か")}枚ちょうどです（現在 ${n} 枚）` });
+    else if (rule.max !== null && n > rule.max) problems.push({ severity: "error", message: `${ZONE_NAME[z]}は${rule.max}枚までです（現在 ${n} 枚）` });
   }
 
   // Card placement
-  for (const { e, row } of zones.main) {
+  for (const { row } of zones.main) {
     if (!row) continue;
     if (row.zone !== "main")
       problems.push({
@@ -105,25 +116,30 @@ export function validateDeck(db: Database, deck: DeckInput): DeckReport {
         message: `《${row.name}》はメインデッキに入れられません（${row.zone === "gr" ? "超GR" : "超次元"}ゾーンのカード）`,
         card: row.name,
       });
-    if (deck.format === "original" && row.starts_in_battle_zone)
+    else if (row.starts_in_battle_zone)
       problems.push({
         severity: "error",
-        message: `《${row.name}》はゲーム開始時にバトルゾーンに置くカードのため、オリジナルでは使用できません`,
+        message:
+          deck.format === "original"
+            ? `《${row.name}》はゲーム開始時にバトルゾーンに置くカードのため、オリジナルでは使用できません`
+            : `《${row.name}》はゲーム開始時にバトルゾーンに置くカードです。特殊枠に入れてください`,
         card: row.name,
       });
-    void e;
   }
   for (const { row } of zones.hyperspatial)
     if (row && row.zone !== "hyperspatial") problems.push({ severity: "error", message: `《${row.name}》は超次元ゾーンに入れられません`, card: row.name });
   for (const { row } of zones.gr)
     if (row && row.zone !== "gr") problems.push({ severity: "error", message: `《${row.name}》は超GRゾーンに入れられません`, card: row.name });
+  for (const { row } of zones.special)
+    if (row && !row.starts_in_battle_zone)
+      problems.push({ severity: "error", message: `《${row.name}》は特殊枠に入れられません（ゲーム開始時にバトルゾーンに置くカードだけ）`, card: row.name });
 
   // Per-name limits (across all zones)
-  const byCard = new Map<number, { row: CardRow; count: number; zone: string }>();
+  const byCard = new Map<number, { row: CardRow; count: number; zone: Zone }>();
   for (const [zone, list] of Object.entries(zones))
     for (const { e, row } of list) {
       if (!row) continue;
-      const cur = byCard.get(row.id) ?? { row, count: 0, zone };
+      const cur = byCard.get(row.id) ?? { row, count: 0, zone: zone as Zone };
       cur.count += e.count;
       byCard.set(row.id, cur);
     }
@@ -131,8 +147,12 @@ export function validateDeck(db: Database, deck: DeckInput): DeckReport {
     if (row.regulation === "premium") problems.push({ severity: "error", message: `《${row.name}》はプレミアム殿堂です（0枚）`, card: row.name });
     else if (row.regulation === "restricted" && count > 1)
       problems.push({ severity: "error", message: `《${row.name}》は殿堂入りです（1枚まで、現在 ${count} 枚）`, card: row.name });
-    else if (zone === "gr" && count > 2)
-      problems.push({ severity: "error", message: `超GRゾーンの同名カードは2枚までです: 《${row.name}》×${count}`, card: row.name });
+    else if (rules[zone]?.perName != null && count > rules[zone]!.perName!)
+      problems.push({
+        severity: "error",
+        message: `${ZONE_NAME[zone]}の同名カードは${rules[zone]!.perName}枚までです: 《${row.name}》×${count}`,
+        card: row.name,
+      });
     else if (row.deck_limit !== null && count > row.deck_limit)
       problems.push({ severity: "error", message: `同名カードは${row.deck_limit}枚までです: 《${row.name}》×${count}`, card: row.name });
   }
@@ -173,8 +193,8 @@ export function validateDeck(db: Database, deck: DeckInput): DeckReport {
 
 /** Parse a plain-text deck list: "4 ボルシャック・ドラゴン" / "ボルシャック・ドラゴン x4" / section headers 超次元 / GR. */
 export function parseDeckText(text: string, format: Format = "original"): DeckInput {
-  const deck: DeckInput = { format, main: [], hyperspatial: [], gr: [] };
-  let zone: "main" | "hyperspatial" | "gr" = "main";
+  const deck: DeckInput = { format, main: [], hyperspatial: [], gr: [], special: [] };
+  let zone: Zone = "main";
   for (const raw of text.split(/\r?\n/)) {
     const line = nfkc(raw).trim();
     if (!line || line.startsWith("#") || line.startsWith("//")) continue;
@@ -184,6 +204,10 @@ export function parseDeckText(text: string, format: Format = "original"): DeckIn
     }
     if (/^(超GR|GR|gr)\b/i.test(line) || /^超GRゾーン/.test(line)) {
       zone = "gr";
+      continue;
+    }
+    if (/^(特殊枠?|special)\s*[:：]?$/i.test(line)) {
+      zone = "special";
       continue;
     }
     if (/^(メイン|main)/i.test(line)) {

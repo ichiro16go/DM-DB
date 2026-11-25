@@ -79,6 +79,7 @@ export function registerDeckRoutes(app: Hono<AppEnv>, dbOf: () => Database, deck
       ...parsed.main.map((e) => ({ zone: "main" as const, ...e })),
       ...(parsed.hyperspatial ?? []).map((e) => ({ zone: "hyperspatial" as const, ...e })),
       ...(parsed.gr ?? []).map((e) => ({ zone: "gr" as const, ...e })),
+      ...(parsed.special ?? []).map((e) => ({ zone: "special" as const, ...e })),
     ];
     return c.json({ cards: sanitizeInput({ cards }).cards });
   });

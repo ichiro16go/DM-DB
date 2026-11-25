@@ -2,6 +2,7 @@
  * MCP tool definitions (search_cards / get_card / validate_deck / list_keywords).
  * Wired to stdio in server.ts; tests connect through an in-memory transport.
  */
+import { ZONE_LABEL } from "../deck/rules.js";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { FIELDS } from "../search/compile.js";
@@ -80,7 +81,7 @@ export function createMcpServer(db: Database, extras: McpExtras = {}): McpServer
             lines.push(
               "",
               `■ ${row.name} 代表リスト: ${deck.name}（${deck.status}${deck.source ? `、${deck.source.eventName} ${deck.source.rank} ${deck.source.date}` : ""}）`,
-              ...deck.cards.map((c) => `${c.zone === "main" ? "" : c.zone === "hyperspatial" ? "[超次元] " : "[GR] "}${c.count} ${c.name}`),
+              ...deck.cards.map((c) => `${c.zone === "main" ? "" : `[${ZONE_LABEL[c.zone]}] `}${c.count} ${c.name}`),
             );
           }
         }
@@ -153,7 +154,7 @@ export function createMcpServer(db: Database, extras: McpExtras = {}): McpServer
       const r = validateDeck(db, parseDeckText(decklist, format));
       const lines = [
         r.valid ? "✓ 構築ルールOK" : "✗ 構築ルール違反あり",
-        `メイン ${r.counts.main} / 超次元 ${r.counts.hyperspatial} / 超GR ${r.counts.gr}`,
+        `メイン ${r.counts.main} / 超次元 ${r.counts.hyperspatial} / 超GR ${r.counts.gr}${r.counts.special ? ` / 特殊枠 ${r.counts.special}` : ""}`,
         ...r.problems.map((p) => `${p.severity === "error" ? "ERROR" : "WARN"}: ${p.message}`),
         `文明: ${Object.entries(r.civs)
           .map(([c, n]) => `${c}${n}`)

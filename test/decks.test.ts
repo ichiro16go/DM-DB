@@ -102,7 +102,7 @@ describe("deck API", () => {
     const a = await (
       await req("POST", "/api/decks/analyze", { format: "original", cards: [card("ボルメテウス・サファイア・ドラゴン"), card("存在しないカード", 1)] })
     ).json();
-    expect(a.counts).toEqual({ main: 5, hyperspatial: 0, gr: 0, unknown: 1 });
+    expect(a.counts).toEqual({ main: 5, hyperspatial: 0, gr: 0, special: 0, unknown: 1 });
     expect(a.cards[0]).toMatchObject({ method: "exact", cost: expect.any(Number) });
     expect(a.problems.join()).toMatch(/存在しないカード/);
     expect(a.report.problems.map((p: { message: string }) => p.message).join()).toMatch(/現在 5 枚、うち特定できないカード 1 枚/);

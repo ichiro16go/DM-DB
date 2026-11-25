@@ -1,8 +1,8 @@
 // Deck-list helpers shared by the deck builder (pure, unit-tested).
+import { ZONES, ZONE_LABEL, ZONE_LONG_LABEL } from "../../../src/deck/rules";
 import type { DeckCard, DeckRevision, Zone } from "../types";
 
-export const ZONES: Zone[] = ["main", "hyperspatial", "gr"];
-export const ZONE_LABEL: Record<Zone, string> = { main: "メインデッキ", hyperspatial: "超次元ゾーン", gr: "超GRゾーン" };
+export { ZONES, ZONE_LABEL, ZONE_LONG_LABEL };
 export const STATUS_LABEL = { complete: "完全", partial: "一部不明", unreadable: "読み取り不可" } as const;
 
 export const total = (cards: DeckCard[], zone?: Zone) => cards.filter((c) => !zone || c.zone === zone).reduce((s, c) => s + c.count, 0);
@@ -34,6 +34,7 @@ export function deckToText(cards: DeckCard[]): string {
     if (!zc.length) continue;
     if (z === "hyperspatial") lines.push("", "超次元");
     if (z === "gr") lines.push("", "GR");
+    if (z === "special") lines.push("", "特殊枠");
     for (const c of zc) lines.push(`${c.count} ${c.name}`);
   }
   return lines.join("\n").trim();

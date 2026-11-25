@@ -1,5 +1,6 @@
 import type { Database } from "better-sqlite3";
 import { validateDeck, type DeckReport, type Format } from "../deck/validate.js";
+import { homeZone, ZONES, type Zone } from "../deck/rules.js";
 import { CardResolver, type ResolveMethod } from "../meta/decklist.js";
 
 /**
@@ -8,7 +9,7 @@ import { CardResolver, type ResolveMethod } from "../meta/decklist.js";
  *   user  — a deck built in the deck builder
  * Every save keeps the previous version in `revisions`, so a wrong correction can be undone.
  */
-export type Zone = "main" | "hyperspatial" | "gr";
+export type { Zone } from "../deck/rules.js";
 export type DeckKind = "meta" | "user";
 export type DeckStatus = "complete" | "partial" | "unreadable";
 
@@ -68,7 +69,6 @@ export interface DeckInput {
 }
 
 export const MAX_REVISIONS = 30;
-const ZONES: Zone[] = ["main", "hyperspatial", "gr"];
 
 export class DeckInputError extends Error {}
 
@@ -144,11 +144,12 @@ export interface ResolvedDeckCard extends DeckCard {
   civs: string[];
   type: string | null;
   image: string | null;
+  homeZone: Zone | null; // where the card belongs (null if unknown)
 }
 
 export interface DeckAnalysis {
   cards: ResolvedDeckCard[];
-  counts: { main: number; hyperspatial: number; gr: number; unknown: number };
+  counts: Record<Zone, number> & { unknown: number };
   problems: string[]; // resolution problems (cards that could not be identified etc.)
   report: DeckReport; // construction rules for the deck's format
 }
@@ -159,16 +160,19 @@ export interface DeckAnalysis {
  */
 export function analyzeDeck(db: Database, resolver: CardResolver, deck: Pick<Deck, "format" | "cards">): DeckAnalysis {
   const info = db.prepare(
-    `SELECT c.id, c.name, c.civs, c.min_cost AS cost, f.type,
+    `SELECT c.id, c.name, c.civs, c.min_cost AS cost, f.type, c.zone, c.starts_in_battle_zone AS sbz,
             (SELECT image_url FROM printings p WHERE p.id = c.canonical_printing_id) AS image
      FROM cards c JOIN faces f ON f.card_id = c.id AND f.face_index = 0 WHERE c.id = ?`,
   );
   const problems: string[] = [];
   const cards: ResolvedDeckCard[] = deck.cards.map((c) => {
-    if (c.name === "?") return { ...c, inputName: "?", cardId: null, method: null, candidates: [], cost: null, civs: [], type: null, image: null };
+    if (c.name === "?")
+      return { ...c, inputName: "?", cardId: null, method: null, candidates: [], cost: null, civs: [], type: null, image: null, homeZone: null };
     const r = resolver.resolve(c.name);
     if (!r.cardId) problems.push(`「${c.name}」を特定できません${r.candidates.length ? `（候補: ${r.candidates.slice(0, 5).join(" / ")}）` : ""}`);
-    const row = r.cardId ? (info.get(r.cardId) as { name: string; civs: string; cost: number | null; type: string; image: string | null }) : null;
+    const row = r.cardId
+      ? (info.get(r.cardId) as { name: string; civs: string; cost: number | null; type: string; image: string | null; zone: string; sbz: number })
+      : null;
     return {
       zone: c.zone,
       count: c.count,
@@ -181,11 +185,18 @@ export function analyzeDeck(db: Database, resolver: CardResolver, deck: Pick<Dec
       civs: row ? JSON.parse(row.civs) : [],
       type: row?.type ?? null,
       image: row?.image ?? null,
+      homeZone: row ? homeZone(row.zone, !!row.sbz) : null,
     };
   });
   const sum = (z: Zone) => cards.filter((c) => c.zone === z).reduce((s, c) => s + c.count, 0);
   const byZone = (z: Zone) => cards.filter((c) => c.zone === z && c.cardId).map((c) => ({ name: c.name, count: c.count }));
-  const report = validateDeck(db, { format: deck.format, main: byZone("main"), hyperspatial: byZone("hyperspatial"), gr: byZone("gr") });
+  const report = validateDeck(db, {
+    format: deck.format,
+    main: byZone("main"),
+    hyperspatial: byZone("hyperspatial"),
+    gr: byZone("gr"),
+    special: byZone("special"),
+  });
   // The rule check only sees identified cards; report the true main-deck size including unknown ones.
   const unknown = cards.filter((c) => !c.cardId).reduce((s, c) => s + c.count, 0);
   if (unknown) {
@@ -198,5 +209,6 @@ export function analyzeDeck(db: Database, resolver: CardResolver, deck: Pick<Dec
           : p,
       );
   }
-  return { cards, counts: { main: sum("main"), hyperspatial: sum("hyperspatial"), gr: sum("gr"), unknown }, problems, report };
+  const counts = Object.fromEntries(ZONES.map((z) => [z, sum(z)])) as Record<Zone, number>;
+  return { cards, counts: { ...counts, unknown }, problems, report };
 }

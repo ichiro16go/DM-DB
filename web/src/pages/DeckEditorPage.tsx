@@ -2,11 +2,13 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { api, ApiError, type DeckWrite } from "../api";
 import { CardModal } from "../components/Card";
-import { DeckList } from "../components/DeckList";
+import { DeckList, visibleZones, ZoneTabs } from "../components/DeckList";
 import { DeckSearchPanel } from "../components/DeckSearchPanel";
-import { DeckStats } from "../components/DeckStats";
+import { AnalysisPanels, ProblemSummary } from "../components/DeckStats";
+import { MainCounter } from "../components/MainCounter";
+import { FORMAT_ZONES, ZONE_LABEL, ZONES, zonesOf } from "../../../src/deck/rules";
 import { Revisions } from "../components/Revisions";
-import { addCard, deckToText, fmtDate, FORMAT_LABEL, normalize, STATUS_LABEL } from "../lib/deck";
+import { addCard, deckToText, fmtDate, FORMAT_LABEL, normalize, STATUS_LABEL, total } from "../lib/deck";
 import { useBeforeUnload, useDebounced } from "../lib/hooks";
 import type { Deck, DeckAnalysis, DeckCard, DeckKind, DeckSource, DeckStatus, Format, Zone } from "../types";
 
@@ -67,6 +69,7 @@ export function DeckEditorPage() {
   const [modal, setModal] = useState<number | null>(null);
   const [panel, setPanel] = useState<"search" | "photo" | "import" | "export">(init.images?.length ? "photo" : "search");
   const [importText, setImportText] = useState("");
+  const [activeZone, setActiveZone] = useState<Zone>("main");
 
   const isNew = !id;
   const kind: DeckKind = deck?.kind ?? init.kind ?? "user";
@@ -112,6 +115,29 @@ export function DeckEditorPage() {
   const set = (patch: Partial<Form>) => setForm((f) => ({ ...f, ...patch }));
   const setCards = (cards: DeckCard[]) => set({ cards });
   const add = (zone: Zone, name: string, n = 1) => setForm((f) => ({ ...f, cards: addCard(f.cards, zone, name, n) }));
+  /** From search / card dialog: the card goes to the zone it belongs to, and that tab opens. */
+  const addFromSearch = (zone: Zone, name: string) => {
+    add(zone, name);
+    if (zone !== activeZone) setActiveZone(zone);
+  };
+
+  // Per-card problems (copy limits, wrong zone …) are shown on the card's row.
+  const rowProblems = useMemo(() => {
+    const m = new Map<string, string[]>();
+    for (const p of analysis?.report.problems ?? []) {
+      if (!p.card || /^カードが見つかりません/.test(p.message)) continue;
+      m.set(p.card, [
+        ...(m.get(p.card) ?? []),
+        p.message
+          .replace(/[:：]?\s*《[^》]*》(×\d+)?/g, "")
+          .replace(/^は/, "")
+          .trim(),
+      ]);
+    }
+    return m;
+  }, [analysis]);
+  // Rows with a warning: cards with a rule problem + names the DB could not identify.
+  const rowWarnCount = rowProblems.size + (analysis?.cards.filter((c) => !c.cardId).length ?? 0);
 
   const body = (): DeckWrite => ({
     name: form.name.trim() || "無題のデッキ",
@@ -206,21 +232,43 @@ export function DeckEditorPage() {
   if (loadError) return <div className="error">{loadError}</div>;
   if (!isNew && !deck) return <p className="muted">読み込み中…</p>;
 
+  const liveCounts = Object.fromEntries(ZONES.map((z) => [z, total(form.cards, z)])) as Record<Zone, number>;
+  const zones = visibleZones(form.format, form.cards);
+  const tab = zones.includes(activeZone) ? activeZone : "main";
+  const ownZones = zonesOf(form.format);
+
   return (
     <section className="deck-editor">
-      <div className="page-head">
-        <Link to={kind === "meta" && form.archetype ? `/meta?format=${form.format}` : "/decks"}>← {kind === "meta" ? "環境デッキ" : "デッキ一覧"}</Link>
-        <span className={`kind-badge ${kind}`}>{kind === "meta" ? "環境デッキ（入賞リスト）" : "マイデッキ"}</span>
-        {deck && (
-          <span className="muted small">
-            最終更新 {fmtDate(deck.updatedAt)} {deck.updatedBy && `by ${deck.updatedBy}`}
-          </span>
-        )}
+      <div className="editor-bar">
+        <Link className="back" to={kind === "meta" && form.archetype ? `/meta?format=${form.format}` : "/decks"}>
+          ← {kind === "meta" ? "環境デッキ" : "デッキ一覧"}
+        </Link>
+        <label className="name-field">
+          <span>デッキ名</span>
+          <input value={form.name} maxLength={80} onChange={(e) => set({ name: e.target.value })} />
+        </label>
+        <span className="seg" role="group" aria-label="フォーマット">
+          {(["original", "advance"] as Format[]).map((f) => (
+            <button key={f} type="button" className={form.format === f ? "active" : ""} onClick={() => set({ format: f })}>
+              {FORMAT_LABEL[f]}
+            </button>
+          ))}
+        </span>
         <span className="spacer" />
-        {dirty && <span className="unsaved">未保存の変更</span>}
+        <MainCounter n={liveCounts.main} />
+        <span className="zone-counts">
+          {ownZones
+            .filter((z) => z !== "main")
+            .map((z) => (
+              <span key={z} className={liveCounts[z] > (FORMAT_ZONES[form.format][z]?.max ?? Infinity) ? "over" : ""}>
+                {ZONE_LABEL[z]} <b>{liveCounts[z]}</b>/{FORMAT_ZONES[form.format][z]?.max}
+              </span>
+            ))}
+        </span>
+        {dirty && <span className="unsaved">未保存</span>}
         {!isNew && dirty && (
           <button type="button" onClick={() => saved && setForm(saved)} disabled={busy}>
-            変更を破棄
+            破棄
           </button>
         )}
         <button type="button" className="primary" onClick={() => save()} disabled={busy || (!isNew && !dirty)} title="Ctrl+S">
@@ -229,7 +277,7 @@ export function DeckEditorPage() {
       </div>
 
       {message && (
-        <div className={message.kind === "ok" ? "notice ok" : "error"}>
+        <div className={message.kind === "ok" ? "notice ok" : "error"} role="status">
           {message.text}
           {message.kind === "conflict" && (
             <span className="conflict-actions">
@@ -245,17 +293,7 @@ export function DeckEditorPage() {
       )}
 
       <div className="deck-meta">
-        <label className="grow">
-          デッキ名
-          <input value={form.name} maxLength={80} onChange={(e) => set({ name: e.target.value })} />
-        </label>
-        <label>
-          フォーマット
-          <select value={form.format} onChange={(e) => set({ format: e.target.value as Format })}>
-            <option value="original">{FORMAT_LABEL.original}</option>
-            <option value="advance">{FORMAT_LABEL.advance}</option>
-          </select>
-        </label>
+        <span className={`kind-badge ${kind}`}>{kind === "meta" ? "環境デッキ（入賞リスト）" : "マイデッキ"}</span>
         <label>
           デッキタイプ
           <input value={form.archetype} maxLength={80} placeholder="例: 赤零ジョーカーズ" onChange={(e) => set({ archetype: e.target.value })} />
@@ -263,13 +301,18 @@ export function DeckEditorPage() {
         <label>
           リストの状態
           <select value={form.status} onChange={(e) => set({ status: e.target.value as DeckStatus })}>
-            {(Object.keys(STATUS_LABEL) as DeckStatus[]).map((s) => (
-              <option key={s} value={s}>
-                {STATUS_LABEL[s]}
+            {(Object.keys(STATUS_LABEL) as DeckStatus[]).map((st) => (
+              <option key={st} value={st}>
+                {STATUS_LABEL[st]}
               </option>
             ))}
           </select>
         </label>
+        {deck && (
+          <span className="muted small">
+            最終更新 {fmtDate(deck.updatedAt)} {deck.updatedBy && `by ${deck.updatedBy}`}
+          </span>
+        )}
       </div>
 
       {source && (
@@ -288,6 +331,38 @@ export function DeckEditorPage() {
       )}
 
       <div className={`editor-grid ${panel === "photo" ? "wide-side" : ""}`}>
+        <div className={`deck-col ${analyzing ? "pending" : ""}`}>
+          <ProblemSummary analysis={analysis} rowCount={rowWarnCount} />
+          <ZoneTabs zones={zones} active={tab} counts={liveCounts} onSelect={setActiveZone} format={form.format} />
+          <DeckList zone={tab} cards={form.cards} analysis={analysis} rowProblems={rowProblems} onChange={setCards} onOpen={setModal} />
+          <AnalysisPanels analysis={analysis} />
+          <label className="f note">
+            メモ
+            <textarea
+              rows={3}
+              value={form.note}
+              maxLength={2000}
+              onChange={(e) => set({ note: e.target.value })}
+              placeholder="採用理由・不明カードの補足など"
+            />
+          </label>
+          {deck && (
+            <>
+              <div className="section-title">編集履歴（{deck.revisions.length}）</div>
+              <Revisions deck={deck} onRestore={restore} busy={busy || dirty} />
+              {dirty && deck.revisions.length > 0 && <p className="muted small">未保存の変更があるときは履歴から戻せません。</p>}
+              <div className="danger-zone">
+                <button type="button" onClick={copy}>
+                  コピーしてマイデッキを作る
+                </button>
+                <button type="button" className="danger" onClick={remove}>
+                  このデッキを削除
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+
         <div className="side">
           <div className="seg">
             <button type="button" className={panel === "search" ? "active" : ""} onClick={() => setPanel("search")}>
@@ -305,10 +380,10 @@ export function DeckEditorPage() {
               書き出し
             </button>
           </div>
-          {panel === "search" && <DeckSearchPanel format={form.format} cards={form.cards} onAdd={(z, n) => add(z, n)} onOpen={setModal} />}
+          {panel === "search" && <DeckSearchPanel format={form.format} cards={form.cards} onAdd={addFromSearch} onOpen={setModal} />}
           {panel === "photo" && (
             <div className="photos">
-              <p className="muted small">主催者のデッキ画像（クリックで原寸）。左の画像とリストを見比べて修正してください。</p>
+              <p className="muted small">主催者のデッキ画像（クリックで原寸）。画像とリストを見比べて修正してください。</p>
               {images.map((src) => (
                 <a key={src} href={src} target="_blank" rel="noopener noreferrer">
                   <img src={src} alt="デッキ画像" referrerPolicy="no-referrer" />
@@ -319,7 +394,7 @@ export function DeckEditorPage() {
           {panel === "import" && (
             <div className="import">
               <p className="muted small">
-                1行に「枚数 カード名」。<code>超次元</code> / <code>GR</code> の行以降はそのゾーン。
+                1行に「枚数 カード名」。<code>超次元</code> / <code>GR</code> / <code>特殊枠</code> の行以降はそのゾーン。
               </p>
               <textarea
                 rows={16}
@@ -350,43 +425,13 @@ export function DeckEditorPage() {
             </div>
           )}
         </div>
-
-        <div className="main-col">
-          <DeckStats analysis={analysis} format={form.format} pending={analyzing} />
-          <DeckList cards={form.cards} analysis={analysis} onChange={setCards} onOpen={setModal} />
-          <label className="f note">
-            メモ
-            <textarea
-              rows={3}
-              value={form.note}
-              maxLength={2000}
-              onChange={(e) => set({ note: e.target.value })}
-              placeholder="採用理由・不明カードの補足など"
-            />
-          </label>
-          {deck && (
-            <>
-              <div className="section-title">編集履歴（{deck.revisions.length}）</div>
-              <Revisions deck={deck} onRestore={restore} busy={busy || dirty} />
-              {dirty && deck.revisions.length > 0 && <p className="muted small">未保存の変更があるときは履歴から戻せません。</p>}
-              <div className="danger-zone">
-                <button type="button" onClick={copy}>
-                  コピーしてマイデッキを作る
-                </button>
-                <button type="button" className="danger" onClick={remove}>
-                  このデッキを削除
-                </button>
-              </div>
-            </>
-          )}
-        </div>
       </div>
       {modal !== null && (
         <CardModal
           id={modal}
           onClose={() => setModal(null)}
           onAdd={(c) => {
-            add(c.zone, c.name);
+            addFromSearch(c.startsInBattleZone ? "special" : c.zone, c.name);
             setMessage({ kind: "ok", text: `${c.name} を追加しました` });
           }}
         />
