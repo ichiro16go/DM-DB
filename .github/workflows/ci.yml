@@ -1,7 +1,13 @@
 name: ci
+# Every push / PR: typecheck, build, test.
+# Push to main (or "Run workflow"): additionally build the image and deploy it to Cloud Run — the
+# service (UI + API + MCP) and both jobs. Needs the repository variables written by
+# scripts/gcp/setup-cicd.sh; without them the deploy job is skipped.
 on:
   push:
   pull_request:
+  workflow_dispatch:
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,5 +22,54 @@ jobs:
       - run: npm run build
       # full-db.test.ts is skipped here (no built DB in CI); fixture-based tests cover the pipeline.
       - run: npm test
-      - name: Docker image builds
+      - name: Docker image builds (main builds it in the deploy job)
+        if: github.ref != 'refs/heads/main'
         run: docker build -t dm-card-db:ci .
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.GCP_WIF_PROVIDER != ''
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write # for Workload Identity Federation (no keys)
+    env:
+      PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+      REGION: ${{ vars.GCP_REGION || 'asia-northeast1' }}
+      SERVICE: dm-card-db
+      JOBS: dm-card-db-update dm-card-db-meta
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOYER_SA }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - name: Build and push the image
+        run: |
+          IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/dm-card-db/app:${GITHUB_SHA::7}"
+          echo "IMAGE=${IMAGE}" >> "$GITHUB_ENV"
+          gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
+      - name: Update the jobs
+        run: |
+          for job in $JOBS; do
+            if gcloud run jobs describe "$job" --region "$REGION" >/dev/null 2>&1; then
+              args=(--image "$IMAGE" --region "$REGION")
+              [[ "$job" == dm-card-db-update ]] && args+=(--update-env-vars "DM_REVISION=${GITHUB_SHA::7}")
+              gcloud run jobs update "$job" "${args[@]}"
+            else
+              echo "::warning::job $job does not exist yet; run scripts/gcp/setup.sh once to create it"
+            fi
+          done
+      - name: Deploy the service (env, secrets and scaling settings are kept)
+        run: gcloud run deploy "$SERVICE" --image "$IMAGE" --region "$REGION"
+      - name: Smoke test
+        run: |
+          URL="$(gcloud run services describe "$SERVICE" --region "$REGION" --format 'value(status.url)')"
+          for i in 1 2 3 4 5; do curl -fsS "${URL}/health" && exit 0; sleep 10; done
+          exit 1

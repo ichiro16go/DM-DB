@@ -99,13 +99,27 @@ gcloud run jobs execute dm-card-db-update --region asia-northeast1
 gcloud run jobs execute dm-card-db-meta --region asia-northeast1
 ```
 
+### 3. 自動デプロイ（CI/CD、初回だけ設定）
+
+`main` に push するたびに、GitHub Actions が テスト → イメージのビルド → Cloud Run への反映（サービスと2つのジョブ）→ `/health` の確認 を行います。設定は Cloud Shell で、リポジトリのフォルダから1回だけ実行します（先に `setup.sh` を1回実行しておくこと）。
+
+```bash
+gh auth login        # まだなら（GitHub.com → HTTPS → ブラウザでログイン）
+PROJECT_ID=$(gcloud config get-value project) ./scripts/gcp/setup-cicd.sh
+```
+
+- 鍵ファイルは作りません。GitHub の OIDC トークンを Workload Identity 連携で受け取り、**このリポジトリの main ブランチからだけ**、デプロイ用のサービスアカウント `dm-card-db-deployer` として動けるようにします。
+- デプロイ用アカウントの権限は、イメージの push、サービスとジョブの更新、実行用アカウントの指定だけです。データやシークレットは読めません。
+- 環境変数・シークレット・メモリなどの設定は、`setup.sh` で入れたものがそのまま残ります（イメージだけを差し替えます）。設定を変えたいときは `setup.sh` を再実行します。
+- 手動で実行したいときは、GitHub の Actions タブ → ci → Run workflow（main を選択）。
+
 ## 運用
 
 | やりたいこと | 方法 |
 |---|---|
 | 更新の結果を見る | `gcloud storage cat gs://<bucket>/data/build-report.md`。品質チェックに落ちた回は `data/rejected/` にレポートが残ります |
 | 前の版に戻す | `gcloud storage cp gs://<bucket>/data/history/<時刻>/dm.sqlite gs://<bucket>/data/dm.sqlite`。10分以内にサービスが切り替わります |
-| コードを更新する | `git pull` してから `setup.sh` を再実行 |
+| コードを更新する | `main` に push すれば自動で反映（CI/CD 設定後）。設定前は `git pull` してから `setup.sh` を再実行 |
 | パスワードを変える | `gcloud secrets versions add dm-auth-password --data-file=-` に新しい値を渡し、`gcloud run services update dm-card-db --region asia-northeast1` で新しいリビジョンを作る |
 | デッキリストを誤って消した | 削除は元に戻せません。`gs://<bucket>/data/decks/` のバケットでオブジェクトのバージョニングを有効にしておくと復元できます（任意） |
 | ログを見る | Cloud Logging（JSON形式で出力しています） |
