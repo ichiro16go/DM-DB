@@ -120,7 +120,7 @@ PROJECT_ID=$(gcloud config get-value project) ./scripts/gcp/setup-cicd.sh
 | 更新の結果を見る | `gcloud storage cat gs://<bucket>/data/build-report.md`。品質チェックに落ちた回は `data/rejected/` にレポートが残ります |
 | 前の版に戻す | `gcloud storage cp gs://<bucket>/data/history/<時刻>/dm.sqlite gs://<bucket>/data/dm.sqlite`。10分以内にサービスが切り替わります |
 | コードを更新する | `main` に push すれば自動で反映（CI/CD 設定後）。設定前は `git pull` してから `setup.sh` を再実行 |
-| パスワードを変える | `gcloud secrets versions add dm-auth-password --data-file=-` に新しい値を渡し、`gcloud run services update dm-card-db --region asia-northeast1` で新しいリビジョンを作る |
+| パスワードを変える | `gcloud secrets versions add dm-auth-password --data-file=-` に新しい値を渡し、`gcloud run services update dm-card-db --region asia-northeast1 --update-env-vars DM_SECRET_ROTATED=$(date +%s)` で新しいリビジョンを作る（設定の変更がないと新しいリビジョンが作られないため、ダミーの変数を変える） |
 | デッキリストを誤って消した | 削除は元に戻せません。`gs://<bucket>/data/decks/` のバケットでオブジェクトのバージョニングを有効にしておくと復元できます（任意） |
 | ログを見る | Cloud Logging（JSON形式で出力しています） |
 
