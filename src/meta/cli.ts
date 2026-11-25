@@ -1,145 +1,56 @@
 /**
- * Meta (環境) data: weekly archetype shares from 田園補完計画 and the CS results behind them.
+ * Meta (環境) data tools. Data lives in the shared store (DM_DATA_STORE, default data/store).
  *
- *   tsx src/meta/cli.ts fetch [--weeks=4]        ranking posts (both formats) + CS result posts in those weeks
+ *   tsx src/meta/cli.ts fetch [--weeks=6]        weekly rankings (both formats) + new CS result posts
  *   tsx src/meta/cli.ts queue [--per=1] [--min-count=1] [--week=YYYY-MM-DD] [--format=original|advance]
  *                                                 pick placements to transcribe, download their deck images
  *   tsx src/meta/cli.ts check [--fix]             resolve + validate every meta/decklists/*.txt
- *                                                 (--fix rewrites reviewed fuzzy/partial names to official names)
- *
- * Parsed data is written to meta/ (committed); raw HTML and images to data/raw/meta/ (not committed).
+ *   tsx src/meta/cli.ts import-decks             create store decks from meta/decklists/*.txt (create-only)
+ *   common: --store=gs://bucket/prefix | /local/dir
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { fetchText, pool } from "../lib/http.js";
-import { DEFAULT_DB_PATH, ROOT, rawExists, readRaw, writeRaw } from "../lib/raw.js";
+import { env } from "node:process";
+import { pool } from "../lib/http.js";
+import { DEFAULT_DB_PATH, DEFAULT_STORE, ROOT } from "../lib/raw.js";
 import { openDb } from "../search/engine.js";
+import { openStore } from "../storage/object-store.js";
+import { DeckStore } from "../decks/store.js";
+import { seedDecks } from "../decks/seed.js";
 import { matchArchetype } from "./archetypes.js";
 import { CardResolver, checkDecklist, formatDecklistFile, parseDecklistFile } from "./decklist.js";
-import {
-  isRankingTitle,
-  isResultTitle,
-  parsePostLinks,
-  parseRankingPost,
-  parseResultPost,
-  type MetaFormat,
-  type RankingPost,
-  type ResultPost,
-} from "./supersolenoid.js";
+import { fetchMeta } from "./fetch.js";
+import { eventsFor, MetaRepo } from "./repo.js";
+import type { RankingPost } from "./supersolenoid.js";
 
 export const META_DIR = join(ROOT, "meta");
-const SNAP_DIR = join(META_DIR, "snapshots");
-const EVENT_DIR = join(META_DIR, "events");
 export const DECK_DIR = join(META_DIR, "decklists");
 const BASE = "https://supersolenoid.jp";
-const TAGS: Record<MetaFormat, string> = { original: "オリジナルCS入賞数ランキング", advance: "アドバンスCS入賞数ランキング" };
 
 const args = process.argv.slice(2);
-const arg = (n: string) => args.find((a) => a.startsWith(`--${n}=`))?.split("=")[1];
+const arg = (n: string) =>
+  args
+    .find((a) => a.startsWith(`--${n}=`))
+    ?.split("=")
+    .slice(1)
+    .join("=");
 const log = (...m: unknown[]) => console.log(...m);
-
-export interface StoredEvent extends ResultPost {
-  id: number;
-}
-
-const postId = (url: string) => Number(url.match(/blog-entry-(\d+)/)![1]);
-
-/** Fetch a post, caching raw HTML under data/raw/meta/posts (posts do not change after publication). */
-async function getPost(url: string, refresh = false): Promise<string> {
-  const f = ["meta", "posts", `${postId(url)}.html.gz`];
-  if (!refresh && rawExists(...f)) return readRaw(...f);
-  const html = await fetchText(url);
-  writeRaw(f, html);
-  return html;
-}
-
-function datesBetween(start: string, end: string): string[] {
-  const out: string[] = [];
-  for (let d = new Date(`${start}T00:00:00Z`); d <= new Date(`${end}T00:00:00Z`); d.setUTCDate(d.getUTCDate() + 1)) out.push(d.toISOString().slice(0, 10));
-  return out;
-}
+const storeLocation = () => arg("store") ?? env.DM_DATA_STORE ?? DEFAULT_STORE;
+const repo = () => new MetaRepo(openStore(storeLocation()));
 
 async function cmdFetch() {
-  const weeks = Number(arg("weeks") ?? 4);
-  mkdirSync(SNAP_DIR, { recursive: true });
-  mkdirSync(EVENT_DIR, { recursive: true });
-  const snapshots: RankingPost[] = [];
-  for (const format of ["original", "advance"] as MetaFormat[]) {
-    const tagHtml = await fetchText(`${BASE}/?tag=${encodeURIComponent(TAGS[format])}`);
-    const links = parsePostLinks(tagHtml).filter((l) => isRankingTitle(l.title));
-    let taken = 0;
-    for (const l of links) {
-      if (taken >= weeks) break;
-      if (/速報/.test(l.title)) continue; // 新弾発売速報版 (a single day) is not a weekly snapshot
-      let post: RankingPost;
-      try {
-        post = parseRankingPost(l.url, await getPost(l.url));
-      } catch (e) {
-        log(`skip ${l.url}: ${(e as Error).message}`);
-        continue;
-      }
-      if (post.format !== format || post.flash) continue;
-      writeFileSync(join(SNAP_DIR, `${format}-${post.periodStart}.json`), JSON.stringify(post, null, 1));
-      snapshots.push(post);
-      taken++;
-      log(`ranking ${format} ${post.periodStart}~${post.periodEnd}: n=${post.sampleSize}, ${post.entries.length} archetypes`);
-    }
-  }
-  // CS result posts: daily archives for every date covered (posts appear up to ~3 days after the event).
-  const dates = new Set<string>();
-  for (const s of snapshots) for (const d of datesBetween(s.periodStart, addDays(s.periodEnd, 4))) dates.add(d);
-  const resultLinks = new Map<number, string>();
-  await pool(
-    [...dates].sort(),
-    async (d) => {
-      // A daily archive shows 15 entries per page: blog-date-YYYYMMDD.html, then -1.html, -2.html …
-      const stem = `blog-date-${d.replace(/-/g, "")}`;
-      for (let page = 0; page < 20; page++) {
-        const html = await fetchText(`${BASE}/${stem}${page ? `-${page}` : ""}.html`);
-        for (const l of parsePostLinks(html)) if (isResultTitle(l.title)) resultLinks.set(l.id, l.url);
-        if (!html.includes(`${stem}-${page + 1}.html`)) break;
-      }
-    },
-    { concurrency: 2, minIntervalMs: 400 },
-  );
-  log(`result posts found: ${resultLinks.size}`);
-  let saved = 0;
-  const { failed } = await pool(
-    [...resultLinks.entries()],
-    async ([id, url]) => {
-      const ev = parseResultPost(url, await getPost(url));
-      writeFileSync(join(EVENT_DIR, `${id}.json`), JSON.stringify({ id, ...ev }, null, 1));
-      saved++;
-    },
-    { concurrency: 2, minIntervalMs: 400 },
-  );
-  log(`events saved: ${saved}${failed.length ? `, failed: ${failed.length}` : ""}`);
+  const r = repo();
+  const res = await fetchMeta(r, { weeks: Number(arg("weeks") ?? 6), log: (m) => log(m) });
+  const all = await r.loadAll();
+  await r.writeIndex(all.snapshots, all.events.length);
+  log(`new weeks: ${res.newSnapshots.join(", ") || "none"}; events saved: ${res.eventsSaved}${res.failed ? `, failed: ${res.failed}` : ""}`);
 }
 
-function addDays(d: string, n: number) {
-  const x = new Date(`${d}T00:00:00Z`);
-  x.setUTCDate(x.getUTCDate() + n);
-  return x.toISOString().slice(0, 10);
-}
-
-export function loadSnapshots(): RankingPost[] {
-  if (!existsSync(SNAP_DIR)) return [];
-  return readdirSync(SNAP_DIR)
-    .filter((f) => f.endsWith(".json"))
-    .map((f) => JSON.parse(readFileSync(join(SNAP_DIR, f), "utf8")) as RankingPost)
-    .sort((a, b) => b.periodStart.localeCompare(a.periodStart));
-}
-
-export function loadEvents(): StoredEvent[] {
-  if (!existsSync(EVENT_DIR)) return [];
-  return readdirSync(EVENT_DIR)
-    .filter((f) => f.endsWith(".json"))
-    .map((f) => JSON.parse(readFileSync(join(EVENT_DIR, f), "utf8")) as StoredEvent);
-}
-
-/** Events (top-4 placements) that fall inside a snapshot's period and format. */
-export function eventsFor(snapshot: RankingPost, events: StoredEvent[]) {
-  return events.filter((e) => e.format === snapshot.format && e.date && e.date >= snapshot.periodStart && e.date <= snapshot.periodEnd);
+async function cmdImportDecks() {
+  const r = repo();
+  const { events } = await r.loadAll();
+  const res = await seedDecks(new DeckStore(r.store), DECK_DIR, events, (m) => log(m));
+  log(`decks created: ${res.created}, skipped: ${res.skipped}`);
 }
 
 interface Dims {
@@ -159,7 +70,7 @@ async function imageDims(url: string): Promise<Dims | null> {
     const b = Buffer.from(await res.arrayBuffer());
     if (b[0] === 0x89 && b.toString("ascii", 1, 4) === "PNG") d = { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
     else
-      for (let i = 2; i + 9 < b.length; ) {
+      for (let i = 2; i + 9 < b.length;) {
         if (b[i] !== 0xff) break;
         const m = b[i + 1]!;
         if (m >= 0xc0 && m <= 0xcf && m !== 0xc4 && m !== 0xc8 && m !== 0xcc) {
@@ -184,10 +95,10 @@ async function cmdQueue() {
   const minCount = Number(arg("min-count") ?? 1);
   const week = arg("week");
   const fmt = arg("format");
-  const snaps = loadSnapshots().filter((s) => (!fmt || s.format === fmt) && (!week || s.periodStart === week));
+  const { snapshots: allSnaps, events } = await repo().loadAll();
+  const snaps = allSnaps.filter((s) => (!fmt || s.format === fmt) && (!week || s.periodStart === week));
   const latest = new Map<string, RankingPost>();
   for (const s of snaps) if (!latest.has(s.format) || latest.get(s.format)!.periodStart < s.periodStart) latest.set(s.format, s);
-  const events = loadEvents();
   mkdirSync(DECK_DIR, { recursive: true });
   const queue: { file: string; image: string; local: string; label: string }[] = [];
   for (const snap of latest.values()) {
@@ -257,7 +168,11 @@ async function cmdQueue() {
     },
     { concurrency: 2, minIntervalMs: 300 },
   );
-  writeFileSync(join(META_DIR, "queue.md"), ["# Transcription queue", "", ...queue.map((q) => `- [ ] ${q.label}\n  - image: ${q.local}\n  - write: ${q.file.replace(ROOT + "/", "")}`)].join("\n") + "\n");
+  writeFileSync(
+    join(META_DIR, "queue.md"),
+    ["# Transcription queue", "", ...queue.map((q) => `- [ ] ${q.label}\n  - image: ${q.local}\n  - write: ${q.file.replace(ROOT + "/", "")}`)].join("\n") +
+      "\n",
+  );
   log(`\n${queue.length} lists queued → meta/queue.md (templates: meta/decklists/*.txt.todo)`);
 }
 
@@ -273,7 +188,13 @@ function cmdCheck() {
     // --fix: after reviewing the warnings, rewrite fuzzy/partial/loose names to the official card name.
     if (fix && r.cards.some((c) => c.cardId && c.method && c.method !== "exact")) {
       const text = readFileSync(path, "utf8");
-      writeFileSync(path, formatDecklistFile(r.file.meta, r.cards.map((c) => ({ zone: c.zone, count: c.count, name: c.cardId ? c.name! : c.rawName }))));
+      writeFileSync(
+        path,
+        formatDecklistFile(
+          r.file.meta,
+          r.cards.map((c) => ({ zone: c.zone, count: c.count, name: c.cardId ? c.name! : c.rawName })),
+        ),
+      );
       if (text !== readFileSync(path, "utf8")) log(`fixed names in ${f}`);
       r = checkDecklist(db, resolver, parseDecklistFile(f, readFileSync(path, "utf8")));
     }
@@ -289,9 +210,10 @@ function cmdCheck() {
 
 if (/[\\/]meta[\\/]cli\.(ts|js)$/.test(process.argv[1] ?? "")) {
   const cmd = args.find((a) => !a.startsWith("--"));
-  const run = cmd === "fetch" ? cmdFetch : cmd === "queue" ? cmdQueue : cmd === "check" ? async () => cmdCheck() : null;
+  const run =
+    cmd === "fetch" ? cmdFetch : cmd === "queue" ? cmdQueue : cmd === "check" ? async () => cmdCheck() : cmd === "import-decks" ? cmdImportDecks : null;
   if (!run) {
-    console.error("usage: tsx src/meta/cli.ts fetch|queue|check [options]");
+    console.error("usage: tsx src/meta/cli.ts fetch|queue|check|import-decks [options]");
     process.exit(2);
   }
   run().catch((e) => {

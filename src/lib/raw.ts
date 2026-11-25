@@ -19,6 +19,8 @@ export const ROOT = findRoot(dirname(fileURLToPath(import.meta.url)));
 export const DATA_DIR = env.DM_DATA_DIR ? resolve(env.DM_DATA_DIR) : join(ROOT, "data");
 export const RAW_DIR = join(DATA_DIR, "raw");
 export const DEFAULT_DB_PATH = join(DATA_DIR, "dm.sqlite");
+/** Writable store (meta data, decks) when DM_DATA_STORE is not set: a local directory. */
+export const DEFAULT_STORE = join(DATA_DIR, "store");
 
 export function rawPath(...parts: string[]): string {
   return join(RAW_DIR, ...parts);

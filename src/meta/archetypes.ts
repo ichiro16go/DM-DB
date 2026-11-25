@@ -69,7 +69,7 @@ export function cleanPlacementArchetype(s: string): string {
 /** Strip leading color words: "白青黒緑ドギラゴン逆" → "ドギラゴン逆" (as archKey). */
 export function coreKey(name: string): string {
   let k = archKey(name);
-  for (let changed = true; changed; ) {
+  for (let changed = true; changed;) {
     changed = false;
     for (const c of COLOR_KEYS) {
       if (k.startsWith(c) && k.length > c.length + 1) {

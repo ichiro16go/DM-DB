@@ -6,6 +6,8 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { FIELDS } from "../search/compile.js";
 import type { Database } from "better-sqlite3";
+import type { MetaService } from "../meta/service.js";
+import type { DeckStore } from "../decks/store.js";
 import { QueryError, SearchEngine, type CardSummary } from "../search/engine.js";
 import { parseDeckText, validateDeck } from "../deck/validate.js";
 
@@ -36,9 +38,56 @@ function renderCard(c: CardSummary): string {
   return `《${c.name}》${reg} (id:${c.id}, zone:${c.zone}${c.legalOriginal ? "" : ", オリジナル不可"})\n${faces}${pr}`;
 }
 
-export function createMcpServer(db: Database): McpServer {
+export interface McpExtras {
+  meta?: MetaService;
+  decks?: DeckStore;
+}
+
+export function createMcpServer(db: Database, extras: McpExtras = {}): McpServer {
   const engine = new SearchEngine(db);
   const server = new McpServer({ name: "dm-card-db", version: "0.1.0" });
+
+  if (extras.meta) {
+    const meta = extras.meta;
+    server.registerTool(
+      "get_meta",
+      {
+        title: "環境デッキ（週次の入賞数ランキング）",
+        description: "公認CSのベスト4入賞数から集計した週次の環境デッキ分布（出典: 田園補完計画）と、登録済みの代表デッキリストを返す。week 省略時は最新週。",
+        inputSchema: {
+          format: z.enum(["original", "advance"]).default("original"),
+          week: z.string().optional().describe("集計期間の開始日 YYYY-MM-DD"),
+          lists: z.number().int().min(0).max(20).default(5).describe("上位何デッキ分の代表リストを含めるか"),
+        },
+      },
+      async ({ format, week, lists }) => {
+        await meta.ensureFresh();
+        const r = await meta.ranking(format, week ?? null);
+        if (!r) return { content: [{ type: "text", text: "週次データがありません" }], isError: true };
+        const lines = [
+          `${format === "original" ? "オリジナル" : "アドバンス"} ${r.snapshot.periodStart}〜${r.snapshot.periodEnd}（母数 ${r.snapshot.sampleSize}、最新セット: ${r.snapshot.latestSet ?? "-"}）出典: ${r.snapshot.url}`,
+          ...r.rows.map((x) => {
+            const d = x.prev ? ` 前週${x.prev.share}%` : " 前週なし";
+            return `${x.rank}位 ${x.name} ${x.count}件 ${x.share}%${d}${x.note ? `（${x.note}）` : ""}${x.decks.length ? ` [リスト${x.decks.length}件]` : ""}`;
+          }),
+          r.singletons.length ? `母数1: ${r.singletons.join("、")}` : "",
+        ];
+        if (extras.decks && lists > 0) {
+          for (const row of r.rows.slice(0, lists)) {
+            const best = row.decks.find((d) => d.status === "complete") ?? row.decks[0];
+            if (!best) continue;
+            const { deck } = await extras.decks.get(best.id);
+            lines.push(
+              "",
+              `■ ${row.name} 代表リスト: ${deck.name}（${deck.status}${deck.source ? `、${deck.source.eventName} ${deck.source.rank} ${deck.source.date}` : ""}）`,
+              ...deck.cards.map((c) => `${c.zone === "main" ? "" : c.zone === "hyperspatial" ? "[超次元] " : "[GR] "}${c.count} ${c.name}`),
+            );
+          }
+        }
+        return { content: [{ type: "text", text: lines.filter((l) => l !== undefined).join("\n") }] };
+      },
+    );
+  }
 
   server.registerTool(
     "search_cards",

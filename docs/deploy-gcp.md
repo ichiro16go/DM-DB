@@ -10,6 +10,7 @@ Claude ─────→ │  /mcp        MCP（Bearer トークン）         
              │  /health     死活監視（認証なし）                         │      │ 新しい版があれば無停止で差し替え
              └──────────────────────────────────────────────────────────┘      │
                                                                              │
+Cloud Scheduler（毎日 6:47）→ Cloud Run ジョブ dm-card-db-meta（環境：週間ランキング＋CS結果）→ data/meta/
 Cloud Scheduler（毎週月曜 4:17）→ Cloud Run ジョブ dm-card-db-update             │
    キャッシュ復元 → 差分クロール → キャッシュ保存 → DB構築 → 品質チェック → 公開 ──┘
                                                                   Cloud Storage gs://<bucket>/data/
@@ -17,9 +18,11 @@ Cloud Scheduler（毎週月曜 4:17）→ Cloud Run ジョブ dm-card-db-update 
                                                                     raw.tar.gz（クロールキャッシュ）
                                                                     history/<時刻>/（90日保持）
                                                                     rejected/<時刻>/（品質チェック落ちのレポート）
+                                                                    meta/（環境データ） decks/（デッキリスト・履歴つき）
 ```
 
-- **イメージは1つ、入口は2つ**です。サービスは `dist/server/index.js`、ジョブは `dist/jobs/update.js` から動きます。
+- **イメージは1つ、入口は3つ**です。サービスは `dist/server/index.js`、ジョブは `dist/jobs/update.js`（カードDB）と `dist/jobs/meta-update.js`（環境）から動きます。
+- **デッキと環境データは書き込み可能**です。サービスは `data/decks/` に書き込むので、サービスのアカウントには `roles/storage.objectAdmin` を付けています（`setup.sh` が付与します）。同時に保存されたときは Cloud Storage の世代番号で競合を検出します。
 - **DBはイメージに含めません。** サービスはCloud Storageに公開されたDBを読みます。このため、データの更新に再デプロイは不要です。コードを更新したときだけ再デプロイします。
 - **品質チェックを通らないDBは公開しません。** 次のどれかに当たると公開を止めます。止めた場合も、公開中のDBはそのまま残ります。
   - 公式一覧より収録数が少ない
@@ -27,7 +30,7 @@ Cloud Scheduler（毎週月曜 4:17）→ Cloud Run ジョブ dm-card-db-update 
   - パースエラーがある
   - 殿堂の対応づけに失敗した
   - キーワード抽出の適合率が90%未満
-- **フロントとバックエンドを分けていません。** UIは静的ファイル3つだけなので、同じサーバーから配信しています。同じドメインなのでCORSも不要です。
+- **フロントとバックエンドを分けていません。** UI（React + Vite）はイメージのビルド時に `web/dist` へビルドし、同じサーバーから配信しています。同じドメインなのでCORSも不要です。
 
 ## 認証
 
@@ -92,6 +95,8 @@ claude mcp add --transport http dm-cards https://<サービスURL>/mcp \
 ```bash
 # 今すぐデータを更新する（通常は毎週月曜に自動）
 gcloud run jobs execute dm-card-db-update --region asia-northeast1
+# 今すぐ環境データを更新する（通常は毎日 6:47 に自動）
+gcloud run jobs execute dm-card-db-meta --region asia-northeast1
 ```
 
 ## 運用
@@ -102,6 +107,7 @@ gcloud run jobs execute dm-card-db-update --region asia-northeast1
 | 前の版に戻す | `gcloud storage cp gs://<bucket>/data/history/<時刻>/dm.sqlite gs://<bucket>/data/dm.sqlite`。10分以内にサービスが切り替わります |
 | コードを更新する | `git pull` してから `setup.sh` を再実行 |
 | パスワードを変える | `gcloud secrets versions add dm-auth-password --data-file=-` に新しい値を渡し、`gcloud run services update dm-card-db --region asia-northeast1` で新しいリビジョンを作る |
+| デッキリストを誤って消した | 削除は元に戻せません。`gs://<bucket>/data/decks/` のバケットでオブジェクトのバージョニングを有効にしておくと復元できます（任意） |
 | ログを見る | Cloud Logging（JSON形式で出力しています） |
 
 ## 費用の目安（個人利用）

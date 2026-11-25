@@ -51,7 +51,8 @@ export function parseDecklistFile(file: string, text: string): DecklistFile {
     if (/^(メイン|main)$/i.test(line)) zone = "main";
     else if (/^(超次元|hyperspatial)$/i.test(line)) zone = "hyperspatial";
     else if (/^(超?GR|gr)$/i.test(line)) zone = "gr";
-    else if (/^\?\s*\d+$/.test(line)) lines.push({ zone, name: "?", count: Number(line.slice(1)) }); // "? 3" = 3 unreadable cards
+    else if (/^\?\s*\d+$/.test(line))
+      lines.push({ zone, name: "?", count: Number(line.slice(1)) }); // "? 3" = 3 unreadable cards
     else {
       const m = line.match(/^(\d+)\s*[x×]?\s+(.+)$/) ?? line.match(/^(.+?)\s*[x×*]\s*(\d+)$/);
       if (!m) throw new Error(`${file}: cannot parse line "${raw}"`);
@@ -118,7 +119,9 @@ export class CardResolver {
   private loose = new Map<string, IndexEntry[]>();
 
   constructor(private db: Database) {
-    const rows = db.prepare("SELECT c.id, c.name, c.name_norm, group_concat(f.name, '|') AS faces FROM cards c JOIN faces f ON f.card_id = c.id GROUP BY c.id").all() as {
+    const rows = db
+      .prepare("SELECT c.id, c.name, c.name_norm, group_concat(f.name, '|') AS faces FROM cards c JOIN faces f ON f.card_id = c.id GROUP BY c.id")
+      .all() as {
       id: number;
       name: string;
       name_norm: string;
@@ -127,14 +130,24 @@ export class CardResolver {
     this.index = rows.map((r) => ({ id: r.id, name: r.name, keys: [...new Set(r.name_norm.split("|").filter(Boolean))] }));
     this.exact = new Map();
     for (const r of rows) {
-      this.exact.set(nfkc(r.name), this.index.find((e) => e.id === r.id)!);
-      for (const f of r.faces.split("|")) if (!this.exact.has(nfkc(f))) this.exact.set(nfkc(f), this.index.find((e) => e.id === r.id)!);
+      this.exact.set(
+        nfkc(r.name),
+        this.index.find((e) => e.id === r.id)!,
+      );
+      for (const f of r.faces.split("|"))
+        if (!this.exact.has(nfkc(f)))
+          this.exact.set(
+            nfkc(f),
+            this.index.find((e) => e.id === r.id)!,
+          );
     }
     for (const e of this.index) for (const k of e.keys) this.loose.set(k, [...(this.loose.get(k) ?? []), e]);
   }
 
   resolve(raw: string): Resolution {
-    const name = nfkc(raw).replace(/^[《≪]|[》≫]$/g, "").trim();
+    const name = nfkc(raw)
+      .replace(/^[《≪]|[》≫]$/g, "")
+      .trim();
     const hit = (e: IndexEntry, method: ResolveMethod): Resolution => ({ cardId: e.id, name: e.name, method, candidates: [] });
     const ex = this.exact.get(name);
     if (ex) {
@@ -174,10 +187,12 @@ export interface ResolvedDecklist {
 export function checkDecklist(db: Database, resolver: CardResolver, file: DecklistFile): ResolvedDecklist {
   const problems: string[] = [];
   const costOf = new Map(
-    (db.prepare("SELECT c.name, MIN(f.cost) AS cost FROM cards c JOIN faces f ON f.card_id = c.id GROUP BY c.id").all() as { name: string; cost: number | null }[]).map((r) => [
-      r.name,
-      r.cost,
-    ]),
+    (
+      db.prepare("SELECT c.name, MIN(f.cost) AS cost FROM cards c JOIN faces f ON f.card_id = c.id GROUP BY c.id").all() as {
+        name: string;
+        cost: number | null;
+      }[]
+    ).map((r) => [r.name, r.cost]),
   );
   const cards = file.lines.map((l) =>
     l.name === "?" ? { ...l, rawName: "?", cardId: null, name: "?", method: null, candidates: [] } : { ...l, rawName: l.name, ...resolve(l) },
@@ -187,7 +202,9 @@ export function checkDecklist(db: Database, resolver: CardResolver, file: Deckli
     const withCost = (n: string) => `${n}(コスト${costOf.get(n) ?? "?"})`;
     if (!r.cardId) problems.push(`「${l.name}」を特定できません${r.candidates.length ? `（候補: ${r.candidates.map(withCost).join(" / ")}）` : ""}`);
     else if (r.method === "exact" && r.candidates.length && !file.meta[`ok-${l.name}`.toLowerCase()])
-      problems.push(`《${withCost(r.name!)}》と名前の始まりが同じ別カードがあります: ${r.candidates.map(withCost).join(" / ")}（正しければ "# ok-${l.name}: yes" を追記）`);
+      problems.push(
+        `《${withCost(r.name!)}》と名前の始まりが同じ別カードがあります: ${r.candidates.map(withCost).join(" / ")}（正しければ "# ok-${l.name}: yes" を追記）`,
+      );
     else if (r.method === "fuzzy" || r.method === "partial") problems.push(`「${l.name}」→《${r.name}》（${r.method}）を確認してください`);
     return { ...r, name: r.name ?? l.name };
   }

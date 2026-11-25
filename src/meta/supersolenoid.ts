@@ -125,7 +125,13 @@ export function parseRankingPost(url: string, html: string): RankingPost {
     // "創世竜(トリーヴァ40、白青黒緑1) ※大半が…" → name "創世竜", note "トリーヴァ40、白青黒緑1 ※大半が…"
     const cut = body.search(/[(※]/);
     const name = (cut >= 0 ? body.slice(0, cut) : body).trim();
-    const note = cut >= 0 ? body.slice(cut).replace(/^\((.*?)\)/, "$1").trim() || null : null;
+    const note =
+      cut >= 0
+        ? body
+            .slice(cut)
+            .replace(/^\((.*?)\)/, "$1")
+            .trim() || null
+        : null;
     entries.push({ ...current!, name, note });
     currentHasEntry = true;
   };
@@ -158,7 +164,8 @@ export function parseRankingPost(url: string, html: string): RankingPost {
       pushEntry(line); // the blog occasionally forgets the "・" bullet
     }
   }
-  if (!periodStart || !sampleSize || entries.length === 0) throw new Error(`incomplete ranking post ${url}: period=${periodStart} n=${sampleSize} entries=${entries.length}`);
+  if (!periodStart || !sampleSize || entries.length === 0)
+    throw new Error(`incomplete ranking post ${url}: period=${periodStart} n=${sampleSize} entries=${entries.length}`);
   return {
     url,
     title,
@@ -271,4 +278,5 @@ export function parsePostLinks(html: string): PostLink[] {
 }
 
 export const isRankingTitle = (t: string) => /入賞数ランキング/.test(t) && !!formatOf(t);
-export const isResultTitle = (t: string) => /結果/.test(t) && /(デュエマ\s*(オリジナル|アドバンス)CS|DMGP|デュエルマスターズ)/.test(t) && !/入賞数ランキング/.test(t);
+export const isResultTitle = (t: string) =>
+  /結果/.test(t) && /(デュエマ\s*(オリジナル|アドバンス)CS|DMGP|デュエルマスターズ)/.test(t) && !/入賞数ランキング/.test(t);

@@ -6,8 +6,9 @@
 - **データ源**: [公式カード検索](https://dm.takaratomy.co.jp/card/)（全収録・全商品）と[殿堂レギュレーション](https://dm.takaratomy.co.jp/rule/regulation/)
 - **DB**: SQLite（1ファイル、`data/dm.sqlite`）
 - **検索**: Scryfall風のクエリ言語（AND / OR / NOT / 括弧 / 数値比較 / 正規表現）
-- **UI**: Web UI（検索・カード詳細・絵柄違い一覧・デッキ検証・データ品質）
-- **AI**: MCPサーバ（`search_cards` / `get_card` / `validate_deck` / `list_keywords`）。ローカル（stdio）とHTTP（`/mcp`）の両方
+- **UI**: React + Vite の Web UI（検索・カード詳細・絵柄違い一覧・**環境デッキ**・**デッキ作成/編集**・データ品質）
+- **環境**: [田園補完計画](https://supersolenoid.jp/)の週間「入賞数ランキング」とCS結果を毎日自動で取り込み、デッキタイプ別のシェア・前週比・入賞リストを表示
+- **AI**: MCPサーバ（`search_cards` / `get_card` / `validate_deck` / `list_keywords` / `get_meta`）。ローカル（stdio）とHTTP（`/mcp`）の両方
 - **運用**: Cloud Run（UI＋API＋MCPを1コンテナで）＋ 週1回の自動更新ジョブ → [docs/deploy-gcp.md](docs/deploy-gcp.md)
 
 > 個人利用を前提にしています。カードのテキスト・画像の権利はタカラトミー等にあります。DBやカード画像は再配布しないでください（UIの画像は公式サイトの画像URLを直接表示しています）。
@@ -18,6 +19,7 @@
 npm install
 npm run crawl       # 公式サイトから取得 → data/raw/（再開可能・取得済みはスキップ。初回は約1.5時間・約100MB）
 npm run build:db    # data/raw → data/dm.sqlite（ネットワーク不要・約25秒・約56MB）
+npm run build:web   # UI をビルド（web/dist）
 npm run serve       # http://localhost:8787
 npm test            # 単体 + フィクスチャ結合 + 本番DBの完全性テスト
 ```
@@ -27,6 +29,21 @@ npm test            # 単体 + フィクスチャ結合 + 本番DBの完全性�
 ```bash
 npm run update
 ```
+
+UIを開発するときは `npm run serve`（API、:8787）と `npm run dev:web`（Vite、:5173。`/api` を :8787 に中継）を並べて動かします。
+
+### 環境デッキとデッキリスト
+
+```bash
+npm run job:meta    # 田園補完計画から直近6週の分布とCS結果を取得 → data/store/meta/（差分のみ取得）
+```
+
+- **分布（自動）**: 週間ランキング（月曜夜に公開）とCS結果記事を取り込みます。GCPでは毎日 6:47 に実行されるので、新しい週は火曜の朝に反映されます。
+- **デッキリスト（手動）**: 自動では更新しません。CS結果の主催者画像から書き起こしたリスト（`meta/decklists/*.txt`）を初回だけ登録し、以後はUIで直します。
+  - 保存のたびに前の版が履歴に残ります（最大30版）。どの版にも戻せます。
+  - 同時に編集された場合は、後から保存した側に 409（競合）を返します。上書きか再読み込みを選べます。
+- **保存先**: デッキと環境データは書き込み可能なストア（GCPでは `gs://<bucket>/data/decks/` と `data/meta/`、ローカルでは `data/store/`）に保存します。カードDB（読み取り専用）とは分けています。
+- **デッキ作成**: カード検索（フォーマットで使えるカードに絞り込み）→ ＋で追加。枚数の増減、ゾーンの移動、テキストの取り込みと書き出しができます。構築ルール、文明、コストカーブはその場でチェックします。特定できないカード名には、候補の選択か名前の入力で直せる欄が出ます。
 
 ### サーバーに置く（GCP）
 
@@ -38,6 +55,7 @@ PROJECT_ID=<プロジェクトID> ./scripts/gcp/setup.sh
 
 - Cloud Run サービス（UI＋API＋MCP。Basic認証とトークン認証付き）
 - 週1回の自動更新ジョブ（差分クロール → DB構築 → 品質チェック → 公開）
+- 毎日の環境データ更新ジョブ（週間ランキング＋CS結果）
 - Cloud Storage（公開中のDB、クロールのキャッシュ、過去の版）
 
 構成・認証・運用・費用は [docs/deploy-gcp.md](docs/deploy-gcp.md) を参照してください。
@@ -57,6 +75,7 @@ claude mcp add --transport http dm-cards https://<サービスURL>/mcp --header 
 | `get_card(name \| id)` | 全面の能力、キーワード、効果タグ、全収録（絵柄違い）、枚数上限 |
 | `validate_deck(format, decklist)` | オリジナル / アドバンスの構築ルールと殿堂をチェック |
 | `list_keywords(contains?)` | 使えるキーワード・系統・効果タグ一覧 |
+| `get_meta(format, week?, lists?)` | 環境（デッキタイプ別のシェア・前週比）と、登録済みのデッキリスト |
 
 ## クエリ言語
 
@@ -153,6 +172,9 @@ sets（商品）  keywords / keyword_families（系統）  tags  illustrators  q
 | `test/api-deck.test.ts` | HTTP API とデッキ検証（40枚、4枚制限、超次元/GRのゾーン、フォーマット） |
 | `test/mcp.test.ts` | MCPサーバ（インメモリ接続でツールを実行） |
 | `test/server.test.ts` | 設定の検証（Cloud Runで認証なしなら起動拒否）、Basic/Bearer/パス形式のトークン認証、MCP over HTTP、DBの無停止差し替え、更新ジョブの品質チェック |
+| `test/meta.test.ts` | 田園補完計画の記事パーサ（ランキング・CS結果・記事一覧）、デッキタイプ名の照合、環境データの集計（前週比・入賞・デッキの紐づけ・新しい週の反映） |
+| `test/decks.test.ts` | デッキの入力検証、保存・履歴・競合検出（409）・復元・削除、同梱リストの初回登録（ユーザーの修正を上書きしない）、デッキAPI |
+| `web/src/lib/lib.test.ts` | UIの条件→クエリ変換、デッキ操作（追加・差分・書き出し） |
 | `test/full-db.test.ts` | **本番DBの完全性**：公式一覧の全収録がDBにあるか、全商品に収録があるか、殿堂が全件対応づいたか、構造の不変条件、有名カードの抜き取り確認、キーワード抽出の公式との一致率、検索速度 |
 
 `npm run build:db` を実行すると `data/build-report.md` が出力されます。中身は次の2つです。
@@ -171,12 +193,15 @@ src/crawl/    公式サイトのクローラ（再開可能、並列数と間隔
 src/parse/    HTMLパーサ、キーワード抽出、効果タグ、殿堂ページ
 src/db/       スキーマとDB構築（raw → SQLite）
 src/search/   クエリパーサ → SQLコンパイラ → 検索エンジン
-src/deck/     デッキ検証
+src/deck/     デッキ検証（構築ルール）
+src/decks/    デッキの保存（履歴・競合検出）、カード名の解決、同梱リストの登録
+src/meta/     環境データ：田園補完計画のパーサ・取得・集計、デッキリストのファイル形式
 src/server/   HTTP API + 静的UI + MCP(HTTP)、認証、DBの無停止差し替え
 src/mcp/      MCPのツール定義（tools.ts）と stdio 版の入口（server.ts）
-src/jobs/     定期更新ジョブ（クロール → 構築 → 品質チェック → 公開）
+src/jobs/     定期更新ジョブ（update: クロール → 構築 → 品質チェック → 公開、meta-update: 環境データ）
 src/storage/  Cloud Storage / ローカルフォルダの共通インターフェース
-web/          フロントエンド（ビルド不要）
+web/          フロントエンド（React + Vite。ビルド結果は web/dist）
+meta/         書き起こしたデッキリスト（decklists/）と書き起こし待ちの一覧（queue.md）
 test/         テストと実カードのフィクスチャ
 ```
 

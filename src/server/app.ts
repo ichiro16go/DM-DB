@@ -1,6 +1,9 @@
 import type { Database } from "better-sqlite3";
 import { createHash, timingSafeEqual } from "node:crypto";
 import { Hono, type Context, type Next } from "hono";
+import { deckErrorResponse, registerDeckRoutes } from "./decks-api.js";
+import type { DeckStore } from "../decks/store.js";
+import type { MetaService } from "../meta/service.js";
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import { FIELDS } from "../search/compile.js";
 import { QueryError, SearchEngine, type Order } from "../search/engine.js";
@@ -24,7 +27,13 @@ export interface AuthConfig {
 
 export interface AppOptions {
   auth?: AuthConfig;
+  /** Writable deck store; deck routes are only mounted when given. */
+  decks?: DeckStore;
+  /** Meta (環境) data; /api/meta routes are only mounted when given. */
+  meta?: MetaService;
 }
+
+export type AppEnv = { Variables: { user: string | null } };
 
 type DbSource = Database | Pick<DbHolder, "current" | "maybeRefresh" | "version">;
 
@@ -41,17 +50,30 @@ export function safeEqual(a: string, b: string): boolean {
 const HEALTH_PATHS = new Set(["/health", "/healthz"]);
 
 function authMiddleware(auth: AuthConfig) {
-  return async (c: Context, next: Next) => {
-    if (auth.public || HEALTH_PATHS.has(c.req.path)) return next();
+  return async (c: Context<AppEnv>, next: Next) => {
+    // c.set("user") records who is acting (used as the author of deck edits).
+    if (auth.public || HEALTH_PATHS.has(c.req.path)) {
+      c.set("user", null);
+      return next();
+    }
     const header = c.req.header("authorization") ?? "";
-    if (auth.token && header.startsWith("Bearer ") && safeEqual(header.slice(7).trim(), auth.token)) return next();
+    if (auth.token && header.startsWith("Bearer ") && safeEqual(header.slice(7).trim(), auth.token)) {
+      c.set("user", "api-token");
+      return next();
+    }
     if (auth.token && c.req.path.startsWith("/mcp/")) {
       const t = decodeURIComponent(c.req.path.slice("/mcp/".length));
-      if (safeEqual(t, auth.token)) return next();
+      if (safeEqual(t, auth.token)) {
+        c.set("user", "api-token");
+        return next();
+      }
     }
     if (auth.basic && header.startsWith("Basic ")) {
       const [user, ...rest] = Buffer.from(header.slice(6), "base64").toString("utf8").split(":");
-      if (safeEqual(user ?? "", auth.basic.user) && safeEqual(rest.join(":"), auth.basic.password)) return next();
+      if (safeEqual(user ?? "", auth.basic.user) && safeEqual(rest.join(":"), auth.basic.password)) {
+        c.set("user", auth.basic.user);
+        return next();
+      }
     }
     if (auth.basic) c.header("WWW-Authenticate", 'Basic realm="DM Card DB", charset="UTF-8"');
     return c.json({ error: "authentication required" }, 401);
@@ -59,7 +81,7 @@ function authMiddleware(auth: AuthConfig) {
 }
 
 /** HTTP API + MCP endpoint. Kept separate from the listener so tests can call app.request() directly. */
-export function createApp(source: DbSource, opts: AppOptions = {}): Hono {
+export function createApp(source: DbSource, opts: AppOptions = {}): Hono<AppEnv> {
   const holder = "current" in source ? source : null;
   const dbOf = (): Database => (holder ? holder.current() : (source as Database));
   // One engine / meta payload per DB handle (the handle changes when a new DB is swapped in).
@@ -71,10 +93,13 @@ export function createApp(source: DbSource, opts: AppOptions = {}): Hono {
     return e;
   };
 
-  const app = new Hono();
+  const app = new Hono<AppEnv>();
 
   app.onError((err, c) => {
     if (err instanceof QueryError) return c.json({ error: err.message, position: err.position ?? null }, 400);
+    const deckErr = deckErrorResponse(err);
+    if (deckErr) return c.json(deckErr.body, deckErr.status);
+    if (err instanceof SyntaxError) return c.json({ error: "JSON が不正です" }, 400);
     console.error(err);
     return c.json({ error: "internal error" }, 500);
   });
@@ -134,9 +159,30 @@ export function createApp(source: DbSource, opts: AppOptions = {}): Hono {
     return c.json({ issues, samples, keywordAgreement: agreement });
   });
 
+  if (opts.decks) registerDeckRoutes(app, dbOf, opts.decks);
+
+  if (opts.meta) {
+    const meta = opts.meta;
+    const fmt = (v: string | undefined) => (v === "advance" ? "advance" : "original");
+    app.get("/api/meta/snapshots", async (c) => {
+      await meta.ensureFresh();
+      return c.json({ snapshots: meta.listSnapshots() });
+    });
+    app.get("/api/meta/ranking", async (c) => {
+      await meta.ensureFresh();
+      const r = await meta.ranking(fmt(c.req.query("format")), c.req.query("week") || null);
+      return r ? c.json(r) : c.json({ error: "no snapshot" }, 404);
+    });
+    app.get("/api/meta/entry", async (c) => {
+      await meta.ensureFresh();
+      const r = await meta.entry(fmt(c.req.query("format")), c.req.query("name") ?? "", c.req.query("week") || null);
+      return r ? c.json(r) : c.json({ error: "not found" }, 404);
+    });
+  }
+
   // MCP over Streamable HTTP, stateless: a fresh server per request bound to the current DB.
   const mcp = async (c: Context) => {
-    const server = createMcpServer(dbOf());
+    const server = createMcpServer(dbOf(), { meta: opts.meta, decks: opts.decks });
     const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined, enableJsonResponse: true });
     await server.connect(transport);
     try {

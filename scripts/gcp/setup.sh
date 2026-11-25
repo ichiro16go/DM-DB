@@ -13,6 +13,8 @@ REGION="${REGION:-asia-northeast1}"
 BUCKET="${BUCKET:-${PROJECT_ID}-dm-card-db}"
 SERVICE="${SERVICE:-dm-card-db}"
 JOB="${JOB:-dm-card-db-update}"
+META_JOB="${META_JOB:-dm-card-db-meta}"
+META_SCHEDULE="${META_SCHEDULE:-47 6 * * *}"  # daily 06:47 JST (the weekly ranking is posted Monday night)
 REPO="${REPO:-dm-card-db}"
 AUTH_USER="${AUTH_USER:-dm}"
 SCHEDULE="${SCHEDULE:-17 4 * * 1}"   # every Monday 04:17 JST
@@ -46,7 +48,8 @@ for sa in dm-card-db-web dm-card-db-job dm-card-db-scheduler; do
   gcloud iam service-accounts describe "${sa}@${PROJECT_ID}.iam.gserviceaccount.com" >/dev/null 2>&1 ||
     gcloud iam service-accounts create "$sa" --display-name "$sa"
 done
-gcloud storage buckets add-iam-policy-binding "gs://${BUCKET}" --member "serviceAccount:${WEB_SA}" --role roles/storage.objectViewer >/dev/null
+# The web service writes deck lists (decks/…) edited in the UI, so it needs object create/overwrite.
+gcloud storage buckets add-iam-policy-binding "gs://${BUCKET}" --member "serviceAccount:${WEB_SA}" --role roles/storage.objectAdmin >/dev/null
 gcloud storage buckets add-iam-policy-binding "gs://${BUCKET}" --member "serviceAccount:${JOB_SA}" --role roles/storage.objectAdmin >/dev/null
 
 step "Secrets (generated once; read them with: gcloud secrets versions access latest --secret=...)"
@@ -93,6 +96,26 @@ else
     --uri "$JOB_URI" --http-method POST --oauth-service-account-email "$SCHED_SA"
 fi
 
+step "Meta (環境) job ${META_JOB}: weekly ranking + CS results; deck lists are never overwritten"
+gcloud run jobs deploy "$META_JOB" --image "$IMAGE" --region "$REGION" \
+  --service-account "$JOB_SA" \
+  --command node --args=--enable-source-maps,dist/jobs/meta-update.js \
+  --set-env-vars "DM_DATA_STORE=${STORE}" \
+  --memory 512Mi --cpu 1 --task-timeout 30m --max-retries 1
+gcloud run jobs add-iam-policy-binding "$META_JOB" --region "$REGION" --member "serviceAccount:${SCHED_SA}" --role roles/run.invoker >/dev/null
+META_URI="https://run.googleapis.com/v2/projects/${PROJECT_ID}/locations/${REGION}/jobs/${META_JOB}:run"
+if gcloud scheduler jobs describe "${META_JOB}-daily" --location "$REGION" >/dev/null 2>&1; then
+  gcloud scheduler jobs update http "${META_JOB}-daily" --location "$REGION" --schedule "$META_SCHEDULE" --time-zone Asia/Tokyo \
+    --uri "$META_URI" --http-method POST --oauth-service-account-email "$SCHED_SA"
+else
+  gcloud scheduler jobs create http "${META_JOB}-daily" --location "$REGION" --schedule "$META_SCHEDULE" --time-zone Asia/Tokyo \
+    --uri "$META_URI" --http-method POST --oauth-service-account-email "$SCHED_SA"
+fi
+if ! gcloud storage objects describe "${STORE}/meta/index.json" >/dev/null 2>&1; then
+  step "First meta fetch (a few minutes)"
+  gcloud run jobs execute "$META_JOB" --region "$REGION" --wait
+fi
+
 if ! gcloud storage objects describe "${STORE}/dm.sqlite" >/dev/null 2>&1; then
   step "First full crawl (waits ~1.5h)"
   gcloud run jobs execute "$JOB" --region "$REGION" --wait
@@ -113,5 +136,6 @@ cat <<EOF
 URL:        ${URL}
 Login:      user "${AUTH_USER}", password: gcloud secrets versions access latest --secret=dm-auth-password
 MCP:        claude mcp add --transport http dm-cards ${URL}/mcp --header "Authorization: Bearer \$(gcloud secrets versions access latest --secret=dm-api-token)"
-Update now: gcloud run jobs execute ${JOB} --region ${REGION}
+Update now: gcloud run jobs execute ${JOB} --region ${REGION}        (cards, weekly)
+Meta now:   gcloud run jobs execute ${META_JOB} --region ${REGION}   (環境ランキング, daily)
 EOF

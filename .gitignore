@@ -5,3 +5,5 @@ data/*.sqlite*
 data/crawl.log
 data/latest*.json
 *.todo
+data/store/
+web/dist/
