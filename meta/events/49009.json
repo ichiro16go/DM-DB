@@ -1,0 +1,50 @@
+{
+ "id": 49009,
+ "url": "https://supersolenoid.jp/blog-entry-49009.html",
+ "title": "【デュエマ アドバンスCS】「第47回CARDBOX防府　夜CS (2026/11/20)」結果　4Cモルトが優勝　赤青マンジージョーカーズ魔導具が準優勝　5Cテレポートが3位入賞　4Cモルトが4位入賞",
+ "format": "advance",
+ "eventName": "第47回CARDBOX防府 夜CS",
+ "date": "2026-11-20",
+ "capacity": 64,
+ "players": null,
+ "region": "山口",
+ "store": "カードボックス防府店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "4Cモルト",
+   "player": "曜",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-16qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "赤青マンジージョーカーズ魔導具",
+   "player": "かぷち",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-16qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "5Cテレポート",
+   "player": "グッチー!!",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-16qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "4Cモルト",
+   "player": "フォンニーナ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-16qqq-4.jpg"
+   ]
+  }
+ ]
+}

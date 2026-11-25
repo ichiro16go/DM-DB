@@ -1,0 +1,50 @@
+{
+ "id": 48593,
+ "url": "https://supersolenoid.jp/blog-entry-48593.html",
+ "title": "【デュエマ アドバンスCS】「第74回 郡山CS ＠協賛シーガル(2026/10/18)」結果　デイガファイアーバードが優勝　ドギラダンテ刈入り4Cモルトが準優勝　ドロマーダーツデリートが3位入賞　白緑ウィリデが3位入賞",
+ "format": "advance",
+ "eventName": "第74回 郡山CS @協賛シーガル",
+ "date": "2026-10-18",
+ "capacity": 64,
+ "players": null,
+ "region": "福島",
+ "store": "カードゲームのシーガル郡山店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "デイガファイアーバード",
+   "player": "40円玉",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261025oyu-49qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "4Cモルト",
+   "player": "バジュラサード",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261025oyu-49qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "ドロマーダーツデリート",
+   "player": "カルデラ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261025oyu-49qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白緑ウィリデ",
+   "player": "赤き幻影",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261025oyu-49qqq-4.jpg"
+   ]
+  }
+ ]
+}

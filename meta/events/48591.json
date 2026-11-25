@@ -1,0 +1,41 @@
+{
+ "id": 48591,
+ "url": "https://supersolenoid.jp/blog-entry-48591.html",
+ "title": "【デュエマ オリジナルCS】「flat- CS in 池袋(2026/10/26)」結果　赤零ジョーカーズが優勝　デアリバイクが3位入賞　4Cギリガザミが4位入賞",
+ "format": "original",
+ "eventName": "flat- Championship 【オリジナル】in 池袋",
+ "date": "2026-10-26",
+ "capacity": 60,
+ "players": null,
+ "region": "東京",
+ "store": "flat-工房池袋店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "赤零ジョーカーズ",
+   "player": "藻屑:mokuzu",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261006tgb-0008qqq-1.png"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "デアリバイク",
+   "player": "僕佐藤",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261006tgb-0008qqq-3.png"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "4Cギリガザミ@",
+   "player": "ちいかま",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/HVjkot8a4AAD2kb.jpg"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,27 @@
+# event: 49050
+# placement: 1
+# archetype: アナカラー生徒会組
+# meta-archetype: アナカラー系生徒会組
+# player: ポッチャマVstar
+# format: original
+# rank: 優勝
+# date: 2026-11-22
+# event-name: トレカラインCS
+# source: https://supersolenoid.jp/blog-entry-49050.html
+# image: https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-20qqq-1.jpg
+# status: complete
+# transcribed: claude 2026-11-24
+# note: 重ねて並べた写真。各束の先頭の名前の冒頭部分とコストから特定
+4 邪幽 ジャヴェール / 「ヤベーのを見たいか？」
+4 青寂の精霊龍 カーネル
+4 流星アーシュ＜私が主役⁉＞
+4 我竜塔第七層 ハッスル・キャッスル
+4 深淵の逆転撃
+4 地封院ギャイ＜まかしとき！＞
+4 流星のガイアッシュ・カイザー
+4 烈しき切札 ドギラゴン逆
+3 熊田すず＜わらわは天才！＞
+2 天革の騎令嬢 ミラクルステラ
+2 切札混成 光隼 蒼斬丸
+1 悪魔龍 ダークマスターズ
+# ok-青寂の精霊龍 カーネル: yes

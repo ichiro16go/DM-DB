@@ -1,0 +1,32 @@
+{
+ "id": 48904,
+ "url": "https://supersolenoid.jp/blog-entry-48904.html",
+ "title": "【デュエマ オリジナルCS】「第265回DMイオン長岡CS (2026/11/15)」結果　デアリアトムが優勝　デアリアトムが準優勝",
+ "format": "original",
+ "eventName": "第265回DMイオン長岡CS",
+ "date": "2026-11-15",
+ "capacity": 64,
+ "players": null,
+ "region": "新潟",
+ "store": "JABUROII",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "デアリアトム",
+   "player": "ケン2018",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261115tyt-03qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "デアリアトム",
+   "player": "ユウト1315",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261115tyt-03qqq-2.jpg"
+   ]
+  }
+ ]
+}

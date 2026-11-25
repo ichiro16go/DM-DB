@@ -1,0 +1,50 @@
+{
+ "id": 49036,
+ "url": "https://supersolenoid.jp/blog-entry-49036.html",
+ "title": "【デュエマ オリジナルCS】「第20回 トレプラ豊田CS(2026/11/22)」結果　赤零ジョーカーズが優勝　デアリバイクが準優勝　リースバイクが3位入賞　アナカラー生徒会組が4位入賞",
+ "format": "original",
+ "eventName": "【参加表明30名まで参加費500円】第20回 トレプラ豊田CS【オリジナル】",
+ "date": "2026-11-22",
+ "capacity": 64,
+ "players": null,
+ "region": "愛知",
+ "store": "トレカプラザ55豊田店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "赤零ジョーカーズ",
+   "player": "ゆか",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-07qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "デアリバイク",
+   "player": "ロキセント",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-07qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "リースバイク",
+   "player": "おはぎゅいー",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-07qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "アナカラー生徒会組",
+   "player": "サンバス",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-07qqq-4.jpg"
+   ]
+  }
+ ]
+}

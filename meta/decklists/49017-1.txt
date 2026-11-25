@@ -1,0 +1,26 @@
+# event: 49017
+# placement: 1
+# archetype: 白緑ウィリデ
+# meta-archetype: ザゼゼーン/ウィリデ
+# player: ろくます
+# format: original
+# rank: 優勝
+# date: 2026-11-21
+# event-name: 第28回ストワンCS
+# source: https://supersolenoid.jp/blog-entry-49017.html
+# image: https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-24qqq-1.jpg
+# status: complete
+# transcribed: claude 2026-11-24
+4 キャディ・ビートル
+4 我竜塔第七層 ハッスル・キャッスル
+4 楯教の求道者 ザゼ・ゼーン
+4 魂が休む庭園 グリーン・グランドクロス
+4 世界のY チャクラ・デル・フィン
+1 我竜塔第一層 セイント・キャッスル
+3 神判のカルマ コットン / ジャッジ・水晶チャージャー
+3 地封院ギャイ＜まかしとき！＞
+2 一音の妖精
+3 ウィリデ・ゴル・ゲルス
+4 烈しき切札 ドギラゴン逆
+1 神聖龍 エモーショナル・ハードコア
+3 天V王 エバーラスト

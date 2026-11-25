@@ -1,0 +1,71 @@
+# Transcription queue
+
+- [ ] advance 赤零ジョーカーズ ← 2位 赤零ジョーカーズ@ねぎましか勝たん / 第21回あおいもりCS (2026-11-22)
+  - image: data/raw/meta/images/49040-1.jpg
+  - write: meta/decklists/49040-1.txt
+- [ ] advance 5Cテレポート ← 優勝 5Cテレポート@asca@リョウ / 【第10回】トレカがかりCS (2026-11-22)
+  - image: data/raw/meta/images/49037-1.jpg
+  - write: meta/decklists/49037-1.txt
+- [ ] advance モルト ← 優勝 4Cモルト@ヤナギ / 大空CS in トレカキャンプDM-池袋- (2026-11-22)
+  - image: data/raw/meta/images/49033-1.jpg
+  - write: meta/decklists/49033-1.txt
+- [ ] advance ラッキーダーツ ← 優勝 ドロマーラッキーダーツ@よぴだ / デュエルマスターズ レプトンカード館CS アドバンス (2026-11-22)
+  - image: data/raw/meta/images/49049-1.jpg
+  - write: meta/decklists/49049-1.txt
+- [ ] original デモニオ ← 優勝 デアリデモニオ@グリド / 【オリジナル】第212回DM新倉敷CS (2026-11-21)
+  - image: data/raw/meta/images/48999-1.jpg
+  - write: meta/decklists/48999-1.txt
+- [ ] original フィオナアカシック ← 優勝 フィオナアカシック@琥珀 / 鬼火CS in 晴れる屋3 (2026-11-22)
+  - image: data/raw/meta/images/49034-1.jpg
+  - write: meta/decklists/49034-1.txt
+- [ ] original ドギラゴン王道&刈 ← 優勝 4Cドギラダンテ刈@藤井 / 巌流CS inひたち野うしく (2026-11-21)
+  - image: data/raw/meta/images/49024-1.jpg
+  - write: meta/decklists/49024-1.txt
+- [ ] original ザゼゼーン/ウィリデ ← 優勝 白緑ウィリデ@ろくます / 第28回ストワンCS (2026-11-21)
+  - image: data/raw/meta/images/49017-1.jpg
+  - write: meta/decklists/49017-1.txt
+- [ ] original ギリガザミ ← 優勝 4Cギリガザミ@じく氏 / 妖精CS in ブックオフ町田中央通り店 (2026-11-21)
+  - image: data/raw/meta/images/49008-1.jpg
+  - write: meta/decklists/49008-1.txt
+- [ ] original ゴルギーオージャー ← 優勝 トリーヴァゴルギーオージャー@ヘヴンズニート / 光臨杯 ~オリジナル~ (2026-11-20)
+  - image: data/raw/meta/images/49001-1.jpg
+  - write: meta/decklists/49001-1.txt
+- [ ] original 白青黒緑ドギラゴン逆 ← 優勝 白青黒緑ドギラゴン逆@せーご / 二本槍CSinポンポコ (2026-11-18)
+  - image: data/raw/meta/images/48954-1.jpg
+  - write: meta/decklists/48954-1.txt
+- [ ] original サムライ ← 優勝 リースサムライ@しょーT / 守礼CS in カースタ首里店 (2026-11-22)
+  - image: data/raw/meta/images/49061-1.jpg
+  - write: meta/decklists/49061-1.txt
+- [ ] original クローシスモウジャキンガ ← 3位 クローシスモウジャキンガ@レイぴア / CLIMAX-CS-東京-秋葉原カードショップCLIMAX (2026-11-22)
+  - image: data/raw/meta/images/49032-4.jpg
+  - write: meta/decklists/49032-4.txt
+- [ ] original アトム革命チェンジ ← 優勝 デアリアトム@たけした / 第89回ブックオフ浜北CS【オリジナル】 (2026-11-21)
+  - image: data/raw/meta/images/49000-1.jpg
+  - write: meta/decklists/49000-1.txt
+- [ ] original トリーヴァ系生徒会組 ← 2位 トリーヴァ生徒会組蒼斬丸@Relife / デュエルマスターズ ファンクスCS【オリジナル】 (2026-11-22)
+  - image: data/raw/meta/images/49053-2.jpg
+  - write: meta/decklists/49053-2.txt
+- [ ] original デスパペット ← 3位 青黒デスパペット刈@Koucha / 【ロッドゾージア&フミシュナCSプロモ争奪】大空CS in TSUTAYA西五反田店 (2026-11-22)
+  - image: data/raw/meta/images/49058-3.jpg
+  - write: meta/decklists/49058-3.txt
+- [ ] original 4CディアスZ ← 優勝 4CディアスZ@なっしー/劇場 / 音速CSin船橋 (2026-11-19)
+  - image: data/raw/meta/images/48971-1.jpg
+  - write: meta/decklists/48971-1.txt
+- [ ] original シーザー ← 優勝 ドロマーシーザー@工藤璃輝(宮城県) / NEMCS【前日までの参加表明で参加費1000円】 (2026-11-21)
+  - image: data/raw/meta/images/49003-1.jpg
+  - write: meta/decklists/49003-1.txt
+- [ ] original 赤単速攻 ← 優勝 赤単速攻@テテララ / ブックオフ佐世保 よむよむCS (2026-11-21)
+  - image: data/raw/meta/images/49005-1.jpg
+  - write: meta/decklists/49005-1.txt
+- [ ] original 赤黒邪王門 ← 優勝 赤黒邪王門@ネコ軍曹 / 第15回DM明石ビブレCS【オリジナル (2026-11-21)
+  - image: data/raw/meta/images/49006-1.jpg
+  - write: meta/decklists/49006-1.txt
+- [ ] original デアリバイク ← 4位 デアリバイク@り-る / ラリアット杯 (2026-11-22)
+  - image: data/raw/meta/images/49046-4.jpg
+  - write: meta/decklists/49046-4.txt
+- [ ] original アルファディオス ← 2位 4Cアルファディオス@なこった / デネブログ×シーガル郡山コラボCS with ツシマイズモ (2026-11-22)
+  - image: data/raw/meta/images/49065-2.jpg
+  - write: meta/decklists/49065-2.txt
+- [ ] original 青黒COMPLEX ← 2位 青黒生徒会組COMPLEX@ミンミンミン / みれどCS (2026-11-17)
+  - image: data/raw/meta/images/48946-2.jpg
+  - write: meta/decklists/48946-2.txt

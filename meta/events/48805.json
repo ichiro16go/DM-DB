@@ -1,0 +1,32 @@
+{
+ "id": 48805,
+ "url": "https://supersolenoid.jp/blog-entry-48805.html",
+ "title": "【デュエマ オリジナルCS】「カーディバルCS(2026/11/07)」結果　青黒ボウダンロウ、赤零ジョーカーズなどが上位入賞",
+ "format": "original",
+ "eventName": "カーディバルCS",
+ "date": "2026-11-07",
+ "capacity": 86,
+ "players": null,
+ "region": "東京",
+ "store": "秋葉原デュエルスペース専門店カーディバル",
+ "placements": [
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "青黒ボウダンロウ@",
+   "player": "八舞",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-13qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "赤零ジョーカーズ",
+   "player": "黒波",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-13qqq-4.jpg"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+# event: 49036
+# placement: 1
+# archetype: 赤零ジョーカーズ
+# meta-archetype: 赤零ジョーカーズ
+# player: ゆか
+# format: original
+# rank: 優勝
+# date: 2026-11-22
+# event-name: 【参加表明30名まで参加費500円】第20回 トレプラ豊田CS【オリジナル】
+# source: https://supersolenoid.jp/blog-entry-49036.html
+# image: https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-07qqq-1.jpg
+# status: complete
+# transcribed: claude 2026-11-24
+# ok-ジョット・ガン・ジョラゴン: yes
+4 ジョジョジョ・ジョーカーズ
+4 銃車逆夢 ザ・マグニー / ジョリー・ザ・スクラッパー
+4 Dr.富士山ッピング
+4 “↑↑”ブランド
+4 キング・ザ・スロットン7
+4 ジョギメラゴン&メラビート ~Jの焔舞~
+4 メラベンチャー・ザ・ジョニー
+4 ジョギラゴン&ジョニー ~Jの旅路~
+1 アイアン・マンハッタン
+1 ジョット・ガン・ジョラゴン
+1 最終兵ッキー
+1 勝熱と弾丸と自由の決断
+2 勝敵逆夢王 モウジャキンガ
+2 にやにYAH

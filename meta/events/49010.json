@@ -1,0 +1,50 @@
+{
+ "id": 49010,
+ "url": "https://supersolenoid.jp/blog-entry-49010.html",
+ "title": "【デュエマ オリジナルCS】「第344回デュエマブルーホースCS(2026/11/21)」結果　リースバイクが優勝　アナカラー生徒会組が準優勝　赤零ジョーカーズが3位入賞　赤零ジョーカーズが3位入賞",
+ "format": "original",
+ "eventName": "【新デッキ記念大会】第344回デュエマブルーホースCS 【早期表明特典有】",
+ "date": "2026-11-21",
+ "capacity": 114,
+ "players": null,
+ "region": "神奈川",
+ "store": "青馬堂書店本店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "リースバイク",
+   "player": "ウォッカ/大和中央",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-17qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "アナカラー生徒会組",
+   "player": "シャロン",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-17qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤零ジョーカーズ",
+   "player": "マーカス",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-17qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤零ジョーカーズ",
+   "player": "契(ちぎり)",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-17qqq-4.jpg"
+   ]
+  }
+ ]
+}

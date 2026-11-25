@@ -1,0 +1,50 @@
+{
+ "id": 48809,
+ "url": "https://supersolenoid.jp/blog-entry-48809.html",
+ "title": "【デュエマ オリジナルCS】「アクアCS in カードショップはっち(2026/11/04)」結果　リースバイクが優勝　Dol-Fal-20th入り黒緑墓地ゾロアスタートが準優勝　逆アポロが3位入賞　ジョーカーズが4位入賞",
+ "format": "original",
+ "eventName": "アクアCS in カードショップはっち",
+ "date": "2026-11-04",
+ "capacity": 64,
+ "players": 64,
+ "region": "大阪",
+ "store": "ラックス奈良柏木店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "リースバイク",
+   "player": "希亜",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-17qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "黒緑墓地ゾロアスタート",
+   "player": "ゆず猫",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-17qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "逆アポロ",
+   "player": "なおっち.",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-17qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "ジョーカーズ",
+   "player": "mofura",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-17qqq-4.jpg"
+   ]
+  }
+ ]
+}

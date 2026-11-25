@@ -1,0 +1,50 @@
+{
+ "id": 48842,
+ "url": "https://supersolenoid.jp/blog-entry-48842.html",
+ "title": "【デュエマ アドバンスCS】「番外編 あどはしごCS in カードボックス日本橋店 (2026/11/08)」結果　アナカラーカリヤドネが優勝　4Cモルトが準優勝　青黒デスパペットが3位入賞　5Cテレポートが4位入賞",
+ "format": "advance",
+ "eventName": "番外編 あどはしごCS in カードボックス日本橋店",
+ "date": "2026-11-08",
+ "capacity": 64,
+ "players": null,
+ "region": "大阪",
+ "store": "カードボックス日本橋店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "アナカラーカリヤドネ",
+   "player": "くくる",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-23qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "4Cモルト",
+   "player": "ナミカワ ダイチ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-23qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "青黒デスパペット",
+   "player": "味噌漬け茄子",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-23qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "5Cテレポート",
+   "player": "かにかま",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-23qqq-4.jpg"
+   ]
+  }
+ ]
+}

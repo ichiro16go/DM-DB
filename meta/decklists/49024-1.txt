@@ -1,0 +1,27 @@
+# event: 49024
+# placement: 1
+# archetype: 4Cドギラダンテ刈
+# meta-archetype: ドギラゴン王道&刈
+# player: 藤井
+# format: original
+# rank: 優勝
+# date: 2026-11-21
+# event-name: 巌流CS inひたち野うしく
+# source: https://supersolenoid.jp/blog-entry-49024.html
+# image: https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-31qqq-1.jpg
+# status: partial
+# transcribed: claude 2026-11-24
+# note: 最下段左のコスト4呪文×3は名前が隠れている
+# ok-pp-「p」: yes
+4 我竜塔第七層 ハッスル・キャッスル
+4 PP-「P」
+4 裏斬隠 テンサイ・ハート
+4 冥土人形クリン・ラビィ
+4 王道の革命 ドギラゴン
+4 斬隠将撃龍ニバイケン
+4 切札混成 ドギラダンテ刈
+3 剣轟の団長 ドギラゴン王道
+2 斬隠蒼頭龍バイケン
+2 音卿の精霊龍 ラフルル・ラブ / 「未来から来る、だからミラクル」
+2 切札混成 光隼 蒼斬丸
+3 ?

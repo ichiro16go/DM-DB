@@ -1,0 +1,49 @@
+{
+ "url": "https://supersolenoid.jp/blog-entry-48919.html",
+ "title": "【デュエマ アドバンスCS】「入賞数ランキング(11/9～11/15)」 GP開催週なので母数少なめ",
+ "format": "advance",
+ "flash": false,
+ "periodStart": "2026-11-09",
+ "periodEnd": "2026-11-15",
+ "sampleSize": 19,
+ "latestSet": "デュエマプレイス・コラボパック「電脳対戦 -WAR OF PLAY'S-」",
+ "publishedAt": "2026-11-16",
+ "entries": [
+  {
+   "rank": 1,
+   "count": 3,
+   "share": 15.8,
+   "name": "赤零ジョーカーズ",
+   "note": null
+  },
+  {
+   "rank": 2,
+   "count": 2,
+   "share": 10.5,
+   "name": "ラッキーダーツ",
+   "note": "テレポート入り1、デリート型1"
+  },
+  {
+   "rank": 2,
+   "count": 2,
+   "share": 10.5,
+   "name": "カリヤドネ",
+   "note": "青黒1、アナカラー1"
+  }
+ ],
+ "singletons": [
+  "4Cテレポート",
+  "4Cマグナ",
+  "5Cテレポート",
+  "5Cテレポートデリート",
+  "5Cミロク",
+  "アナカラージョルジュ",
+  "アナカラーデッドマン",
+  "クローシス侵略バイク",
+  "デアリブラックルシファー",
+  "リースDDDバイク",
+  "白緑ウィリデ",
+  "青黒デスパペット"
+ ],
+ "singletonShare": 63.2
+}

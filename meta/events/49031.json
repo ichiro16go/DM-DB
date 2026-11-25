@@ -1,0 +1,42 @@
+{
+ "id": 49031,
+ "url": "https://supersolenoid.jp/blog-entry-49031.html",
+ "title": "【デュエマ オリジナルCS】「はっちcs in カードショップはっち (2026/11/22)」結果　4Cギリガザミが優勝　赤零ジョーカーズが準優勝　4Cディスペクター天門が3位入賞　赤零ジョーカーズが3位入賞",
+ "format": "original",
+ "eventName": "はっちcs in カードショップはっち",
+ "date": "2026-11-22",
+ "capacity": 80,
+ "players": null,
+ "region": "大阪",
+ "store": "カードショップもののふ",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "ゼニスザーク秩序【光水闇ギリガザミ】",
+   "player": null,
+   "images": []
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "るなかす【火ゼロジョーカーズ】",
+   "player": null,
+   "images": []
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "ゴママヨ警察【4c天門】",
+   "player": null,
+   "images": []
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "ふねみかん【火ゼロジョーカーズ】",
+   "player": null,
+   "images": []
+  }
+ ]
+}

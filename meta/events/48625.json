@@ -1,0 +1,50 @@
+{
+ "id": 48625,
+ "url": "https://supersolenoid.jp/blog-entry-48625.html",
+ "title": "【デュエマ オリジナルCS】「コンパスCS in 竜星のPAO秋葉原ロケット無線店(2026/09/22)」結果　アナカラー生徒会組が優勝　赤零ジョーカーズが準優勝　アナカラー生徒会組が3位入賞　青黒デスパペットが4位入賞",
+ "format": "original",
+ "eventName": "コンパスCS in 竜星のPAO秋葉原ロケット無線店",
+ "date": "2026-09-22",
+ "capacity": 128,
+ "players": null,
+ "region": "東京",
+ "store": "PAO堀之内店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "アナカラー生徒会組",
+   "player": "rんp",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-02qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "赤零ジョーカーズ",
+   "player": "Nea01",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-02qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "アナカラー生徒会組",
+   "player": "くろきり",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-02qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "青黒デスパペット",
+   "player": "青島",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-02qqq-4.jpg"
+   ]
+  }
+ ]
+}

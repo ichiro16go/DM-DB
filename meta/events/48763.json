@@ -1,0 +1,50 @@
+{
+ "id": 48763,
+ "url": "https://supersolenoid.jp/blog-entry-48763.html",
+ "title": "【デュエマ オリジナルCS】「竿燈CS in ブックオフプラスドン・キホーテ秋田店(2026/10/24)」結果　デアリデモニオが優勝　リースバイクが準優勝　トリーヴァゴルギーオージャーが3位入賞　赤零ジョーカーズが4位入賞",
+ "format": "original",
+ "eventName": "竿燈CS in ブックオフプラスドン・キホーテ秋田店",
+ "date": "2026-10-24",
+ "capacity": 40,
+ "players": null,
+ "region": "秋田",
+ "store": "BOOKOFF PLUSドン・キホーテ秋田店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "デアリデモニオ",
+   "player": "パスタ太郎",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-26qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "リースバイク",
+   "player": "UMAP",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-26qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "トリーヴァゴルギーオージャー",
+   "player": "レスター",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-26qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "赤零ジョーカーズ",
+   "player": "自認ブラキオサウルス",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-26qqq-4.jpg"
+   ]
+  }
+ ]
+}

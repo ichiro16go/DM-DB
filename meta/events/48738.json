@@ -1,0 +1,50 @@
+{
+ "id": 48738,
+ "url": "https://supersolenoid.jp/blog-entry-48738.html",
+ "title": "【デュエマ アドバンスCS】「第197回DM岡山駅前CS(2026/11/03)」結果　赤単速攻が優勝　アナカラーカリヤドネが準優勝　赤黒バイクが3位入賞　赤青秘密結社が4位入賞",
+ "format": "advance",
+ "eventName": "第197回DM岡山駅前CSアドバンス",
+ "date": "2026-11-03",
+ "capacity": 80,
+ "players": null,
+ "region": "岡山",
+ "store": "カードボックス岡山駅前店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "赤単速攻@",
+   "player": "タッツー",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-07qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "アナカラーカリヤドネ",
+   "player": "ぶらっきー/香取推し",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-07qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤黒バイク",
+   "player": "かにかま",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-07qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "赤青秘密結社",
+   "player": "004",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-07qqq-4.jpg"
+   ]
+  }
+ ]
+}

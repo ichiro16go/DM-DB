@@ -1,0 +1,41 @@
+{
+ "id": 48601,
+ "url": "https://supersolenoid.jp/blog-entry-48601.html",
+ "title": "【デュエマ オリジナルCS】「DM飛梅CS in カードショップポンポコ(2026/10/03)」結果　アナカラー生徒会組が優勝　トリーヴァゴルギーオージャーが準優勝　白緑ウィリデが3位入賞",
+ "format": "original",
+ "eventName": "DM飛梅CS in カードショップポンポコ",
+ "date": "2026-10-03",
+ "capacity": 80,
+ "players": null,
+ "region": "東京",
+ "store": "おもちゃのふるや",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "アナカラー生徒会組",
+   "player": ".tEn.",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261025oyu-55qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "トリーヴァゴルギーオージャー",
+   "player": "道徳と皿",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261025oyu-55qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白緑ウィリデ",
+   "player": "カイラ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261025oyu-55qqq-3.jpg"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "id": 49041,
+ "url": "https://supersolenoid.jp/blog-entry-49041.html",
+ "title": "【デュエマ オリジナルCS】「トイコンプCS in住道店(2026/11/22)」結果　4Cゼーロが優勝　赤零ジョーカーズが準優勝　クローシスデスパペットモウジャキンガが3位入賞",
+ "format": "original",
+ "eventName": "トイコンプチャンピオンシップin住道店(オリジナル)",
+ "date": "2026-11-22",
+ "capacity": 64,
+ "players": null,
+ "region": "大阪",
+ "store": "トイコンプ住道店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "4Cゼーロ",
+   "player": "しんちゃん食堂",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-12qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "赤零ジョーカーズ",
+   "player": "ごっしー",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-12qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "クローシスデスパペットモウジャキンガ",
+   "player": "中野のわの",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-12qqq-3.jpg"
+   ]
+  }
+ ]
+}

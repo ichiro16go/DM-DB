@@ -1,0 +1,50 @@
+{
+ "id": 48786,
+ "url": "https://supersolenoid.jp/blog-entry-48786.html",
+ "title": "【デュエマ オリジナルCS】「デュエマCS in Bee本舗バトルタワー店(2026/11/06)」結果　4CディアスZが優勝　白緑ウィリデが準優勝　デイガファイアーバードが3位入賞　4Cギリガザミが4位入賞",
+ "format": "original",
+ "eventName": "デュエマCS in Bee本舗バトルタワー店",
+ "date": "2026-11-06",
+ "capacity": 64,
+ "players": null,
+ "region": "大阪",
+ "store": "Bee本舗バトルタワー店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "4CディアスZ",
+   "player": "DJ-str7",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-37qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "白緑ウィリデ",
+   "player": "だいご/前田界隈",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-37qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "デイガファイアーバード",
+   "player": "ら+/らぶちう界隈",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-37qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "4Cギリガザミ",
+   "player": "ごんべ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-37qqq-4.jpg"
+   ]
+  }
+ ]
+}

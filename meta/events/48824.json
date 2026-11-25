@@ -1,0 +1,50 @@
+{
+ "id": 48824,
+ "url": "https://supersolenoid.jp/blog-entry-48824.html",
+ "title": "【デュエマ オリジナルCS】「シモカップCS (2026/11/08)」結果　トリーヴァ蒼斬丸が優勝　赤零ジョーカーズが準優勝　白黒赤緑メタビートが3位入賞　赤零ジョーカーズが4位入賞",
+ "format": "original",
+ "eventName": "シモカップCS",
+ "date": "2026-11-08",
+ "capacity": 32,
+ "players": null,
+ "region": "大阪",
+ "store": "e-forum河内長野店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "トリーヴァ蒼斬丸",
+   "player": "uRuna",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-05qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "赤零ジョーカーズ",
+   "player": "ドレミファ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-05qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白黒赤緑メタビート",
+   "player": "ネプ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-05qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "赤零ジョーカーズ",
+   "player": "七バイ寿司",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-05qqq-4.jpg"
+   ]
+  }
+ ]
+}

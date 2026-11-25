@@ -1,0 +1,50 @@
+{
+ "id": 48701,
+ "url": "https://supersolenoid.jp/blog-entry-48701.html",
+ "title": "【デュエマ オリジナルCS】「大空CS in トレカキャンプDM-池袋-(2026/11/01)」結果　トリーヴァゴルギーオージャーが優勝　トリーヴァ蒼斬丸が準優勝　白緑ザゼゼーンが3位入賞　アナカラー生徒会組が3位入賞",
+ "format": "original",
+ "eventName": "大空CS in トレカキャンプDM-池袋-",
+ "date": "2026-11-01",
+ "capacity": 64,
+ "players": null,
+ "region": "東京",
+ "store": "ドラマ下北沢トレカ専門店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "トリーヴァゴルギーオージャー",
+   "player": "ハト/Miku",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-02qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "トリーヴァ蒼斬丸",
+   "player": "とうちか",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-02qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白緑ザゼゼーン",
+   "player": "いいですよ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-02qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "アナカラー生徒会組",
+   "player": "BaL",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-02qqq-4.jpg"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+{
+ "id": 49082,
+ "url": "https://supersolenoid.jp/blog-entry-49082.html",
+ "title": "【デュエマ オリジナルCS】「梅田NU茶屋町しっぽCS (2026/11/23)」結果　ドロマーシーザーが優勝　赤零ジョーカーズが準優勝　フィオナアカシックが3位入賞　ドールバロム＆大獄の封殺ディアスZ入り黒緑バロムが3位入賞",
+ "format": "original",
+ "eventName": "【オリジナル構築】梅田NU茶屋町しっぽCS",
+ "date": "2026-11-23",
+ "capacity": 64,
+ "players": null,
+ "region": "大阪",
+ "store": "トレカショップ竜のしっぽ 梅田NU茶屋町店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "ドロマーシーザー",
+   "player": "表サイバー龍",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261123ooi-13qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "赤零ジョーカーズ",
+   "player": "RJ2",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261123ooi-13qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "フィオナアカシック",
+   "player": "けみーけ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261123ooi-13qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "黒緑バロム",
+   "player": "親方#古人",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261123ooi-13qqq-4.jpg"
+   ]
+  }
+ ]
+}

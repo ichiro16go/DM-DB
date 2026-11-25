@@ -1,0 +1,23 @@
+{
+ "id": 49001,
+ "url": "https://supersolenoid.jp/blog-entry-49001.html",
+ "title": "【デュエマ オリジナルCS】「光臨杯(2026/11/20)」結果　トリーヴァゴルギーオージャーが優勝",
+ "format": "original",
+ "eventName": "光臨杯 ~オリジナル~",
+ "date": "2026-11-20",
+ "capacity": 64,
+ "players": 29,
+ "region": "滋賀",
+ "store": "カードショップ Light",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "トリーヴァゴルギーオージャー",
+   "player": "ヘヴンズニート",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-10qqq-1.jpg"
+   ]
+  }
+ ]
+}

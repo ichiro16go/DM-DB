@@ -1,0 +1,50 @@
+{
+ "id": 48687,
+ "url": "https://supersolenoid.jp/blog-entry-48687.html",
+ "title": "【デュエマ オリジナルCS】「彩強CS in 竜星のPAO大宮店(2026/10/31)」結果　白青黒緑ドギラゴン逆が優勝　アナカラー生徒会組が準優勝　アナカラー生徒会組が3位入賞　白緑ウィリデが3位入賞",
+ "format": "original",
+ "eventName": "【オリジナル】彩強CS in 竜星のPAO大宮店【最大2.4倍】",
+ "date": "2026-10-31",
+ "capacity": 128,
+ "players": 55,
+ "region": "埼玉",
+ "store": "竜星のPAO大宮店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "白青黒緑ドギラゴン逆",
+   "player": "凪/キャット界隈",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261031ghj-18qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "アナカラー生徒会組",
+   "player": "CHANEL",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261031ghj-18qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "アナカラー生徒会組",
+   "player": "あーち122",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261031ghj-18qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白緑ウィリデ",
+   "player": "作楽ゆわ/谷一派",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261031ghj-18qqq-4.jpg"
+   ]
+  }
+ ]
+}

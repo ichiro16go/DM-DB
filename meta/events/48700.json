@@ -1,0 +1,50 @@
+{
+ "id": 48700,
+ "url": "https://supersolenoid.jp/blog-entry-48700.html",
+ "title": "【デュエマ オリジナルCS】「朝のリドルCS学割の陣(2026/11/01)」結果　モモムゲン入り4C墓地退化が優勝　デアリデモニオが準優勝　ドギラダンテ刈入り白青黒緑ドギラゴン逆が3位入賞　デアリデモニオが3位入賞",
+ "format": "original",
+ "eventName": "朝のリドルCS学割の陣【高校生以下500円/参加表明30名まで参加費800円】",
+ "date": "2026-11-01",
+ "capacity": 64,
+ "players": 64,
+ "region": "東京",
+ "store": "カードショップリドル京急蒲田店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "4C墓地退化",
+   "player": "土亀",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-01qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "デアリデモニオ",
+   "player": "Perry",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-01qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白青黒緑ドギラゴン逆",
+   "player": "イセ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-01qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "デアリデモニオ",
+   "player": "左人",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-01qqq-4.jpg"
+   ]
+  }
+ ]
+}

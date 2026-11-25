@@ -1,0 +1,50 @@
+{
+ "id": 48642,
+ "url": "https://supersolenoid.jp/blog-entry-48642.html",
+ "title": "【デュエマ オリジナルCS】「DM飛梅CS in TSUTAYA Trading Card北千住(2026/10/23)」結果　アナカラー生徒会組が優勝　リースゴリナボルトが準優勝　リースゴリナボルトが3位入賞　リースゴリナボルトが4位入賞",
+ "format": "original",
+ "eventName": "DM飛梅CS in TSUTAYA Trading Card北千住",
+ "date": "2026-10-23",
+ "capacity": 64,
+ "players": null,
+ "region": "東京",
+ "store": "TSUTAYA Trading Card 北千住",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "アナカラー生徒会組",
+   "player": "洋菓子のマカロン",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-20qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "リースゴリナボルト",
+   "player": "シズミ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-20qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "リースゴリナボルト",
+   "player": "懐幸/IAP",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-20qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "リースゴリナボルト",
+   "player": "mimikyu",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-20qqq-4.jpg"
+   ]
+  }
+ ]
+}

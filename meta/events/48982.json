@@ -1,0 +1,50 @@
+{
+ "id": 48982,
+ "url": "https://supersolenoid.jp/blog-entry-48982.html",
+ "title": "【デュエマ オリジナルCS】「DM飛梅CS in バトロコ吉祥寺駅前店 (2026/11/01)」結果　ドギラダンテ刈入り白青黒緑ドギラゴン逆が優勝　白緑ザゼゼーンが準優勝　4Cギリガザミが3位入賞　リースバイクが4位入賞",
+ "format": "original",
+ "eventName": "DM飛梅CS in バトロコ吉祥寺駅前店",
+ "date": "2026-11-01",
+ "capacity": 64,
+ "players": null,
+ "region": "東京",
+ "store": "TSUTAYA一関中央店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "白青黒緑ドギラゴン逆",
+   "player": "たかし_rm-rf",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261120suq-06qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "白緑ザゼゼーン",
+   "player": "GAPPO",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261120suq-06qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "4Cギリガザミ",
+   "player": "いーする",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261120suq-06qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "リースバイク",
+   "player": "せーご",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261120suq-06qqq-4.jpg"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+{
+ "id": 49080,
+ "url": "https://supersolenoid.jp/blog-entry-49080.html",
+ "title": "【デュエマ オリジナルCS】「トレカチャンピオン各務原店CS (2026/11/23)」結果　リースバイクが優勝　白緑ウィリデが準優勝　フィオナアカシックが3位入賞　4Cギリガザミが4位入賞",
+ "format": "original",
+ "eventName": "【学生割引あり】トレカチャンピオン各務原店CS",
+ "date": "2026-11-23",
+ "capacity": 64,
+ "players": null,
+ "region": "岐阜",
+ "store": "トレカチャンピオン各務原店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "リースバイク",
+   "player": "聖鎧亜",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261123ooi-11qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "白緑ウィリデ",
+   "player": "ABB",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261123ooi-11qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "フィオナアカシック",
+   "player": "あび",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261123ooi-11qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "4Cギリガザミ",
+   "player": "yoluka",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261123ooi-11qqq-4.jpg"
+   ]
+  }
+ ]
+}

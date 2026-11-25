@@ -1,0 +1,50 @@
+{
+ "id": 48968,
+ "url": "https://supersolenoid.jp/blog-entry-48968.html",
+ "title": "【デュエマ オリジナルCS】「音速CSポンポコ (2026/11/19)」結果　リースバイクが優勝　4Cドギラダンテ刈が準優勝　白緑ウィリデがベスト4　リースバイクがベスト4",
+ "format": "original",
+ "eventName": "音速CSポンポコ",
+ "date": "2026-11-19",
+ "capacity": 64,
+ "players": null,
+ "region": "東京",
+ "store": "トクジロー浦安店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "リースバイク",
+   "player": "れもん",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261116fik-27qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "4Cドギラダンテ刈",
+   "player": "オクツ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261116fik-27qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "ベスト4",
+   "rank": 3,
+   "archetype": "白緑ウィリデ",
+   "player": "葦名まな",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261116fik-27qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "ベスト4",
+   "rank": 3,
+   "archetype": "リースバイク",
+   "player": "ムラカミハル",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261116fik-27qqq-4.jpg"
+   ]
+  }
+ ]
+}

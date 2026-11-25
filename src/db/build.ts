@@ -7,6 +7,7 @@ import type { MasterData } from "../parse/master.js";
 import { parseRegulation, type RegulationRef } from "../parse/regulation.js";
 import { tagAbilities, TAG_RULES } from "../parse/tags.js";
 import { computeChronology } from "./chronology.js";
+import { buildMeta, type MetaSource } from "./build-meta.js";
 import { SCHEMA } from "./schema.js";
 
 export const CIV_BITS: Record<string, number> = { 光: 1, 水: 2, 闇: 4, 火: 8, 自然: 16 };
@@ -23,6 +24,8 @@ export interface RawSource {
   regulationHtml: string | null;
   /** Listed printings whose official detail page is empty (recorded as quality issues). */
   unavailable?: string[];
+  /** Meta (環境) data from meta/: weekly shares, CS results, transcribed deck lists. */
+  meta?: MetaSource;
 }
 
 export interface BuildReport {
@@ -442,6 +445,12 @@ export function buildDatabase(source: RawSource, dbPath: string, log: (msg: stri
     db.exec(`UPDATE cards SET regulation = 'premium', deck_limit = 0 WHERE id IN (SELECT card_id FROM regulation_entries WHERE status = 'premium')`);
   } else {
     issue("regulation_missing", "-", "no regulation page in source");
+  }
+
+  // ---------- meta (環境) ----------
+  if (source.meta) {
+    const m = buildMeta(db, source.meta, issue);
+    log(`meta: ${m.snapshots} snapshots, ${m.events} events, ${m.decklists} deck lists (${m.validDecklists} valid)`);
   }
 
   // ---------- aggregates ----------

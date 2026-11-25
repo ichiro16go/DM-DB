@@ -1,0 +1,50 @@
+{
+ "id": 48712,
+ "url": "https://supersolenoid.jp/blog-entry-48712.html",
+ "title": "【デュエマ オリジナルCS】「シャントCSin三洋堂トレカ館四日市店(2026/11/01)」結果　トリーヴァ創世竜が優勝　デアリデモニオが準優勝　白青黒緑ドギラゴン逆が3位入賞　トリーヴァゴルギーオージャーが4位入賞",
+ "format": "original",
+ "eventName": "シャントCSin三洋堂トレカ館四日市店※事前登録割あり※",
+ "date": "2026-11-01",
+ "capacity": 54,
+ "players": null,
+ "region": "三重",
+ "store": "三洋堂トレカ館 四日市店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "トリーヴァ創世竜",
+   "player": "こちゅあ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-13qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "デアリデモニオ",
+   "player": "意志の力",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-13qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白青黒緑ドギラゴン逆",
+   "player": "ざっしゅ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-13qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "トリーヴァゴルギーオージャー",
+   "player": "mokahire",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-13qqq-4.jpg"
+   ]
+  }
+ ]
+}

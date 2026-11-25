@@ -1,0 +1,50 @@
+{
+ "id": 48830,
+ "url": "https://supersolenoid.jp/blog-entry-48830.html",
+ "title": "【デュエマ オリジナルCS】「第16回ジョイCS (2026/11/08)」結果　デアリバイクが優勝　4Cドラゴンドギラダンテ刈が準優勝　赤零ジョーカーズが3位入賞　トリーヴァ創世竜が4位入賞",
+ "format": "original",
+ "eventName": "第16回ジョイCS",
+ "date": "2026-11-08",
+ "capacity": 64,
+ "players": null,
+ "region": "鹿児島",
+ "store": "ブックオフ鹿児島ジョイプラザ店トレカ館",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "デアリバイク",
+   "player": "内藤/Ito",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-11qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "4Cドラゴンドギラダンテ刈",
+   "player": "おうけい",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-11qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤零ジョーカーズ",
+   "player": "ARR",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-11qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "トリーヴァ創世竜",
+   "player": "マンダラ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-11qqq-4.jpg"
+   ]
+  }
+ ]
+}

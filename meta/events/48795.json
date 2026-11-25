@@ -1,0 +1,41 @@
+{
+ "id": 48795,
+ "url": "https://supersolenoid.jp/blog-entry-48795.html",
+ "title": "【デュエマ オリジナルCS】「第240回DMデッキーCS (2026/11/07)」結果　赤零ジョーカーズが優勝　赤零ジョーカーズが準優勝　赤零ジョーカーズが3位入賞",
+ "format": "original",
+ "eventName": "第240回DMデッキーCS",
+ "date": "2026-11-07",
+ "capacity": 128,
+ "players": null,
+ "region": "新潟",
+ "store": "CARDBASE JABURO",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "赤零ジョーカーズ",
+   "player": "カニオ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-04qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "赤零ジョーカーズ",
+   "player": "SK",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-04qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤零ジョーカーズ",
+   "player": "ハンノキ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-04qqq-3.jpg"
+   ]
+  }
+ ]
+}

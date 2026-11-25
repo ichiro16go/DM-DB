@@ -1,0 +1,283 @@
+{
+ "url": "https://supersolenoid.jp/blog-entry-49067.html",
+ "title": "【デュエマ オリジナルCS】「入賞数ランキング(11/16～11/22)」 GP後に環境激変、新型の創世竜が急増",
+ "format": "original",
+ "flash": false,
+ "periodStart": "2026-11-16",
+ "periodEnd": "2026-11-22",
+ "sampleSize": 395,
+ "latestSet": "ドリーム英雄譚デッキボルメテウスの書",
+ "publishedAt": "2026-11-23",
+ "entries": [
+  {
+   "rank": 1,
+   "count": 68,
+   "share": 17.2,
+   "name": "赤零ジョーカーズ",
+   "note": null
+  },
+  {
+   "rank": 2,
+   "count": 41,
+   "share": 10.4,
+   "name": "創世竜",
+   "note": "トリーヴァ40、白青黒緑1 ※大半がギャイ&ドギラゴン逆入り"
+  },
+  {
+   "rank": 3,
+   "count": 40,
+   "share": 10.1,
+   "name": "リースバイク",
+   "note": null
+  },
+  {
+   "rank": 4,
+   "count": 35,
+   "share": 8.9,
+   "name": "アナカラー系生徒会組",
+   "note": null
+  },
+  {
+   "rank": 5,
+   "count": 25,
+   "share": 6.3,
+   "name": "デモニオ",
+   "note": "全てデアリ"
+  },
+  {
+   "rank": 6,
+   "count": 21,
+   "share": 5.3,
+   "name": "フィオナアカシック",
+   "note": null
+  },
+  {
+   "rank": 7,
+   "count": 19,
+   "share": 4.8,
+   "name": "ドギラゴン王道&刈",
+   "note": "カウンターニバイケン型14、デスフェルザーク型5"
+  },
+  {
+   "rank": 7,
+   "count": 19,
+   "share": 4.8,
+   "name": "ザゼゼーン/ウィリデ",
+   "note": "全てウィリデ型"
+  },
+  {
+   "rank": 9,
+   "count": 14,
+   "share": 3.5,
+   "name": "ギリガザミ",
+   "note": null
+  },
+  {
+   "rank": 10,
+   "count": 10,
+   "share": 2.5,
+   "name": "ゴルギーオージャー",
+   "note": "全てトリーヴァ"
+  },
+  {
+   "rank": 10,
+   "count": 10,
+   "share": 2.5,
+   "name": "白青黒緑ドギラゴン逆",
+   "note": "生徒会組無し、ゼンアク型"
+  },
+  {
+   "rank": 12,
+   "count": 7,
+   "share": 1.8,
+   "name": "サムライ",
+   "note": "赤白4、リース2、型不明1"
+  },
+  {
+   "rank": 13,
+   "count": 6,
+   "share": 1.5,
+   "name": "クローシスモウジャキンガ",
+   "note": null
+  },
+  {
+   "rank": 13,
+   "count": 6,
+   "share": 1.5,
+   "name": "アトム革命チェンジ",
+   "note": "デアリ5、白黒赤緑1"
+  },
+  {
+   "rank": 15,
+   "count": 5,
+   "share": 1.3,
+   "name": "トリーヴァ系生徒会組",
+   "note": null
+  },
+  {
+   "rank": 15,
+   "count": 5,
+   "share": 1.3,
+   "name": "デスパペット",
+   "note": "青黒メアリージェニードギラダンテ刈型4、青黒1"
+  },
+  {
+   "rank": 17,
+   "count": 4,
+   "share": 1,
+   "name": "4CディアスZ",
+   "note": null
+  },
+  {
+   "rank": 17,
+   "count": 4,
+   "share": 1,
+   "name": "シーザー",
+   "note": "全てドロマー"
+  },
+  {
+   "rank": 19,
+   "count": 3,
+   "share": 0.8,
+   "name": "赤単速攻",
+   "note": null
+  },
+  {
+   "rank": 19,
+   "count": 3,
+   "share": 0.8,
+   "name": "赤黒邪王門",
+   "note": null
+  },
+  {
+   "rank": 19,
+   "count": 3,
+   "share": 0.8,
+   "name": "デアリバイク",
+   "note": null
+  },
+  {
+   "rank": 19,
+   "count": 3,
+   "share": 0.8,
+   "name": "アルファディオス",
+   "note": "白青赤緑2、トリーヴァ1"
+  },
+  {
+   "rank": 19,
+   "count": 3,
+   "share": 0.8,
+   "name": "青黒COMPLEX",
+   "note": null
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "トリーヴァ蒼斬丸",
+   "note": "生徒会組無し、ストラトバッグビッグマナ型"
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "ディスペクター天門",
+   "note": "全て白青黒緑"
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "ザダンバース",
+   "note": "全て白青黒緑"
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "5Cザーディクリカ",
+   "note": null
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "スノーフェアリー",
+   "note": "全て白青赤緑"
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "邪眼帝",
+   "note": "全てドロマー"
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "ハイランダーボルコン",
+   "note": null
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "ペテンズシュート",
+   "note": null
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "ヒカリスマ",
+   "note": "全てラッカ"
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "リースドギラゴン王道",
+   "note": null
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "キャベッジ",
+   "note": "全て緑単"
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "5Cハンプティ",
+   "note": null
+  },
+  {
+   "rank": 24,
+   "count": 2,
+   "share": 0.5,
+   "name": "マンジージョーカーズ",
+   "note": "赤青1、黒緑1"
+  }
+ ],
+ "singletons": [
+  "4Cゼーロ",
+  "5Cオボロティガウォック",
+  "アナカラーCRYMAXジャオウガ",
+  "トリーヴァキングエンペラー天門",
+  "ドロマーダーツ珊瑚",
+  "リースボルシャックバクテラス",
+  "水単ロストクルセイダー",
+  "白青黒緑ソーシャルマニフェストドギラゴン逆",
+  "逆アポロ",
+  "青緑Q.E.D.",
+  "青黒ボウダンロウ",
+  "黒単アビス",
+  "黒緑アポロヌス",
+  "黒緑バロム",
+  "5Cドギラゴン逆ドギラダンテ刈"
+ ],
+ "singletonShare": 3.8
+}

@@ -1,0 +1,50 @@
+{
+ "id": 48800,
+ "url": "https://supersolenoid.jp/blog-entry-48800.html",
+ "title": "【デュエマ オリジナルCS】「第36回スサノオCS inカードボックスアリオン皆生店 (2026/11/07)」結果　白緑ウィリデが優勝　フィオナアカシックが準優勝　デアリアトムオーパーツ銃が3位入賞　トリーヴァゴルギーオージャーが4位入賞",
+ "format": "original",
+ "eventName": "第36回スサノオCS inカードボックスアリオン皆生店",
+ "date": "2026-11-07",
+ "capacity": 64,
+ "players": null,
+ "region": "鳥取",
+ "store": "CARDBOX ガレージアリオン塩冶店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "白緑ウィリデ",
+   "player": "レド。",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-08qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "フィオナアカシック",
+   "player": "D ♭",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-08qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "デアリアトム",
+   "player": "やっぴぃ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-08qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "トリーヴァゴルギーオージャー",
+   "player": "ゾロル",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-08qqq-4.jpg"
+   ]
+  }
+ ]
+}

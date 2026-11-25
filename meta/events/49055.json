@@ -1,0 +1,50 @@
+{
+ "id": 49055,
+ "url": "https://supersolenoid.jp/blog-entry-49055.html",
+ "title": "【デュエマ オリジナルCS】「高知龍馬CS in TSUTAYA南国店 (2026/11/22)」結果　4Cスノーフェアリーが優勝　4Cスノーフェアリーが準優勝　赤零ジョーカーズが3位入賞　トリーヴァゴルギーオージャーが4位入賞",
+ "format": "original",
+ "eventName": "高知龍馬CS in TSUTAYA南国店",
+ "date": "2026-11-22",
+ "capacity": 64,
+ "players": 60,
+ "region": "高知",
+ "store": "TSUTAYA土佐道路店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "4Cスノーフェアリー",
+   "player": "◆よっしー",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-25qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "4Cスノーフェアリー",
+   "player": "ナガン",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-25qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤零ジョーカーズ",
+   "player": "力水",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-25qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "トリーヴァゴルギーオージャー",
+   "player": "こうもり.",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-25qqq-4.jpg"
+   ]
+  }
+ ]
+}

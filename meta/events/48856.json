@@ -1,0 +1,50 @@
+{
+ "id": 48856,
+ "url": "https://supersolenoid.jp/blog-entry-48856.html",
+ "title": "【デュエマ オリジナルCS】「flat-CS in 秋葉原 (2026/11/10)」結果　4Cジャパニカンが優勝　デアリデモニオが準優勝　赤零ジョーカーズが3位入賞　ドロマーシーザーが4位入賞",
+ "format": "original",
+ "eventName": "flat- Championship 【オリジナル】in 秋葉原",
+ "date": "2026-11-10",
+ "capacity": 32,
+ "players": null,
+ "region": "東京",
+ "store": "flat -工房秋葉原店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "4Cジャパニカン",
+   "player": "たこてん",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/HWwf17eakAA8lF-.png"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "デアリデモニオ",
+   "player": "ずっきー/田所界隈",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/HWwgCt9a8AAB5gC.png"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤零ジョーカーズ",
+   "player": "にわか",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/HWwgLVvaQAAQPAU.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "ドロマーシーザー",
+   "player": "工藤璃輝(宮城県)",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/HWwgRwfbUAARkej.png"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "id": 48796,
+ "url": "https://supersolenoid.jp/blog-entry-48796.html",
+ "title": "【デュエマ オリジナルCS】「はっちcs in カードショップはっち (2026/11/07)」結果　リースバイクが優勝　赤零ジョーカーズが準優勝　リースサムライが3位入賞　赤零ジョーカーズが3位入賞",
+ "format": "original",
+ "eventName": "はっちcs in カードショップはっち",
+ "date": "2026-11-07",
+ "capacity": 80,
+ "players": null,
+ "region": "大阪",
+ "store": "竜星の嵐 日本橋店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "リースバイク",
+   "player": "アギリ",
+   "images": []
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "赤零ジョーカーズ",
+   "player": "ミラー",
+   "images": []
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "リースサムライ",
+   "player": "Baft",
+   "images": []
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤零ジョーカーズ",
+   "player": "むくやまむくを",
+   "images": []
+  }
+ ]
+}

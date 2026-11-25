@@ -1,0 +1,50 @@
+{
+ "id": 49046,
+ "url": "https://supersolenoid.jp/blog-entry-49046.html",
+ "title": "【デュエマ オリジナルCS】「ラリアット杯 (2026/11/22)」結果　トリーヴァ創世竜が優勝　リースバイクが準優勝　フェリックス・ミザリィ入り黒単アビスが3位入賞　デアリバイクが4位入賞",
+ "format": "original",
+ "eventName": "ラリアット杯",
+ "date": "2026-11-22",
+ "capacity": 36,
+ "players": null,
+ "region": "宮崎",
+ "store": "トレカショップラリアット",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "トリーヴァ創世竜",
+   "player": "ゲル。",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-17qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "リースバイク",
+   "player": "nary",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-17qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "黒単アビス",
+   "player": "いちご大王",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-17qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "デアリバイク",
+   "player": "り-る",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-17qqq-4.jpg"
+   ]
+  }
+ ]
+}

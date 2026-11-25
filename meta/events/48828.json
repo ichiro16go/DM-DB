@@ -1,0 +1,50 @@
+{
+ "id": 48828,
+ "url": "https://supersolenoid.jp/blog-entry-48828.html",
+ "title": "【デュエマ オリジナルCS】「復活!霧鮫龍基地CS@協賛シーガル(2026/11/08)」結果　赤零ジョーカーズが優勝　フェリックス・ミザリィ入り青黒COMPLEXが準優勝　デアリデモニオが3位入賞　5Cドギラダンテ刈が3位入賞",
+ "format": "original",
+ "eventName": "復活!霧鮫龍基地CS@協賛シーガル(オリジナル)",
+ "date": "2026-11-08",
+ "capacity": 64,
+ "players": null,
+ "region": "山形",
+ "store": "シーガル嶋北店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "赤零ジョーカーズ",
+   "player": "MATCH",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-09qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "青黒COMPLEX",
+   "player": "ADAMAS",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-09qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "デアリデモニオ@t",
+   "player": "k",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-09qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "5Cドギラダンテ刈",
+   "player": "たこんじ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261108uoq-09qqq-4.jpg"
+   ]
+  }
+ ]
+}

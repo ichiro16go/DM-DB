@@ -1,0 +1,50 @@
+{
+ "id": 48602,
+ "url": "https://supersolenoid.jp/blog-entry-48602.html",
+ "title": "【デュエマ オリジナルCS】「まつば雄飛CS(2026/10/25)」結果　ドロマーシーザーが優勝　白緑ウィリデが準優勝　4Cギリガザミが3位入賞　ドギラダンテ刈＆蒼斬丸入り白青黒緑カウンターバイケンが3位入賞",
+ "format": "original",
+ "eventName": "まつば雄飛CS",
+ "date": "2026-10-25",
+ "capacity": 64,
+ "players": null,
+ "region": "栃木",
+ "store": "バトロコ富山駅前",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "ドロマーシーザー",
+   "player": "いちみる/東京在住",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261025oyu-56qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "白緑ウィリデ",
+   "player": "chatty",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261025oyu-56qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "4Cギリガザミ",
+   "player": "ジェイソンテイラー",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261025oyu-56qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白青黒緑カウンターバイケン",
+   "player": "T-M",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261025oyu-56qqq-4.jpg"
+   ]
+  }
+ ]
+}

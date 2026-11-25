@@ -1,0 +1,50 @@
+{
+ "id": 48789,
+ "url": "https://supersolenoid.jp/blog-entry-48789.html",
+ "title": "【デュエマ オリジナルCS】「DM早稲田祭CS(2026/11/07)」結果　デアリデモニオが優勝　トリーヴァアルファディオスが準優勝　リースバイクが3位入賞　4Cドギラゴン王道刈が4位入賞",
+ "format": "original",
+ "eventName": "DM早稲田祭CS",
+ "date": "2026-11-07",
+ "capacity": 40,
+ "players": null,
+ "region": "東京",
+ "store": "COMPOFF高岡西町店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "デアリデモニオ",
+   "player": "ざわ🌹",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-40qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "トリーヴァアルファディオス",
+   "player": "ひこまる",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-40qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "リースバイク@M",
+   "player": "rumori",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-40qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "4Cドギラゴン王道刈",
+   "player": "maro09",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-40qqq-4.jpg"
+   ]
+  }
+ ]
+}

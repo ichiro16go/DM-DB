@@ -1,0 +1,50 @@
+{
+ "id": 48736,
+ "url": "https://supersolenoid.jp/blog-entry-48736.html",
+ "title": "【デュエマ オリジナルCS】「シモカップCS(2026/11/03)」結果　トリーヴァゴルギーネクスト蒼斬丸が優勝　フィオナ・アカシックが準優勝　4CBTが3位入賞　赤零ジョーカーズが4位入賞",
+ "format": "original",
+ "eventName": "シモカップCS",
+ "date": "2026-11-03",
+ "capacity": 32,
+ "players": null,
+ "region": "大阪",
+ "store": "e-forum河内長野店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "トリーヴァ蒼斬丸",
+   "player": "なま",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-05qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "フィオナ・アカシック",
+   "player": "カワウソくん焼き",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-05qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "4CBT",
+   "player": "√ひか",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-05qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "赤零ジョーカーズ",
+   "player": "けんちゃ/MZK",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-05qqq-4.jpg"
+   ]
+  }
+ ]
+}

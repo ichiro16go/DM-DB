@@ -1,0 +1,50 @@
+{
+ "id": 49020,
+ "url": "https://supersolenoid.jp/blog-entry-49020.html",
+ "title": "【デュエマ オリジナルCS】「POWERCS in flat-工房 秋葉原店 (2026/11/21)」結果　フィオナアカシックが優勝　ギャイ＆ドギラゴン逆入りトリーヴァ創世竜が準優勝　白青黒緑ドギラゴン逆が3位入賞　デアリバイクが3位入賞",
+ "format": "original",
+ "eventName": "【オリジナル】POWERCS in flat-工房 秋葉原店",
+ "date": "2026-11-21",
+ "capacity": 32,
+ "players": null,
+ "region": "東京",
+ "store": "プレイスペース ぷらっつさくら",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "フィオナアカシック",
+   "player": "あやたか。",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-27qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "トリーヴァ創世竜",
+   "player": "tossy_7",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-27qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白青黒緑ドギラゴン逆",
+   "player": "Hîragi",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-27qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "デアリバイク",
+   "player": "アーシェス",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-27qqq-4.jpg"
+   ]
+  }
+ ]
+}

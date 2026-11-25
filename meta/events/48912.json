@@ -1,0 +1,50 @@
+{
+ "id": 48912,
+ "url": "https://supersolenoid.jp/blog-entry-48912.html",
+ "title": "【デュエマ オリジナルCS】「バクオンCS in ホビーオフ藤沢 (2026/11/10)」結果　4Cギリガザミが優勝　赤零ジョーカーズが準優勝　白青黒緑ドギラゴン逆がベスト4　4Cドギラゴン王道刈がベスト4",
+ "format": "original",
+ "eventName": "バクオンCS in ホビーオフ藤沢",
+ "date": "2026-11-10",
+ "capacity": 32,
+ "players": null,
+ "region": "神奈川",
+ "store": "ホビーオフ藤沢店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "4Cギリガザミ",
+   "player": "ランクドール",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261115tyt-12qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "赤零ジョーカーズ",
+   "player": "〜吹雪〜",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261115tyt-12qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "ベスト4",
+   "rank": 3,
+   "archetype": "白青黒緑ドギラゴン逆",
+   "player": "ビジャス",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261115tyt-12qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "ベスト4",
+   "rank": 3,
+   "archetype": "4Cドギラゴン王道刈",
+   "player": "MiSTY.",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261115tyt-12qqq-4.jpg"
+   ]
+  }
+ ]
+}

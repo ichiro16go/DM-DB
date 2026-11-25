@@ -1,0 +1,50 @@
+{
+ "id": 48992,
+ "url": "https://supersolenoid.jp/blog-entry-48992.html",
+ "title": "【デュエマ オリジナルCS】「晴天CS in 南船橋 (2026/11/21)」結果　デアリデモニオが優勝　アナカラー生徒会組が準優勝　ギャイ＆ドギラゴン逆入りトリーヴァ創世竜が3位入賞　白青黒緑ドギラゴン逆が3位入賞",
+ "format": "original",
+ "eventName": "晴天CS in 南船橋",
+ "date": "2026-11-21",
+ "capacity": 80,
+ "players": 56,
+ "region": "千葉",
+ "store": "ブックオフスーパーバザー松戸駅東口店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "デアリデモニオ",
+   "player": "柔道家",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-01qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "アナカラー生徒会組",
+   "player": "にゃび",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-01qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "トリーヴァ創世竜",
+   "player": "だぶりー",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-01qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白青黒緑ドギラゴン逆",
+   "player": "ナル茶",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-01qqq-4.jpg"
+   ]
+  }
+ ]
+}

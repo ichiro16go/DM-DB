@@ -1,0 +1,28 @@
+# event: 49008
+# placement: 1
+# archetype: 4Cギリガザミ
+# meta-archetype: ギリガザミ
+# player: じく氏
+# format: original
+# rank: 優勝
+# date: 2026-11-21
+# event-name: 妖精CS in ブックオフ町田中央通り店
+# source: https://supersolenoid.jp/blog-entry-49008.html
+# image: https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-15qqq-1.jpg
+# status: complete
+# transcribed: claude 2026-11-24
+4 冥土人形クリン・ラビィ
+4 裏魔導書グリモア-Ⅰ章
+4 真気楼と誠偽感の決断
+4 覚悟の決闘
+4 ペテンズ・ゲート
+4 唸る鉄腕 ギリガザミ
+3 超光喜 エルボロム
+3 流星のガイアッシュ・カイザー
+2 エターナル・ブレイン / ブレイン珊瑚の仙樹
+3 宿命の決闘
+1 理想と平和の決断
+1 魔誕の覇王アザファウスト
+1 マーシャル・クロウラー
+1 水上第九院 シャコガイル
+1 LOVE＆ABYSS

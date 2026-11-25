@@ -1,0 +1,50 @@
+{
+ "id": 48637,
+ "url": "https://supersolenoid.jp/blog-entry-48637.html",
+ "title": "【デュエマ オリジナルCS】「DM飛梅CS in 立川(2026/10/12)」結果　デアリデモニオが優勝　白緑ウィリデが準優勝　アナカラー生徒会組が3位入賞　白緑ウィリデが4位入賞",
+ "format": "original",
+ "eventName": "DM飛梅CS in 立川",
+ "date": "2026-10-12",
+ "capacity": 64,
+ "players": null,
+ "region": "東京",
+ "store": "カードショップ オリオンベース",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "デアリデモニオ",
+   "player": "くぅるべ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-15qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "白緑ウィリデ",
+   "player": "けんけんラーメン",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-15qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "アナカラー生徒会組",
+   "player": "レグナム",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-15qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "白緑ウィリデ",
+   "player": "天!!",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-15qqq-4.jpg"
+   ]
+  }
+ ]
+}

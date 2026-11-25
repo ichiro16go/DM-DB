@@ -1,0 +1,14 @@
+# event: 48992
+# placement: 1
+# archetype: デアリデモニオ
+# meta-archetype: デモニオ
+# player: 柔道家
+# format: original
+# rank: 優勝
+# date: 2026-11-21
+# event-name: 晴天CS in 南船橋
+# source: https://supersolenoid.jp/blog-entry-48992.html
+# image: https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-01qqq-1.jpg
+# status: unreadable
+# transcribed: claude 2026-11-24
+# note: 扇状に重ねた写真で、コストしか見えないカードが多い

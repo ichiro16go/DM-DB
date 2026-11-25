@@ -1,0 +1,42 @@
+{
+ "id": 48793,
+ "url": "https://supersolenoid.jp/blog-entry-48793.html",
+ "title": "【デュエマ オリジナルCS】「はっちcs in 竜星の嵐新宿店 (2026/11/07)」結果　赤零ジョーカーズが優勝　白青黒緑ドギラゴン逆が準優勝　赤零ジョーカーズが3位入賞　赤零ジョーカーズが3位入賞",
+ "format": "original",
+ "eventName": "はっちcs in 竜星の嵐新宿店",
+ "date": "2026-11-07",
+ "capacity": 80,
+ "players": null,
+ "region": "東京",
+ "store": "竜星の嵐 新宿店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "赤零ジョーカーズ",
+   "player": "チャックザジッパー",
+   "images": []
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "白青黒緑ドギラゴン逆",
+   "player": "過食スキー",
+   "images": []
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤零ジョーカーズ",
+   "player": "あるが",
+   "images": []
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤零ジョーカーズ",
+   "player": "樹愛羅、助けに来たぞ",
+   "images": []
+  }
+ ]
+}

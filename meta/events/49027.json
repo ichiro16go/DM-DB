@@ -1,0 +1,50 @@
+{
+ "id": 49027,
+ "url": "https://supersolenoid.jp/blog-entry-49027.html",
+ "title": "【デュエマ オリジナルCS】「第9回 トレカがかりCS (2026/11/21)」結果　4Cドギラダンテ刈が優勝　4Cディスペクター天門が準優勝　4Cドギラダンテ刈が3位入賞　アナカラー生徒会組が4位入賞",
+ "format": "original",
+ "eventName": "【第9回】トレカがかりCS",
+ "date": "2026-11-21",
+ "capacity": 64,
+ "players": null,
+ "region": "山口",
+ "store": "トレカがかり",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "4Cドギラダンテ刈",
+   "player": "イトウ0",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-34qqq-1a.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "4Cディスペクター天門",
+   "player": "はやっしー",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-34qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "4Cドギラダンテ刈",
+   "player": "オン",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-34qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "アナカラー生徒会組",
+   "player": "みゅーたー",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-34qqq-4.jpg"
+   ]
+  }
+ ]
+}

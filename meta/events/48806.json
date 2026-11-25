@@ -1,0 +1,41 @@
+{
+ "id": 48806,
+ "url": "https://supersolenoid.jp/blog-entry-48806.html",
+ "title": "【デュエマ オリジナルCS】「第1回 白橋CS in 豊田(2026/11/07)」結果　アナカラー生徒会組が優勝　4Cダーバンデが準優勝　赤零ジョーカーズが3位入賞",
+ "format": "original",
+ "eventName": "第1回 白橋CS in 豊田",
+ "date": "2026-11-07",
+ "capacity": 64,
+ "players": null,
+ "region": "愛知",
+ "store": "トレカプラザ55豊田店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "アナカラー生徒会組",
+   "player": "あおつきなこ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-14qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "4Cダーバンデ",
+   "player": "ダークシャドウ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-14qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤零ジョーカーズ",
+   "player": "pirokichi6",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-14qqq-3.jpg"
+   ]
+  }
+ ]
+}

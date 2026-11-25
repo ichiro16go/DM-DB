@@ -1,0 +1,50 @@
+{
+ "id": 49038,
+ "url": "https://supersolenoid.jp/blog-entry-49038.html",
+ "title": "【デュエマ オリジナルCS】「第345回デュエマブルーホースCS(2026/11/22)」結果　赤零ジョーカーズが優勝　アナカラー生徒会組が準優勝　トリーヴァ創世竜が3位入賞　トリーヴァ創世竜が3位入賞",
+ "format": "original",
+ "eventName": "【新デッキ記念大会】第345回デュエマブルーホースCS 【早期表明特典有】",
+ "date": "2026-11-22",
+ "capacity": 114,
+ "players": null,
+ "region": "神奈川",
+ "store": "青馬堂書店矢向店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "赤零ジョーカーズ",
+   "player": "ユキヤ57",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-09qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "アナカラー生徒会組",
+   "player": "みるえめ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-09qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "トリーヴァ創世竜",
+   "player": "優栗つとめ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-09qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "トリーヴァ創世竜",
+   "player": "2tas0佐賀の誇り",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-09qqq-4.jpg"
+   ]
+  }
+ ]
+}

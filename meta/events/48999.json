@@ -1,0 +1,50 @@
+{
+ "id": 48999,
+ "url": "https://supersolenoid.jp/blog-entry-48999.html",
+ "title": "【デュエマ オリジナルCS】「第212回DM新倉敷CS (2026/11/21)」結果　デアリデモニオが優勝　トリーヴァゴルギーオージャーが準優勝　4Cギリガザミが3位入賞　青緑Q.E.D.が4位入賞",
+ "format": "original",
+ "eventName": "【オリジナル】第212回DM新倉敷CS",
+ "date": "2026-11-21",
+ "capacity": 108,
+ "players": null,
+ "region": "岡山",
+ "store": "カードボックス玉島店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "デアリデモニオ",
+   "player": "グリド",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-08qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "トリーヴァゴルギーオージャー",
+   "player": "鉄牛",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-08qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "4Cギリガザミ",
+   "player": "JN",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-08qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "青緑Q.E.D.",
+   "player": "kyum",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-08qqq-4.jpg"
+   ]
+  }
+ ]
+}

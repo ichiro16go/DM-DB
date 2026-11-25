@@ -1,5 +1,5 @@
 import type { Database } from "better-sqlite3";
-import { nfkc } from "../lib/normalize.js";
+import { looseKey, nfkc } from "../lib/normalize.js";
 
 /**
  * Deck legality check for オリジナル / アドバンス.
@@ -61,10 +61,12 @@ export function validateDeck(db: Database, deck: DeckInput): DeckReport {
   );
 
   const lookup = (zone: string, e: DeckEntry): CardRow | null => {
-    const n = nfkc(e.name).replace(/^[《≪]|[》≫]$/g, "");
-    let row = find.get(n, n, n) as CardRow | undefined;
+    const raw = e.name.trim().replace(/^[《≪]|[》≫]$/g, "");
+    const n = nfkc(raw);
+    // Card names are stored as printed (full-width ＆ ～ ７ …): try the raw spelling, then NFKC.
+    let row = (find.get(raw, raw, raw) ?? find.get(n, n, n)) as CardRow | undefined;
     if (!row) {
-      const loose = findLoose.all(`%${n.replace(/[\s・]/g, "")}%`) as CardRow[];
+      const loose = findLoose.all(`%${looseKey(n)}%`) as CardRow[];
       if (loose.length === 1) {
         row = loose[0];
         problems.push({ severity: "warning", message: `「${e.name}」を《${row!.name}》として扱いました`, card: row!.name });

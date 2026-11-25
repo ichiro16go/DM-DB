@@ -1,0 +1,27 @@
+# event: 49043
+# placement: 1
+# archetype: リースバイク
+# meta-archetype: リースバイク
+# player: はことり
+# format: original
+# rank: 優勝
+# date: 2026-11-22
+# event-name: バトロコ新静岡CS
+# source: https://supersolenoid.jp/blog-entry-49043.html
+# image: https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261122tgb-14qqq-1.jpg
+# status: complete
+# transcribed: claude 2026-11-24
+# note: 右端のミラクルステラとPP-[P](プロモ)は賞品のため除外
+4 轟く邪道 レッドゾーン
+4 轟腕のR ダグラジャパニカン
+4 世界のY チャクラ・デル・フィン
+4 PP-「P」
+4 神判のカルマ コットン / ジャッジ・水晶チャージャー
+3 キャディ・ビートル
+4 キユリのASMラジオ
+4 ピザスターのアンティハムト
+4 ハンプティ・ルピア
+2 奇石 ミクセル / ジャミング・チャフ
+2 鬼星の絆 フウジン天＆ライジン天
+1 単騎連射 マグナム
+# ok-PP-「P」: yes

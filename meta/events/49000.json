@@ -1,0 +1,50 @@
+{
+ "id": 49000,
+ "url": "https://supersolenoid.jp/blog-entry-49000.html",
+ "title": "【デュエマ オリジナルCS】「第89回ブックオフ浜北CS(2026/11/21)」結果　デアリアトムが優勝　トリーヴァ生徒会組蒼斬丸が準優勝　ドギラダンテ刈入り青黒デスパペットが3位入賞　トリーヴァ創世竜が4位入賞",
+ "format": "original",
+ "eventName": "第89回ブックオフ浜北CS【オリジナル】",
+ "date": "2026-11-21",
+ "capacity": 64,
+ "players": null,
+ "region": "静岡",
+ "store": "ブックオフプラス浜北店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "デアリアトム",
+   "player": "たけした",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-09qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "トリーヴァ生徒会組蒼斬丸",
+   "player": "KXrA92(しりうす)",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-09qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "青黒デスパペット",
+   "player": "ルファン",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-09qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "トリーヴァ創世竜",
+   "player": "ユウニイ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-09qqq-4.jpg"
+   ]
+  }
+ ]
+}

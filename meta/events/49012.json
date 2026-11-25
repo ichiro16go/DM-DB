@@ -1,0 +1,50 @@
+{
+ "id": 49012,
+ "url": "https://supersolenoid.jp/blog-entry-49012.html",
+ "title": "【デュエマ オリジナルCS】「第131回アド3CS(2026/11/21)」結果　リースバイクが優勝　赤零ジョーカーズが準優勝　白緑ウィリデが3位入賞　デアリデモニオが4位入賞",
+ "format": "original",
+ "eventName": "第131回アド3CS【オリジナル】",
+ "date": "2026-11-21",
+ "capacity": 64,
+ "players": null,
+ "region": "愛知",
+ "store": "アドバンテージ大須3号店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "リースバイク",
+   "player": "さかこー",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-19qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "赤零ジョーカーズ",
+   "player": "小林",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-19qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白緑ウィリデ",
+   "player": "コゲミン",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-19qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "デアリデモニオ",
+   "player": "カイリト",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-19qqq-4.jpg"
+   ]
+  }
+ ]
+}

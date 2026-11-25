@@ -1,0 +1,50 @@
+{
+ "id": 48749,
+ "url": "https://supersolenoid.jp/blog-entry-48749.html",
+ "title": "【デュエマ オリジナルCS】「トレカラインCS(2026/11/03)」結果　赤零ジョーカーズが優勝　アビス記号jS入り4Cザダンバースが準優勝　リースバイクが3位入賞　4Cドギラゴン王道刈が4位入賞",
+ "format": "original",
+ "eventName": "トレカラインCS",
+ "date": "2026-11-03",
+ "capacity": 102,
+ "players": null,
+ "region": "大阪",
+ "store": "遊vic 中野店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "赤零ジョーカーズ",
+   "player": "かいそら/はっちCS",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-16qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "4Cザダンバース",
+   "player": "うぃうぃ/狛犬",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-16qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "リースバイク",
+   "player": "ぴぴみ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-16qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "4Cドギラゴン王道刈",
+   "player": "ラグセリア",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261103jgh-16qqq-4.jpg"
+   ]
+  }
+ ]
+}

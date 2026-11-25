@@ -1,0 +1,50 @@
+{
+ "id": 48811,
+ "url": "https://supersolenoid.jp/blog-entry-48811.html",
+ "title": "【デュエマ オリジナルCS】「GIRAFULL広島cs(2026/11/07)」結果　D4に敗北は許されない！入り白青黒緑ドギラゴン逆が優勝　赤黒邪王門が準優勝　白緑ザゼゼーンが3位入賞　白青黒緑ドギラゴン逆が4位入賞",
+ "format": "original",
+ "eventName": "GIRAFULL広島cs【オリジナル】",
+ "date": "2026-11-07",
+ "capacity": 64,
+ "players": null,
+ "region": "広島",
+ "store": "GIRAFULL広島ドンキ店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "白青黒緑ドギラゴン逆",
+   "player": "アーテル・マナミーニ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-19qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "赤黒邪王門",
+   "player": "だいはテリー",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-19qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白緑ザゼゼーン",
+   "player": "あんころね",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-19qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "白青黒緑ドギラゴン逆",
+   "player": "こたろうくん",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261107uss-19qqq-4.jpg"
+   ]
+  }
+ ]
+}

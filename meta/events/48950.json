@@ -1,0 +1,50 @@
+{
+ "id": 48950,
+ "url": "https://supersolenoid.jp/blog-entry-48950.html",
+ "title": "【デュエマ オリジナルCS】「宮崎CS(2026/11/06)」結果　赤零ジョーカーズが優勝　デアリアトムが準優勝　青黒デスパペットが3位入賞　ドロマーシーザーが4位入賞",
+ "format": "original",
+ "eventName": "デュエルマスターズ宮崎CS(オリジナル)",
+ "date": "2026-11-06",
+ "capacity": 36,
+ "players": null,
+ "region": "宮崎",
+ "store": "カードショップ@ほ~む。宮崎店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "赤零ジョーカーズ",
+   "player": "はじめJK",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261116fik-17qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "デアリアトム",
+   "player": "天咲",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261116fik-17qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "青黒デスパペット",
+   "player": "ちょんぼ(特盛)",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261116fik-17qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "ドロマーシーザー",
+   "player": "ゴーディ/サウナ部",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261116fik-17qqq-4.jpg"
+   ]
+  }
+ ]
+}

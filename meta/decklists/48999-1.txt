@@ -1,0 +1,27 @@
+# event: 48999
+# placement: 1
+# archetype: デアリデモニオ
+# meta-archetype: デモニオ
+# player: グリド
+# format: original
+# rank: 優勝
+# date: 2026-11-21
+# event-name: 【オリジナル】第212回DM新倉敷CS
+# source: https://supersolenoid.jp/blog-entry-48999.html
+# image: https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-08qqq-1.jpg
+# status: partial
+# transcribed: claude 2026-11-24
+# note: 最下段左のコスト5×3は名前が写っていない
+# ok-pp-「p」: yes
+4 ヘルコプ太の心絵
+4 ジャスミンの地版
+4 禁断英雄 モモキングダムX
+4 キャンベロ <レッゾ.Star>
+4 鬼黒皇グレイテスト・ジャオウガ
+4 CRY-S-MAX ジャオウガ
+3 終来王鬼 ジャオウガ
+3 PP-「P」
+2 禁鬼機関 ジャオウガ-8
+3 バクロ法師の封
+2 ロスト・チョイス
+3 ?

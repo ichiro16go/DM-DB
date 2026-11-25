@@ -1,0 +1,50 @@
+{
+ "id": 48994,
+ "url": "https://supersolenoid.jp/blog-entry-48994.html",
+ "title": "【デュエマ アドバンスCS】「PleiadesCS in JapanTCG Center吉祥寺駅北口店 (2026/11/21)」結果　4Cゴルファウンデーションが優勝　4Cアルファディオスが準優勝　5Cテレポートが3位入賞　赤零ジョーカーズが4位入賞",
+ "format": "advance",
+ "eventName": "PleiadesCS in JapanTCG Center吉祥寺駅北口店",
+ "date": "2026-11-21",
+ "capacity": 64,
+ "players": null,
+ "region": "東京",
+ "store": "Japan TCG Center吉祥寺駅北口店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "4Cゴルファウンデーション",
+   "player": "ジンベヱ",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-03qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "4Cアルファディオス",
+   "player": "マイケル",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-03qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "5Cテレポート",
+   "player": "あすか。",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-03qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "赤零ジョーカーズ",
+   "player": "森山",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-03qqq-4.jpg"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "id": 49022,
+ "url": "https://supersolenoid.jp/blog-entry-49022.html",
+ "title": "【デュエマ アドバンスCS】「イーグルCS＠トレカピット仙台店 (2026/11/21)」結果　5Cテレポートが優勝　青黒COMPLEXが3位入賞",
+ "format": "advance",
+ "eventName": "イーグルCS@トレカピット仙台店",
+ "date": "2026-11-21",
+ "capacity": 64,
+ "players": null,
+ "region": "宮城",
+ "store": "トイコンプ堺東店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "5Cテレポート",
+   "player": "ADAMAS",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-29qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "青黒COMPLEX",
+   "player": "ぼく",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261121ujt-29qqq-3.jpg"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "id": 48722,
+ "url": "https://supersolenoid.jp/blog-entry-48722.html",
+ "title": "【デュエマ アドバンスCS】「N×NリモートDM杯(2026/10/18)」結果　赤零ジョーカーズ、黒t緑ドラガンザークなどが上位入賞",
+ "format": "advance",
+ "eventName": "N×NリモートDM杯",
+ "date": "2026-10-18",
+ "capacity": 64,
+ "players": null,
+ "region": "青森県",
+ "store": "萬屋 大清水店(※リモート大会です。店舗は大会の会場ではありません)",
+ "placements": [
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "赤零ジョーカーズ",
+   "player": "アグロ奈美恵",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-23qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "黒t緑ドラガンザーク",
+   "player": "囚人A",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261101tyz-23qqq-3.jpg"
+   ]
+  }
+ ]
+}

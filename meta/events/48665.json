@@ -1,0 +1,50 @@
+{
+ "id": 48665,
+ "url": "https://supersolenoid.jp/blog-entry-48665.html",
+ "title": "【デュエマ オリジナルCS】「第152回アドCS(2026/10/30)」結果　ロスト・チョイス＆ジャオウガ-8入りデアリデモニオが優勝　トリーヴァゴルギーオージャーが準優勝　白緑ウィリデが3位入賞　4Cスノーフェアリーが4位入賞",
+ "format": "original",
+ "eventName": "第152回アドCS【オリジナル】",
+ "date": "2026-10-30",
+ "capacity": 64,
+ "players": null,
+ "region": "愛知",
+ "store": "アドバンテージ大須2号店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "デアリデモニオ",
+   "player": "ごみいち",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-33qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "トリーヴァゴルギーオージャー",
+   "player": "ARata.",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-33qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "白緑ウィリデ",
+   "player": "ももっしー",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-33qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "4Cスノーフェアリー",
+   "player": "しじみスライム",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261029sju-33qqq-4.jpg"
+   ]
+  }
+ ]
+}

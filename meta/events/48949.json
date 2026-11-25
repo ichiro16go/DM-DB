@@ -1,0 +1,42 @@
+{
+ "id": 48949,
+ "url": "https://supersolenoid.jp/blog-entry-48949.html",
+ "title": "【デュエマ オリジナルCS】「はっちcs inコーギーアール名古屋店 (2026/11/17)」結果　ジャオウガ-8＆ロストチョイス型デアリデモニオが優勝　リースバイクが準優勝　白緑ウィリデが3位入賞　4Cアトムジャオウガメタビートが4位入賞",
+ "format": "original",
+ "eventName": "【早期参加表明で200円割引】はっちcs inコーギーアール名古屋店",
+ "date": "2026-11-17",
+ "capacity": 64,
+ "players": 34,
+ "region": "愛知",
+ "store": "コーギーアール名古屋",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "ごみいち選手(火闇自然デモニオ)",
+   "player": null,
+   "images": []
+  },
+  {
+   "rankLabel": "準優勝",
+   "rank": 2,
+   "archetype": "マツ.選手(火光自然レッドゾーン)",
+   "player": null,
+   "images": []
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "飛彩選手(光自然ウィリデ)",
+   "player": null,
+   "images": []
+  },
+  {
+   "rankLabel": "4位",
+   "rank": 4,
+   "archetype": "こうよー選手(4cアトムジャオウガ)",
+   "player": null,
+   "images": []
+  }
+ ]
+}

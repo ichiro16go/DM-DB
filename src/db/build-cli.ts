@@ -7,6 +7,21 @@ import { join } from "node:path";
 import { DATA_DIR, DEFAULT_DB_PATH, listRaw, rawExists, readRaw, readRawJson } from "../lib/raw.js";
 import type { MasterData } from "../parse/master.js";
 import { buildDatabase, type BuildReport, type RawSource } from "./build.js";
+import type { MetaSource } from "./build-meta.js";
+import { DECK_DIR, loadEvents, loadSnapshots } from "../meta/cli.js";
+import { parseDecklistFile } from "../meta/decklist.js";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+
+/** meta/ (committed): weekly snapshots, CS events and transcribed deck lists. */
+export function loadMetaSource(): MetaSource {
+  const decklists = existsSync(DECK_DIR)
+    ? readdirSync(DECK_DIR)
+        .filter((f) => f.endsWith(".txt"))
+        .sort()
+        .map((f) => parseDecklistFile(f, readFileSync(join(DECK_DIR, f), "utf8")))
+    : [];
+  return { snapshots: loadSnapshots(), events: loadEvents(), decklists };
+}
 
 export function loadRawSource(): RawSource {
   if (!rawExists("master.json")) throw new Error("data/raw/master.json not found — run `npm run crawl` first");
@@ -26,6 +41,7 @@ export function loadRawSource(): RawSource {
     details: details(),
     regulationHtml: rawExists("regulation.html.gz") ? readRaw("regulation.html.gz") : null,
     unavailable: rawExists("detail_missing.json") ? readRawJson<string[]>("detail_missing.json") : [],
+    meta: loadMetaSource(),
   };
 }
 

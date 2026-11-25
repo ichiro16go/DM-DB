@@ -1,0 +1,50 @@
+{
+ "id": 48944,
+ "url": "https://supersolenoid.jp/blog-entry-48944.html",
+ "title": "【デュエマ オリジナルCS】「晴天CS in 吉祥寺 (2026/11/10)」結果　白青黒緑ドギラゴン逆が優勝　緑単キャベッジが準優勝　赤零ジョーカーズが3位入賞　赤零ジョーカーズが3位入賞",
+ "format": "original",
+ "eventName": "晴天CS in 吉祥寺",
+ "date": "2026-11-10",
+ "capacity": 64,
+ "players": 37,
+ "region": "東京",
+ "store": "ブックオフ港北綱島西店",
+ "placements": [
+  {
+   "rankLabel": "優勝",
+   "rank": 1,
+   "archetype": "白青黒緑ドギラゴン逆",
+   "player": "キースホワイト",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261116fik-12qqq-1.jpg"
+   ]
+  },
+  {
+   "rankLabel": "2位",
+   "rank": 2,
+   "archetype": "緑単キャベッジ",
+   "player": "ツナ凹",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261116fik-12qqq-2.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤零ジョーカーズ",
+   "player": "砂上のテーブルマナー",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261116fik-12qqq-3.jpg"
+   ]
+  },
+  {
+   "rankLabel": "3位",
+   "rank": 3,
+   "archetype": "赤零ジョーカーズ",
+   "player": "kanayan2",
+   "images": [
+    "https://blog-imgs-189.fc2.com/s/u/p/supersolenoid/dm-20261116fik-12qqq-4.jpg"
+   ]
+  }
+ ]
+}
