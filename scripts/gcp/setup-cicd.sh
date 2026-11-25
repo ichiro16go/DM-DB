@@ -22,6 +22,12 @@ WEB_SA="dm-card-db-web@${PROJECT_ID}.iam.gserviceaccount.com"
 JOB_SA="dm-card-db-job@${PROJECT_ID}.iam.gserviceaccount.com"
 # owner/repo from the git remote (https://github.com/owner/repo(.git) or git@github.com:owner/repo.git)
 GH_REPO="${GH_REPO:-$(git config --get remote.origin.url | sed -E 's#(\.git)?$##; s#^.*github\.com[:/]##')}"
+# The OIDC token carries the repository's canonical name and the condition is case-sensitive
+# (e.g. a repo renamed to DM-DB still answers at dm-db), so ask GitHub for the exact name.
+if command -v gh >/dev/null && gh auth status >/dev/null 2>&1; then
+  GH_REPO="$(gh repo view "$GH_REPO" --json nameWithOwner -q .nameWithOwner)"
+fi
+echo "GitHub repository: ${GH_REPO}"
 [[ "$GH_REPO" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]] || { echo "could not tell the GitHub repo; set GH_REPO=owner/repo" >&2; exit 1; }
 
 step() { printf '\n\033[1m== %s\033[0m\n' "$*"; }
