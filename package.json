@@ -18,7 +18,8 @@
     "build:web": "vite build --config web/vite.config.ts",
     "dev:web": "vite --config web/vite.config.ts",
     "meta": "tsx src/meta/cli.ts",
-    "job:meta": "tsx src/jobs/meta-update.ts"
+    "job:meta": "tsx src/jobs/meta-update.ts",
+    "sim": "tsx src/sim/cli.ts"
   },
   "type": "module",
   "dependencies": {

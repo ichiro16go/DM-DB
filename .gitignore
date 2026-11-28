@@ -7,3 +7,4 @@ data/latest*.json
 *.todo
 data/store/
 web/dist/
+data/sim/

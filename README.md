@@ -47,6 +47,17 @@ npm run job:meta    # 田園補完計画から直近6週の分布とCS結果を�
 - **特殊枠**: 禁断・零無など「ゲーム開始時にバトルゾーンに置くカード」は、40枚の外の特殊枠に入れます（アドバンスのみ。上限は rules.ts で変更可）。
 - **デッキ作成**: カード検索（フォーマットで使えるカードに絞り込み）→ ＋で追加。枚数の増減、ゾーンの移動、テキストの取り込みと書き出しができます。構築ルール、文明、コストカーブはその場でチェックします。特定できないカード名には、候補の選択か名前の入力で直せる欄が出ます。
 
+### AI 対戦シミュレーション（Phase 1：バニラ）
+
+```bash
+npm run sim -- --games=100 --seed=1 --deck-a=火 --deck-b=水 --agent-a=greedy --agent-b=random
+```
+
+- デッキは DB のバニラクリーチャーから文明を指定して自動生成（`火`、`火自然` など）。デッキ編集で作ったデッキは `deck:<id>`
+- AI は `greedy`（定石）と `random`
+- 結果は `data/sim/<日時>/`：集計（`summary.txt`）、1局ごとの日本語の棋譜（`game-0001.txt`）と再現用の記録（`game-0001.json`）
+- ルールの数値は `src/sim/config.ts`、定石の判断の重みは `src/sim/agents/greedy.ts` の `GreedyParams`。設計は [docs/sim-design.md](docs/sim-design.md)
+
 ### サーバーに置く（GCP）
 
 ```bash
@@ -177,6 +188,7 @@ sets（商品）  keywords / keyword_families（系統）  tags  illustrators  q
 | `test/meta.test.ts` | 田園補完計画の記事パーサ（ランキング・CS結果・記事一覧）、デッキタイプ名の照合、環境データの集計（前週比・入賞・デッキの紐づけ・新しい週の反映） |
 | `test/decks.test.ts` | デッキの入力検証、保存・履歴・競合検出（409）・復元・削除、同梱リストの初回登録（ユーザーの修正を上書きしない）、デッキAPI |
 | `web/src/lib/lib.test.ts` | UIの条件→クエリ変換、デッキ操作（追加・差分・書き出し） |
+| `test/sim.test.ts` | 対戦シミュレーション：準備・ターン・マナと文明・召喚酔い・バトル・ブレイク・勝敗（とどめ／山札切れ／上限ターン）、再現性、ランダム対戦での不変条件、定石がランダムに勝ち越すこと |
 | `test/full-db.test.ts` | **本番DBの完全性**：公式一覧の全収録がDBにあるか、全商品に収録があるか、殿堂が全件対応づいたか、構造の不変条件、有名カードの抜き取り確認、キーワード抽出の公式との一致率、検索速度 |
 
 `npm run build:db` を実行すると `data/build-report.md` が出力されます。中身は次の2つです。
@@ -200,6 +212,7 @@ src/decks/    デッキの保存（履歴・競合検出）、カード名の解
 src/meta/     環境データ：田園補完計画のパーサ・取得・集計、デッキリストのファイル形式
 src/server/   HTTP API + 静的UI + MCP(HTTP)、認証、DBの無停止差し替え
 src/mcp/      MCPのツール定義（tools.ts）と stdio 版の入口（server.ts）
+src/sim/      AI 対戦シミュレーション（ルールエンジン、AI、デッキ生成、棋譜）
 src/jobs/     定期更新ジョブ（update: クロール → 構築 → 品質チェック → 公開、meta-update: 環境データ）
 src/storage/  Cloud Storage / ローカルフォルダの共通インターフェース
 web/          フロントエンド（React + Vite。ビルド結果は web/dist）
