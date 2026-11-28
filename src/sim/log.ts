@@ -23,6 +23,15 @@ function deckLines(r: GameRecord, p: PlayerId): string[] {
   return [...counts.values()].map((c) => `  ${c.n} 《${c.name}》 ${c.civs} コスト${c.cost} パワー${c.power}`);
 }
 
+const civLabel = (civs: string[]) => civs.join("/") || "無色";
+
+/** "火2・水1" — civilizations of the tapped mana cards (a multi-colored card counts for each of its civs). */
+function manaLabel(s: GameState, iids: number[]) {
+  const n = new Map<string, number>();
+  for (const iid of iids) for (const c of cardOf(s, iid).civs.length ? cardOf(s, iid).civs : ["無色"]) n.set(c, (n.get(c) ?? 0) + 1);
+  return [...n].map(([c, k]) => `${c}${k}`).join("・");
+}
+
 export function recordToText(r: GameRecord): string {
   const out: string[] = [];
   const name = (s: GameState, iid: number) => `《${cardOf(s, iid).name}》`;
@@ -54,7 +63,7 @@ export function recordToText(r: GameRecord): string {
         return;
       case "summon": {
         const c = cardOf(s, e.iid);
-        out.push(`  召喚 ${name(s, e.iid)}（コスト${c.cost}・パワー${c.power}）`);
+        out.push(`  召喚 ${name(s, e.iid)}（${civLabel(c.civs)}・コスト${c.cost}・パワー${c.power}）← マナ ${manaLabel(s, e.mana)} をタップ`);
         return;
       }
       case "attack":
@@ -69,7 +78,9 @@ export function recordToText(r: GameRecord): string {
         out.push(`    シールドをブレイク：${name(s, e.iid)} が手札へ（残り${e.shieldsLeft}）`);
         return;
       case "pass":
-        return; // implied by the next line
+        // Say explicitly when a player chose not to charge (otherwise a quiet turn looks like a bug).
+        if (e.phase === "charge") out.push("  マナチャージしない");
+        return;
       case "end":
         out.push("", e.winner === null ? `引き分け（${REASON[e.reason]}）` : `${who(e.winner)} の勝ち（${REASON[e.reason]}）`);
         return;

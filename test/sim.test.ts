@@ -222,6 +222,44 @@ describe("runner, agents and records", () => {
     }
   });
 
+  it("every summon in real games is paid correctly: cost cards, including each of the card's civilizations", () => {
+    // two-color decks, so payments really depend on which mana is tapped
+    const rng = new Rng(21);
+    let summons = 0;
+    for (let i = 0; i < 200; i++) {
+      const d: [SimCard[], SimCard[]] = [generateDeck(pool, { civs: ["火", "水"] }, rng), generateDeck(pool, { civs: ["火", "水"] }, rng)];
+      const r = playGame({ decks: d, agents: [i % 2 ? greedyAgent() : randomAgent, randomAgent], seed: rng.int(2 ** 31) });
+      const g = new Game({ decks: r.decks, seed: r.seed, first: r.first });
+      for (const e of r.events) {
+        if (e.t !== "summon") continue;
+        const c = g.state.instances[e.iid]!.card;
+        const manaCivs = new Set(e.mana.flatMap((iid) => g.state.instances[iid]!.card.civs));
+        expect(e.mana).toHaveLength(c.cost);
+        for (const civ of c.civs) expect(manaCivs.has(civ)).toBe(true);
+        summons++;
+      }
+    }
+    expect(summons).toBeGreaterThan(1000);
+  });
+
+  it("refuses to summon without mana of the card's civilization, even with enough mana", () => {
+    const water = card("w", ["水"], 2, 2000);
+    const g = newGame(FIRE2, { d1: deckOf(water) });
+    const s = g.state;
+    s.players[0].mana = s.players[1].deck.splice(0, 5).map((iid) => ({ iid, tapped: false })); // five water mana
+    g.step({ type: "skipCharge" });
+    expect(types(legalActions(s))).toEqual(["endMain"]); // the fire card is not castable
+    expect(() => g.step({ type: "summon", iid: s.players[0].hand[0]! })).toThrow(IllegalActionError);
+    // explicit payment with only water mana is refused too
+    const fire = s.players[0].hand[0]!;
+    expect(() => g.step({ type: "summon", iid: fire, mana: s.players[0].mana.slice(0, 2).map((m) => m.iid) })).toThrow(IllegalActionError);
+    // one fire mana makes it castable, and that fire card must be among the tapped ones
+    s.players[0].mana.push({ iid: s.players[0].deck.shift()!, tapped: false });
+    g.step({ type: "summon", iid: fire });
+    const ev = g.events.at(-1)!;
+    expect(ev.t === "summon" && ev.mana.some((iid) => s.instances[iid]!.card.civs.includes("火"))).toBe(true);
+  });
+
   it("the rule-based agent clearly beats the random agent", () => {
     const rng = new Rng(11);
     const recs = Array.from({ length: 200 }, (_, i) => {
@@ -239,7 +277,7 @@ describe("runner, agents and records", () => {
     const text = recordToText(r);
     expect(text).toMatch(/結果: .*(の勝ち|引き分け)/);
     expect(text).toMatch(/T1 [AB]（マナ0・手札5・シールド5・山札30/);
-    expect(text).toMatch(/召喚 《カード/);
+    expect(text).toMatch(/召喚 《カード[^》]*》（火・コスト\d+・パワー\d+）← マナ 火\d+ をタップ/);
     for (const pl of [0, 1]) expect(cardCount(new Game({ decks: r.decks, seed: r.seed, first: r.first }).state.players[pl as PlayerId])).toBe(40);
   });
 
